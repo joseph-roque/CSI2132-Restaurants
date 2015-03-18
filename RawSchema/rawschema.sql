@@ -4,9 +4,11 @@ CREATE TABLE Rater
 	email VARCHAR(90) NOT NULL,
 	name VARCHAR(70) NOT NULL,
 	join_date TIMESTAMP NOT NULL,
-	type TEXT NOT NULL, --not sure about this
+	type SMALLINT NOT NULL,
 	reputation SMALLINT NOT NULL DEFAULT 1,
 	PRIMARY KEY (user_id),
+	FOREIGN KEY (type) REFERENCES RaterType(type)
+		ON UPDATE CASCADE ON DELETE RESTRICT --What do we want?
 	CONSTRAINT rep_bounds CHECK (reputation >= 1 AND reputation <= 5),
 	CONSTRAINT valid_email CHECK (email ~* '^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+[.][A-Za-z]$'),
 		--Alphanumeric (with dot, underscore dash), 1 or more
@@ -16,6 +18,13 @@ CREATE TABLE Rater
 		--then alphabetic domain end (com, ca, etc.)
 	CONSTRAINT valid_name CHECK (name ~* '^[A-Za-z][A-Za-z0-9 _-]$')
 		--Alphanumeric (with space, dash, underscore), starts with a letter
+);
+
+CREATE TABLE RaterType
+(
+	type SERIAL,
+	description TEXT NOT NULL,
+	PRIMARY KEY (type)
 );
 
 CREATE TABLE Restaurant
