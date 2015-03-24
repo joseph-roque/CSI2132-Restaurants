@@ -10,13 +10,13 @@ CREATE TABLE Rater
 	FOREIGN KEY (type_id) REFERENCES RaterType(type_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT, --What do we want?
 	CONSTRAINT rep_bounds CHECK (reputation >= 1 AND reputation <= 5),
-	CONSTRAINT valid_email CHECK (email ~* '^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+[.][A-Za-z]$'),
+	CONSTRAINT valid_email CHECK (email ~* '^[a-z0-9._-]+@[a-z0-9.-]+[.][a-z]$'),
 		--Alphanumeric (with dot, underscore dash), 1 or more
 		--then @
 		--then alphanumeric (with dot, dash), 1 or more
 		--then .
 		--then alphabetic domain end (com, ca, etc.)
-	CONSTRAINT valid_name CHECK (name ~* '^[A-Za-z][A-Za-z0-9 _-]$')
+	CONSTRAINT valid_name CHECK (name ~* '^[a-zàâçéèêëîïôûùüÿñæœ][a-z0-9àâçéèêëîïôûùüÿñæœ _-]$')
 		--Alphanumeric (with space, dash, underscore), starts with a letter
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE Restaurant
 	PRIMARY KEY (restaurant_id),
 	FOREIGN KEY (cuisine) REFERENCES CuisineType(cuisine_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-	CONSTRAINT valid_name CHECK (name ~* '^[A-Za-z][A-Za-z0-9 ]*$')
+	CONSTRAINT valid_name CHECK (name ~* '^[a-z\'àâçéèêëîïôûùüÿñæœ][a-z0-9 \'àâçéèêëîïôûùüÿñæœ-]*$')
 		--Starts with letter, then alphanumeric with spaces
 		-- TODO: Add ' to viable names, and french accents?
 );
@@ -84,11 +84,20 @@ CREATE TABLE Location
 	PRIMARY KEY (location_id),
 	FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 		ON UPDATE CASCADE ON DELETE CASCADE, -- no restaurant = no location
-	CONSTRAINT valid_phone CHECK (phone_number ~* '^(1-|)(\d{3}|\(\d{3}\))[-]?\d{3}[-]?\d{4}$')
-		--Starts with '1-' or not
-		--Followed by either '(XYZ)' or 'XYZ'
-		--Followed by 0 or 1 hyphens, 3 digits, 0 or 1 hyphens, 4 digits
+	CONSTRAINT valid_phone CHECK (phone_number ~* '^(1 ?|1[-] ?|[+]1 ?|[+]1[-] ?|)(\d{3}|\(\d{3}\))[- ]?\d{3}[- ]?\d{4}([- ]?x\d{1,4}|)$')
+		--1) Starts with either +1 / +1- / 1- / 1 or nothing
+		--2) Followed by a space or not
+		--3) Followed by either '(XYZ)' or 'XYZ'
+		--4) Followed by hyphen/space or not
+		--5) Repeat 2-3 for 3 digits, then 4 digits
+		--6) Followed by 'x1234' for extension of up to 4 digits
 		-- Thoughts on simplifying this? (eg 16135550123)
+		-- Accepts following formats: 16135550123 / 1-613-555-0123 / 613 555 0123 x555 / (613) 555-0123 / +1-613-555-0123 and variations
+
+		-- Possible simplification: When user inputs phone number in text field, before we put it in the database
+		-- we get rid of any spaces, dashes, etc. and just check if it's 10 digits with/without 1 at the start and extension at end
+		-- Example regex: '^1?\d{10}(x\d{1,4}|)$'
+		-- Accepts following formats: 16135550123 / 6135550123 / 6135550123x00 / 16135550123x1234
 );
 
 CREATE TABLE MenuItem
