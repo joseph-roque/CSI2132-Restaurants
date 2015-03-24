@@ -1,3 +1,10 @@
+CREATE TABLE RaterType
+(
+	type_id SERIAL,
+	description TEXT NOT NULL,
+	PRIMARY KEY (type_id)
+);
+
 CREATE TABLE Rater
 (
 	user_id SERIAL,
@@ -20,11 +27,11 @@ CREATE TABLE Rater
 		--Alphanumeric (with space, dash, underscore), starts with a letter
 );
 
-CREATE TABLE RaterType
+CREATE TABLE CuisineType
 (
-	type_id SERIAL,
+	cuisine_id SERIAL,
 	description TEXT NOT NULL,
-	PRIMARY KEY (type_id)
+	PRIMARY KEY (cuisine_id)
 );
 
 CREATE TABLE Restaurant
@@ -36,18 +43,10 @@ CREATE TABLE Restaurant
 	PRIMARY KEY (restaurant_id),
 	FOREIGN KEY (cuisine) REFERENCES CuisineType(cuisine_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-	CONSTRAINT valid_name CHECK (name ~* '^[a-z\'àâçéèêëîïôûùüÿñ][a-z0-9 \'àâçéèêëîïôûùüÿñ-]*$')
+	CONSTRAINT valid_name CHECK (name ~* '^[a-z''àâçéèêëîïôûùüÿñ][a-z0-9 ''àâçéèêëîïôûùüÿñ-]*$')
 		--Starts with letter, then alphanumeric with spaces
 		-- TODO: Add ' to viable names, and french accents?
 );
-
-CREATE TABLE CuisineType
-(
-	cuisine_id SERIAL,
-	description TEXT NOT NULL,
-	PRIMARY KEY (type_id)
-);
-
 
 CREATE TABLE Rating
 (
@@ -68,7 +67,7 @@ CREATE TABLE Rating
 	CONSTRAINT food_valid_rating CHECK (food >= 1 AND food <= 5),
 	CONSTRAINT mood_valid_rating CHECK (mood >= 1 AND mood <= 5),
 	CONSTRAINT staff_valid_rating CHECK (staff >= 1 AND staff <= 5),
-	CONSTRAINT comments_min_length CHECK (DATALENGTH(comments) > 50)
+	CONSTRAINT comments_min_length CHECK (comments ~* '.{50,}')
 );
 
 CREATE TABLE Location
@@ -84,7 +83,7 @@ CREATE TABLE Location
 	PRIMARY KEY (location_id),
 	FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 		ON UPDATE CASCADE ON DELETE CASCADE, -- no restaurant = no location
-	CONSTRAINT valid_phone CHECK (phone_number ~* '^(1 ?|1[-] ?|[+]1 ?|[+]1[-] ?|)(\d{3}|\(\d{3}\))[- ]?\d{3}[- ]?\d{4}([- ]?x\d{1,4}|)$')
+	CONSTRAINT valid_phone CHECK (phone_number ~* E'^(1 ?|1[-] ?|[+]1 ?|[+]1[-] ?|)(\\d{3}|\\(\\d{3}\\))[- ]?\\d{3}[- ]?\\d{4}([- ]?x\\d{1,4}|)$')
 		--1) Starts with either +1 / +1- / 1- / 1 or nothing
 		--2) Followed by a space or not
 		--3) Followed by either '(XYZ)' or 'XYZ'
@@ -100,11 +99,18 @@ CREATE TABLE Location
 		-- Accepts following formats: 16135550123 / 6135550123 / 6135550123x00 / 16135550123x1234
 );
 
+CREATE TABLE ItemType
+(
+	type_id SERIAL,
+	description TEXT NOT NULL,
+	PRIMARY KEY (type_id)
+);
+
 CREATE TABLE MenuItem
 (
 	item_id SERIAL,
 	name VARCHAR(70) NOT NULL,
-	type_id VARCHAR(8), -- entree, main meal, beverage, dessert, etc.
+	type_id SMALLINT NOT NULL, -- entree, main meal, beverage, dessert, etc.
 	description TEXT, --not sure about this
 	price DECIMAL(4,2),
 	restaurant_id INTEGER NOT NULL,
@@ -112,13 +118,6 @@ CREATE TABLE MenuItem
 	FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 		ON UPDATE CASCADE ON DELETE CASCADE, 
 	FOREIGN KEY (type_id) REFERENCES ItemType(type_id)
-);
-
-CREATE TABLE ItemType
-(
-	type_id SERIAL,
-	description TEXT NOT NULL,
-	PRIMARY KEY (type_id)
 );
 
 CREATE TABLE RatingItem
