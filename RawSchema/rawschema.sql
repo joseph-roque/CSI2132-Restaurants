@@ -16,7 +16,7 @@ CREATE TABLE Rater
 		--then alphanumeric (with dot, dash), 1 or more
 		--then .
 		--then alphabetic domain end (com, ca, etc.)
-	CONSTRAINT valid_name CHECK (name ~* '^[a-zàâçéèêëîïôûùüÿñæœ][a-z0-9àâçéèêëîïôûùüÿñæœ _-]$')
+	CONSTRAINT valid_name CHECK (name ~* '^[a-zàâçéèêëîïôûùüÿñ][a-z0-9àâçéèêëîïôûùüÿñ _-]$')
 		--Alphanumeric (with space, dash, underscore), starts with a letter
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE Restaurant
 	PRIMARY KEY (restaurant_id),
 	FOREIGN KEY (cuisine) REFERENCES CuisineType(cuisine_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT,
-	CONSTRAINT valid_name CHECK (name ~* '^[a-z\'àâçéèêëîïôûùüÿñæœ][a-z0-9 \'àâçéèêëîïôûùüÿñæœ-]*$')
+	CONSTRAINT valid_name CHECK (name ~* '^[a-z\'àâçéèêëîïôûùüÿñ][a-z0-9 \'àâçéèêëîïôûùüÿñ-]*$')
 		--Starts with letter, then alphanumeric with spaces
 		-- TODO: Add ' to viable names, and french accents?
 );
