@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Bootstrap 3, from LayoutIt!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta name="author" content="">
+	<meta charset="utf-8">
+	<title>Sizzl | Main Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
 	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
 	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
 	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
 	
-	<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- SWITCH TO MIN EVENTUALLY? -->
+	<link href="css/bootstrap.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 
-  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-  <![endif]-->
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<![endif]-->
 
-  <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-  <link rel="shortcut icon" href="img/favicon.png">
-  	<script src="js/jquery-2.1.3.js"></script>
+	<!-- Fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="img/favicon.png">
+	
+	<!--<script src="js/jquery-2.1.3.js"></script>-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
@@ -33,9 +37,93 @@
 
 <body>
 
+<!-- Fade-in script for each section-->
+<script>
+	$(document).ready(function(){
+
+		$('#most-popular')fadeIn();
+		$("#cuisines").fadeIn("slow");
+		$("#recent-reviews").fadeIn(3000);
+
+	});
+</script>
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
+			<div class="logo">
+				
+				<!-- Logo & subtitle text -->
+			
+				<img class="img-responsive center-block" src="logo.png" style="width:50%">
+				<h3 class="text-center text-muted">
+					Your one-stop shop for dank-ass restaurant reviews
+				</h3>
+			</div>
+			
+			<!-- Navigation Bar -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
+					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
+					<span class="icon-bar"></span><span class="icon-bar"></span>
+				</button> 
+				<!--
+				<a class="navbar-brand" href="#">Sizzl</a>
+				-->
+				<a href="#">
+					<img style="max-width:50px; margin-top: -20px; margin-right: 5px" src="logo-fire.png">
+				</a>
+			</div>
+				
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active">
+						<a href="#">About</a>
+					</li>
+					<li>
+						<a href="#">Contact</a>
+					</li>
+					
+				</ul>
+				
+				<!-- Search Bar -->
+				<form class="navbar-form navbar-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Restaurants, Cuisines..."/>
+					</div> 
+					<button type="submit" class="btn btn-default">
+						<span class="glyphicon glyphicon-search"></span> Search!
+					</button>
+				</form>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="#">Link</a>
+					</li>
+					<li class="dropdown">
+						 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#">Action</a>
+							</li>
+							<li>
+								<a href="#">Another action</a>
+							</li>
+							<li>
+								<a href="#">Something else here</a>
+							</li>
+							<li class="divider">
+							</li>
+							<li>
+								<a href="#">Separated link</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+
+			<!-- OLD NAV BAR DELETE ME
 			<ul class="nav nav-tabs">
 				<li class="active">
 					<a href="#">Home</a>
@@ -46,7 +134,7 @@
 				<li class="disabled">
 					<a href="#">Messages</a>
 				</li>
-				<!-- SEARCH BAR -->
+				<!-- SEARCH BAR 
 				<div class="col-lg-4 col-lg-offset-4">
 					<div class="input-group">
 					  <input type="text" class="form-control" placeholder="Restaurants, Cuisines...">
@@ -55,8 +143,8 @@
 						<span class="glyphicon glyphicon-search"></span> Search
 						</button>
 					  </span>
-					</div><!-- /input-group -->
-				</div><!-- /.col-lg-6 -->
+					</div><!-- /input-group 
+				</div><!-- /.col-lg-6 
 
 				
 				<li class="dropdown pull-right">
@@ -78,23 +166,20 @@
 						</li>
 					</ul>
 				</li>
-			</ul>
-			
-			<!-- Logo & subtitle text -->
-			
-			<img class="center-block" src="logo.png" alt="Sizzl">
-			<h3 class="text-center text-muted">
-				Your one-stop shop for dank ass restaurant reviews
-			</h3>
+			</ul> 
+			-->
+
 
 			
 
-			<h1 class="text-center text-success">
-				Most Popular Restaurants
-			</h3>
-			<div class="row">
+			<!-- Most Popular Restaurants -->
+			<div class="most-popular" style="top-padding:50px">
+				<h1 class="text-center text-success">
+					Most Popular Restaurants
+				</h3>
+				
 				<div class="col-md-4">
-					<div class="thumbnail">
+					<div class="thumbnail" style="height:350px">
 						<img alt="300x200" src="http://lorempixel.com/600/200/food" />
 						<div class="caption">
 							<h3>
@@ -109,8 +194,9 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-md-4">
-					<div class="thumbnail">
+					<div class="thumbnail" style="height:350px">
 						<img alt="300x200" src="http://lorempixel.com/600/200/city" />
 						<div class="caption">
 							<h3>
@@ -125,8 +211,9 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="col-md-4">
-					<div class="thumbnail">
+					<div class="thumbnail" style="height:350px">
 						<img alt="300x200" src="http://lorempixel.com/600/200/sports" />
 						<div class="caption">
 							<h3>
@@ -144,51 +231,58 @@
 				</div>
 			</div>
 		</div>
-	</div>
+
 	<div class="row clearfix">
-		<div class="col-md-3 column">
-			<h3>Cuisines
-			</h3>
-			<ul>
-				<li>
-					Amurrican (25)
-				</li>
-				<li>
-					Asian (5)
-				</li>
-				<li>
-					Coffee (18)
-				</li>
-				<li>
-					Italian (14)
-				</li>
-				<li>
-					Middle Eastern (4)
-				</li>
-				<li>
-					Sandwiches (11)
-				</li>
-				<li>
-					Vegetarian (0)
-				</li>
-			</ul>
+		<!-- Cuisines -->
+		<div class="cuisines">
+			<div class="col-md-3 column">
+				<h3>Cuisines
+				</h3>
+				<ul>
+					<li>
+						Amurrican (25)
+					</li>
+					<li>
+						Asian (5)
+					</li>
+					<li>
+						Coffee (18)
+					</li>
+					<li>
+						Italian (14)
+					</li>
+					<li>
+						Middle Eastern (4)
+					</li>
+					<li>
+						Sandwiches (11)
+					</li>
+					<li>
+						Vegetarian (0)
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div class="col-md-9 column">
-			<h2 class="text-info text-center">
-				Most Recent Reviews
-			</h3>
-			<h2>
-				I LOVE BACON
-			</h2>
-			<h4>
-			by <a href="#">SomeDouchebag</a>
-			</h4>
-			<p>
-				I've been a vegetarian all my life. Recently, my friend forced me into trying Restaurant 1. They ordered the triple-bacon-stack-baconator-bacon-bonanza on a bacon-burrito-bun. It was good. Would recommend.
-			</p>
-			<p>
-				<a class="btn" href="#">View details »</a>
-			</p>
+		
+		<!-- Recent Reviews -->
+		<div class="recent-reviews">
+			<div class="col-md-9 column">
+				<h2 class="text-info text-center">
+					Most Recent Reviews
+				</h3>
+				<h2>
+					I LOVE BACON
+				</h2>
+				<h4>
+				by <a href="#">SomeDouchebag</a>
+				</h4>
+				<p>
+					I've been a vegetarian all my life. Recently, my friend forced me into trying Restaurant 1. They ordered the triple-bacon-stack-baconator-bacon-bonanza on a bacon-burrito-bun. It was good. Would recommend.
+				</p>
+				<p>
+					<a class="btn" href="#">View details »</a>
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
