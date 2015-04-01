@@ -3350,7 +3350,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-lg,
 .btn-group-lg > .btn {
-  padding: 14px 28px;
+  padding: 12px 28px;
   font-size: 18px;
   line-height: 1.3333333;
   border-radius: 6px;
@@ -3546,6 +3546,7 @@ tbody.collapse.in {
   top: auto;
   bottom: 100%;
   margin-bottom: 2px;
+  text-align:centered;
 }
 @media (min-width: 768px) {
   .navbar-right .dropdown-menu {
@@ -4159,7 +4160,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-fixed-top,
 .navbar-fixed-bottom {
+  text-align:center;
   position: fixed;
+  padding-bottom: 5px;
   right: 0;
   left: 0;
   z-index: 1030;
@@ -6619,4 +6622,3 @@ button.close {
     background-position: center center;
     background-size: cover;  
 }
-
