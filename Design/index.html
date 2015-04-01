@@ -50,10 +50,9 @@
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
+		
+			<!-- Logo & subtitle text -->
 			<div class="logo">
-				
-				<!-- Logo & subtitle text -->
-			
 				<img class="img-responsive center-block" src="logo.png" style="width:50%">
 				<h3 class="text-center text-muted">
 					Your one-stop shop for dank-ass restaurant reviews
@@ -61,171 +60,89 @@
 			</div>
 			
 			<!-- Navigation Bar -->
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> 
-					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
-					<span class="icon-bar"></span><span class="icon-bar"></span>
-				</button> 
-				<!--
-				<a class="navbar-brand" href="#">Sizzl</a>
-				-->
-				<a href="#">
-					<img style="max-width:50px; margin-top: -20px; margin-right: 5px" src="logo-fire.png">
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>    
+				</div>
+				
+				<!-- Middle Logo -->
+				<a class="navbar-brand">
+					<img class="img-responsive center-block" style="max-width:50px; margin-top: -30px" src="logo-fire-alt.png" href="#">
 				</a>
-			</div>
 				
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a href="#">About</a>
-					</li>
-					<li>
-						<a href="#">Contact</a>
-					</li>
-					
-				</ul>
-				
-				<!-- Search Bar -->
-				<form class="navbar-form navbar-right" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Restaurants, Cuisines..."/>
-					</div> 
-					<button type="submit" class="btn btn-default">
-						<span class="glyphicon glyphicon-search"></span> Search!
-					</button>
-				</form>
-				
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-						<a href="#">Link</a>
-					</li>
-					<li class="dropdown">
-						 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown<strong class="caret"></strong></a>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="#">Action</a>
-							</li>
-							<li>
-								<a href="#">Another action</a>
-							</li>
-							<li>
-								<a href="#">Something else here</a>
-							</li>
-							<li class="divider">
-							</li>
-							<li>
-								<a href="#">Separated link</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			
-		</div>
-
-			<!-- OLD NAV BAR DELETE ME
-			<ul class="nav nav-tabs">
-				<li class="active">
-					<a href="#">Home</a>
-				</li>
-				<li>
-					<a href="#">Profile</a>
-				</li>
-				<li class="disabled">
-					<a href="#">Messages</a>
-				</li>
-				<!-- SEARCH BAR 
-				<div class="col-lg-4 col-lg-offset-4">
-					<div class="input-group">
-					  <input type="text" class="form-control" placeholder="Restaurants, Cuisines...">
-					  <span class="input-group-btn">
-						<button type="button" class="btn btn-info">
-						<span class="glyphicon glyphicon-search"></span> Search
-						</button>
-					  </span>
-					</div><!-- /input-group 
-				</div><!-- /.col-lg-6 
-
-				
-				<li class="dropdown pull-right">
-					 <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown<strong class="caret"></strong></a>
-					<ul class="dropdown-menu">
-						<li>
-							<a href="#">Action</a>
-						</li>
-						<li>
-							<a href="#">Another action</a>
-						</li>
-						<li>
-							<a href="#">Something else here</a>
-						</li>
-						<li class="divider">
-						</li>
-						<li>
-							<a href="#">Separated link</a>
-						</li>
+				<div class="navbar-collapse collapse">
+					<!-- Left -->
+					<ul class="nav navbar-nav navbar-left">
+						<li><a href="#">About</a></li>
+						<li><a href="#about">Contact</a></li>
 					</ul>
-				</li>
-			</ul> 
-			-->
-
-
+					<!-- Right -->
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#about">Login</a></li>
+						<li><a href="#contact"><b>Register</b></a></li>
+					</ul>
+				</div>
+			</nav>
 			
-
+						
 			<!-- Most Popular Restaurants -->
 			<div class="most-popular" style="top-padding:50px">
 				<h1 class="text-center text-success">
 					Most Popular Restaurants
 				</h3>
-				
+				<!-- One -->
 				<div class="col-md-4">
-					<div class="thumbnail" style="height:350px">
-						<img alt="300x200" src="http://lorempixel.com/600/200/food" />
+					<div class="thumbnail">
+					<a href="#">
+						<div class="cropped-img" style="background-image:url('http://afghanchopan.com/wp-content/uploads/2013/08/garden-salad.jpg')" /> </div>
+
 						<div class="caption">
-							<h3>
-								Restaurant 1
-							</h3>
+							<h2>
+								Restaurant 1</a>
+							</h2>
 							<p>
 								Specialized in dank ass hamburgers, Restaurant 1 is world renown for its affordable finger foods.
 							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Explore</a> <a class="btn" href="#">View Menu</a>
-							</p>
+
 						</div>
 					</div>
 				</div>
-				
+				<!-- Two -->
 				<div class="col-md-4">
-					<div class="thumbnail" style="height:350px">
-						<img alt="300x200" src="http://lorempixel.com/600/200/city" />
+					<div class="thumbnail">
+						<a href="#">
+						<div class="cropped-img" style="background-image:url('http://i.telegraph.co.uk/multimedia/archive/01718/steak_1718547b.jpg')" /> </div>
+
 						<div class="caption">
-							<h3>
-								Restaurant 2
-							</h3>
+							<h2>
+								Restaurant 2</a>
+							</h2>
 							<p>
 								Better known locally as "Pho Ling Do Bang Do Ding Da Do 2", this hole-in-the-wall eatery features some of the grimiest pho known to Ottawa.
 							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Explore</a> <a class="btn" href="#">View Menu</a>
-							</p>
+
 						</div>
 					</div>
 				</div>
-				
+				<!-- Three -->
 				<div class="col-md-4">
-					<div class="thumbnail" style="height:350px">
-						<img alt="300x200" src="http://lorempixel.com/600/200/sports" />
+					<div class="thumbnail">
+						<a href="#">
+						<div class="cropped-img" style="background-image:url('http://upload.wikimedia.org/wikipedia/commons/a/a2/Asian_Style_Italian_Pasta.jpg')" /> </div>
+						
 						<div class="caption">
-							<h3>
-								Restaurant 3
-							</h3>
+							<h2>
+								Restaurant 3</a>
+							</h2>
 							<p>
 								You haven't been to a sports bar until you've been to Restaurant 3. A new addition to the downtown nightlife, this sports bar is praised for
 								its super hot waitresses with unreasonably-sized jugs. No comment on the food.
 							</p>
-							<p>
-								<a class="btn btn-primary" href="#">Explore</a> <a class="btn" href="#">View Menu</a>
-							</p>
+
 						</div>
 					</div>
 				</div>
