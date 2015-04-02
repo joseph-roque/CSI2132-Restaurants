@@ -6,6 +6,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
+	 <p><em>User and pass to connect to database KEEP THIS ALTHOUGH IT LOOKS UGLY</em></p>
+
+	<form id="testdb" name="testdb" method="post" action="">
+            <p> <lable for="name"> Enter your User Name:</lable>
+            <input name="iuser" type="text" id="iuser" />
+            </p>
+            <p> <lable for="name"> Enter your password:</lable>
+            <input name="ipass" type="password" id="ipass" />
+            </p>
+            <p> <input type="submit" name="bfetch" value="Fetch"/>
+        </form>      
+		<?php
+		if (array_key_exists('ipass', $_POST) && array_key_exists('iuser', $_POST))
+		{
+			// Connecting, selecting database    
+			$dbconn = pg_connect("host=web0.site.uottawa.ca port=15432 dbname=".$_POST['iuser']." user=".$_POST['iuser']." password=".$_POST['ipass'])        
+			or die('Could not connect: ' . pg_last_error());
+		}
+		?>
+
+
 
 	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
 	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
@@ -92,7 +113,17 @@
 
 					<div class="caption">
 						<h2>
-							Restaurant 1</a>
+							<?php
+								//Query to be ran will be changed when we implement ratings
+								//The DB should already be connected at this point
+								$query = 'SELECT R.name FROM project.restaurant R WHERE restaurant_id=8';
+								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+								//Fetch the results and print them
+								while ($row = pg_fetch_row($result)) {
+									echo "$row[0]";
+									echo "<br/>\n";
+								}
+							?></a>
 						</h2>
 						<p>
 							Specialized in dank ass hamburgers, Restaurant 1 is world renown for its affordable finger foods.
