@@ -81,49 +81,49 @@
 				
 				<!-- James -->
 				<div class="col-md-4">
-					<div class="thumbnail">
-					<a href="https://github.com/jreinlein/">
-					<div class="cropped-img" style="background-image:url('https://avatars0.githubusercontent.com/u/7434338?v=3&s=460')" /> </div>
+					<div class="thumbnail" style="height:500px">
+					<a href="https://github.com/jreinlein">
+					<div class="cropped-img" style="background-image:url('https://avatars0.githubusercontent.com/u/7434338?v=3&s=460'); min-height:300px" /> </div>
 
 					<div class="caption">
 						<h2>
 							James Reinlein</a>
 						</h2>
 						<p>
-							Specialized in dank ass hamburgers, Restaurant 1 is world renown for its affordable finger foods.
+							Specialized in dank memes and surfing (the internet, not waves), James likes to waste a lot of his time on Reddit or raging at teammates in online MOBAs.
 						</p>
 					</div>
 				</div>
 			</div>
 				<!-- Joseph -->
 				<div class="col-md-4">
-					<div class="thumbnail">
-					<a href="https://github.com/joseph-roque/">
-					<div class="cropped-img" style="background-image:url('http://josephroque.ca/assets/jroque_headshot_380x380.png')" /> </div>
+					<div class="thumbnail" style="height:500px">
+					<a href="https://github.com/joseph-roque">
+					<div class="cropped-img" style="background-image:url('http://josephroque.ca/assets/jroque_headshot_380x380.png'); min-height:300px" /> </div>
 
 					<div class="caption">
 						<h2>
 							Joseph Roque</a>
 						</h2>
 						<p>
-							Better known locally as "Pho Ling Do Bang Do Ding Da Do 2", this hole-in-the-wall eatery features some of the grimiest pho known to Ottawa.
+							In his free time, Joseph likes to bowl (5-pins only, none of that 10-pin garbage) and recite an unreasonable amount of digits of pi.
 						</p>
 					</div>
 				</div>
 				</div>
 				<!-- Moe -->
 				<div class="col-md-4">
-					<div class="thumbnail">
-					<a href="#">
-					<div class="cropped-img" style="background-image:url('moe.png')" /> </div>
+					<div class="thumbnail" style="height:500px">
+					<a href="https://github.com/mshanti">
+					<div class="cropped-img" style="background-image:url('moe.png'); min-height:300px"/> </div>
 						
 					<div class="caption">
 						<h2>
-							"Moe" Shanti</a>
+							Moe Shanti</a>
 						</h2>
 						<p>
-							You haven't been to a sports bar until you've been to Restaurant 3. A new addition to the downtown nightlife, this sports bar is praised for
-							its super hot waitresses with unreasonably-sized jugs. No comment on the food.
+							Also known as <i>Habibi</i>, Moe spends his leisure time brushing up on his knowledge of the Qur'an and refraining from unlawful drugs.
+							His mother is quite proud.
 						</p>
 
 					</div>
