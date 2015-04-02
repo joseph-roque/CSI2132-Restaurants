@@ -1,0 +1,67 @@
+12 restaurants
+	8 Ratings each
+15 raters
+	Max 10 ratings each
+40 menu items
+
+RaterType
+(0, 'Other')
+(1, 'Casual')
+(2, 'Blogger')
+(3, 'Verified Critic')
+
+
+Rater
+INSERT INTO (email, name, join_date, type_id)
+
+('max@muchies.com', 'MunchieMax', '2013-08-01', 3)
+('danny@foodraterz.com', 'DannyRatezFood', '2014-11-15', 3)
+('supergirl1999@hotmail.com', 'Missy', 2015-02-28', 1)
+('dog.owner1234@gmail.com', 'GermanShepherdsRule', '2013-04-10', 1)
+('notafakeemail@fakeemails.com', 'LegitimateUser', '2012-12-01', 0)
+('fightthepower485@ftp.com', 'FightThePower', '2014-06-30', 2)
+('tasty@eatz.com', 'TastyEatz', '2012-04-19', 3)
+('imhungry@starving.com', 'ImHungryFeedMe', '2009-05-10', 3)
+('jesselovescats@yahoo.ca', 'CatsAreCute22', '2015-01-08', 1)
+('myparentsaredead@bwe.com', 'BruceWayne', 2014-07-29', 1)
+('myuncleisdead@spiderman.com', 'NotPeterParker', '2013-09-09', 1)
+('myplanetisgone@superman.com', 'KryptoniteSucks', '2012-12-14', 1)
+('youwouldntlikeme@whenimangry.ca', 'TheIncredibleHulk', '2013-08-17', 1)
+('contactme@peterquill.com', 'Starlord', '2014-08-23', 1)
+('iam@groot.com', 'IAmGroot', '2014-06-15', 1)
+('blogger@hotmail.com', 'FoodBlogger', '2014-03-03', 2)
+('donthatetheplaya999@aol.com', 'DontHateMissyMiss', '2011-03-04', 1)
+('shakeitofftswiftfan@hotmail.com', 'TSwiftIsMyLife', '2014-09-12', 1)
+
+CuisineType
+(0, 'Unknown')
+(1, 'Mexican')
+(2, 'Indian')
+(3, 'Korean')
+(4, 'Chinese')
+(5, 'Italian')
+(6, 'Fine Dining')
+(7, 'Breakfast')
+(8, 'Middle Eastern')
+(9, 'Sandwiches')
+(10, 'Other')
+
+Restaurant
+INSERT INTO (name, cuisine, url)
+('Bite', 9, null)
+('Play Food and Wine', 6, 'www.playfood.ca')
+('Taste of Korea', 3, 'www.tastekorea.ca')
+('Chinese Wonders', 4, 'www.chinesewonders.com')
+('Pub 101', 9, null)
+('Tacos and Stuff', 1, 'tacosandstuff.com')
+('The Spicy Indian', 2, 'spicyindian.com')
+('West Side Luigis', 5, 'westsideluigis.ca')
+('The Red Hen', 7, 'redhenbreakfast.ca')
+('Ottawa Shawarma Place', 8, 'ottawashawarma.ca')
+('Stuff Your Face', 6, 'stuffyourface.com')
+('The Pizza Shack', 10, null)
+('Taste of China', 4, null)
+('Wonderful India', 2, null)
+
+Rating
+INSERT INTO (user_id, post_date, price, food, mood, staff, comments, restaurant_id)
