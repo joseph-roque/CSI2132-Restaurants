@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Sizzl | Login</title>
+	<title>Sizzl | Contact</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -61,20 +61,20 @@
 					</ul>
 					<!-- Left -->
 					<ul class="nav navbar-nav navbar-left">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="about.php">About</a></li>
+						<li><a href="contact.php"><b>Contact</b></a></li>
 					</ul>
 					<!-- Right -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="login.html"><b>Login</b></a></li>
-						<li><a href="register.html">Register</a></li>
+						<li><a href="login.php">Login</a></li>
+						<li><a href="register.php">Register</a></li>
 					</ul>
 				</div>	
 			</nav>
 			
 			<h2 class="text-center text-info">
-					Log into your Sizzl account
+					Contact us, we promise not to bite
 			</h2>
 			
 			<div class="register-form">
@@ -82,23 +82,27 @@
 					<div class="col-md-12 column">
 						<form role="form">
 							<div class="row">
-								<div class="form-group-xs">
+							<!-- Name -->
+								<div class="form-group-xxs">
+									 <label for="input-name">Name</label>
+									 <input type="email" class="form-control" id="input-email" autofocus/>
+								</div>
+							<!-- Email -->
+								<div class="form-group-xxs">
 									 <label for="input-email">Email address</label>
-									 <input type="email" class="form-control" id="input-email" required autofocus/>
+									 <input type="email" class="form-control" id="input-email" required/>
 								</div>
 							</div>
+							<!-- Comments -->
 							<div class="row">
-								<div class="form-group-xs">
-									 <label for="input-pw">Password</label>
-									 <input type="password" class="form-control" id="input-pw" required/>
+								<div class="form-group-xxs">
+									 <label for="input-comments">Comments</label>
+									 <textarea name="comments" rows="10" cols="30" placeholder="We're listening...!" required></textarea>
 								</div>
 							</div>
-							<!-- DISABLED UNLESS YOU KNOW HOW TO DO THIS
-							<div class="checkbox">
-								 <label><input type="checkbox" /> Remember Me</label>
-							</div> -->
+							<!-- Submit button -->
 							<div class="text-center">
-								<button type="submit" class="btn"><strong>Login!</strong></button>
+								<button type="submit" class="btn"><strong>Submit</strong></button>
 							</div>
 						</form>
 					</div>

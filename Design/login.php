@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Sizzl | Contact</title>
+	<title>Sizzl | Login</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -61,14 +61,14 @@
 					</ul>
 					<!-- Left -->
 					<ul class="nav navbar-nav navbar-left">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="contact.html"><b>Contact</b></a></li>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="about.php">About</a></li>
+						<li><a href="contact.php">Contact</a></li>
 					</ul>
 					<!-- Right -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="login.html">Login</a></li>
-						<li><a href="register.html">Register</a></li>
+						<li><a href="login.php"><b>Login</b></a></li>
+						<li><a href="register.php">Register</a></li>
 					</ul>
 				</div>	
 			</nav>
@@ -84,13 +84,13 @@
 							<div class="row">
 								<div class="form-group-xs">
 									 <label for="input-email">Email address</label>
-									 <input type="email" class="form-control" id="input-email" />
+									 <input type="email" class="form-control" id="input-email" required autofocus/>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group-xs">
 									 <label for="input-pw">Password</label>
-									 <input type="password" class="form-control" id="input-pw" />
+									 <input type="password" class="form-control" id="input-pw" required/>
 								</div>
 							</div>
 							<!-- DISABLED UNLESS YOU KNOW HOW TO DO THIS
@@ -98,7 +98,7 @@
 								 <label><input type="checkbox" /> Remember Me</label>
 							</div> -->
 							<div class="text-center">
-								<button type="submit" class="btn-lg btn-primary">Login!</button>
+								<button type="submit" class="btn"><strong>Login!</strong></button>
 							</div>
 						</form>
 					</div>

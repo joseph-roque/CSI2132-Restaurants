@@ -61,14 +61,14 @@
 					</ul>
 					<!-- Left -->
 					<ul class="nav navbar-nav navbar-left">
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="about.php">About</a></li>
+						<li><a href="contact.php">Contact</a></li>
 					</ul>
 					<!-- Right -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="login.html">Login</a></li>
-						<li><a href="register.html"><b>Register</b></a></li>
+						<li><a href="login.php">Login</a></li>
+						<li><a href="register.php"><b>Register</b></a></li>
 					</ul>
 				</div>	
 			</nav>
