@@ -56,7 +56,7 @@
 	<script type="text/javascript" src="js/scripts.js"></script>
 </head>
 
-<body>
+<body background="bg.png">
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">

@@ -67,7 +67,7 @@
 					</ul>
 					<!-- Right -->
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#about">Login</a></li>
+						<li><a href="login.html">Login</a></li>
 						<li><a href="register.html"><b>Register</b></a></li>
 					</ul>
 				</div>	
@@ -84,19 +84,19 @@
 							<div class="row">
 								<div class="form-group-xs">
 									 <label for="input-email">Email address</label>
-									 <input type="email" class="form-control" id="input-email" />
+									 <input type="email" class="form-control" id="input-email" required autofocus/>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group-xs">
 									 <label for="input-pw">Password</label>
-									 <input type="password" class="form-control" id="input-pw" />
+									 <input type="password" class="form-control" id="input-pw" required/>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group-xs">
 									 <label for="input-pw-confirm">Confirm Password</label>
-									 <input type="password" class="form-control" id="input-pw-confirm" />
+									 <input type="password" class="form-control" id="input-pw-confirm" required/>
 								</div>
 							</div>
 							<!-- DISABLED UNLESS YOU KNOW HOW TO DO THIS
@@ -104,7 +104,7 @@
 								 <label><input type="checkbox" /> Remember Me</label>
 							</div> -->
 							<div class="text-center">
-								<button type="submit" class="btn-lg btn-primary">Register!</button>
+								<button type="submit" class="btn"><strong>Register!</strong></button>
 							</div>
 						</form>
 					</div>
