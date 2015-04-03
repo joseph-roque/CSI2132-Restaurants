@@ -17,13 +17,13 @@ CREATE TABLE Rater
 	FOREIGN KEY (type_id) REFERENCES RaterType(type_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT, --What do we want?
 	CONSTRAINT rep_bounds CHECK (reputation >= 1 AND reputation <= 5),
-	CONSTRAINT valid_email CHECK (email ~* '^[a-z0-9._-]+@[a-z0-9.-]+[.][a-z]$'),
+	CONSTRAINT valid_email CHECK (email ~* '^[a-z0-9._-]+@[a-z0-9.-]+[.][a-z]+$'),
 		--Alphanumeric (with dot, underscore dash), 1 or more
 		--then @
 		--then alphanumeric (with dot, dash), 1 or more
 		--then .
 		--then alphabetic domain end (com, ca, etc.)
-	CONSTRAINT valid_name CHECK (name ~* '^[a-zàâçéèêëîïôûùüÿñ][a-z0-9àâçéèêëîïôûùüÿñ _-]$')
+	CONSTRAINT valid_name CHECK (name ~* '^[a-zàâçéèêëîïôûùüÿñ][a-z0-9àâçéèêëîïôûùüÿñ _-]*$')
 		--Alphanumeric (with space, dash, underscore), starts with a letter
 );
 
