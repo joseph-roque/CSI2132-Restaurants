@@ -75,7 +75,7 @@ CREATE TABLE Location
 	location_id SERIAL,
 	first_open_date TIMESTAMP NOT NULL,
 	manager_name VARCHAR(70), 
-	phone_number CHAR(11), 
+	phone_number VARCHAR(16),
 	street_address TEXT, --not sure about this
 	hour_open DECIMAL(4,0), -- 24h format (eg 0630 is 6:30 am)
 	hour_close DECIMAL(4,0), -- 24h format (eg 1801 is 6:01 pm)
@@ -83,7 +83,7 @@ CREATE TABLE Location
 	PRIMARY KEY (location_id),
 	FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 		ON UPDATE CASCADE ON DELETE CASCADE, -- no restaurant = no location
-	CONSTRAINT valid_phone CHECK (phone_number ~* E'^(1 ?|1[-] ?|[+]1 ?|[+]1[-] ?|)(\\d{3}|\\(\\d{3}\\))[- ]?\\d{3}[- ]?\\d{4}([- ]?x\\d{1,4}|)$')
+	CONSTRAINT valid_phone CHECK (phone_number ~* E'^1?\\d{10}(x\\d{1,4}|)$')
 		--1) Starts with either +1 / +1- / 1- / 1 or nothing
 		--2) Followed by a space or not
 		--3) Followed by either '(XYZ)' or 'XYZ'
