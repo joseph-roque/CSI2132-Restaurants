@@ -1,6 +1,6 @@
 CREATE TABLE RaterType
 (
-	type_id SERIAL,
+	type_id INTEGER,
 	description TEXT NOT NULL,
 	PRIMARY KEY (type_id)
 );
@@ -29,7 +29,7 @@ CREATE TABLE Rater
 
 CREATE TABLE CuisineType
 (
-	cuisine_id SERIAL,
+	cuisine_id INTEGER,
 	description TEXT NOT NULL,
 	PRIMARY KEY (cuisine_id)
 );
@@ -50,7 +50,7 @@ CREATE TABLE Restaurant
 
 CREATE TABLE Rating
 (
-	user_id INTEGER NOT NULL DEFAULT '00',
+	user_id INTEGER NOT NULL DEFAULT 0,
 	post_date TIMESTAMP NOT NULL,
 	price SMALLINT NOT NULL DEFAULT 0,
 	food SMALLINT NOT NULL DEFAULT 0,
@@ -63,10 +63,10 @@ CREATE TABLE Rating
 		ON UPDATE CASCADE ON DELETE SET DEFAULT,
 	FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 		ON UPDATE CASCADE ON DELETE CASCADE, -- no restaurant, no ratings
-	CONSTRAINT price_valid_rating CHECK (price >= 1 AND price <= 5),
-	CONSTRAINT food_valid_rating CHECK (food >= 1 AND food <= 5),
-	CONSTRAINT mood_valid_rating CHECK (mood >= 1 AND mood <= 5),
-	CONSTRAINT staff_valid_rating CHECK (staff >= 1 AND staff <= 5),
+	CONSTRAINT price_valid_rating CHECK (price >=0 AND price <= 5),
+	CONSTRAINT food_valid_rating CHECK (food >= 0 AND food <= 5),
+	CONSTRAINT mood_valid_rating CHECK (mood >= 0 AND mood <= 5),
+	CONSTRAINT staff_valid_rating CHECK (staff >= 0 AND staff <= 5),
 	CONSTRAINT comments_min_length CHECK (comments ~* '.{50,}')
 );
 
@@ -101,7 +101,7 @@ CREATE TABLE Location
 
 CREATE TABLE ItemType
 (
-	type_id SERIAL,
+	type_id INTEGER,
 	description TEXT NOT NULL,
 	PRIMARY KEY (type_id)
 );
