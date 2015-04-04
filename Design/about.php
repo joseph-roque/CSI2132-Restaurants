@@ -111,7 +111,7 @@
 					</div>
 				</div>
 				</div>
-				<!-- Moe -->
+				<!-- Mohammed -->
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/mshanti">
@@ -119,7 +119,7 @@
 						
 					<div class="caption">
 						<h2>
-							Moe Shanti</a>
+							Mohammed Shanti</a>
 						</h2>
 						<p>
 							Also known as <i>Habibi</i>, Moe spends his leisure time brushing up on his knowledge of the Qur'an and refraining from unlawful drugs.

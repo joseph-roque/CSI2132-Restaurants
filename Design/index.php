@@ -116,7 +116,7 @@
 							<?php
 								//Query to be ran will be changed when we implement ratings
 								//The DB should already be connected at this point
-								$query = 'SELECT R.name FROM project.restaurant R WHERE restaurant_id=8';
+								$query = "SELECT R.name FROM project.restaurant R WHERE R.name='Chinese Wonders'";
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								//Fetch the results and print them
 								while ($row = pg_fetch_row($result)) {
@@ -126,7 +126,17 @@
 							?></a>
 						</h2>
 						<p>
-							Specialized in dank ass hamburgers, Restaurant 1 is world renown for its affordable finger foods.
+							<?php
+								//Query to be ran will be changed when we implement ratings
+								//The DB should already be connected at this point
+								$query = 'SELECT R.name FROM project.restaurant R WHERE restaurant_id=8';
+								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+								//Fetch the results and print them
+								while ($row = pg_fetch_row($result)) {
+									echo "$row[0]";
+									echo "<br/>\n";
+								}	
+							?>
 						</p>
 					</div>
 				</div>
@@ -205,13 +215,41 @@
 					Most Recent Reviews
 				</h2>
 				<h2>
-					I LOVE BACON
+					I LOVE BACON add title query
 				</h2>
 				<h4>
-				by <a href="#">SomeDouchebag</a>
+				by <a href="#">
+				<?php
+					$query = " SELECT Rater.name
+							FROM project.Rater Rater, project.Rating Rating
+							WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
+							(SELECT MIN(Rating2.post_date) FROM project.Rating Rating2)";
+							
+					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+					//Fetch the results and print them
+					while ($row = pg_fetch_row($result)) {
+						echo "$row[0]";
+						echo "<br/>\n";
+					}
+					
+				?>
+				</a>
 				</h4>
 				<p>
-					I've been a vegetarian all my life. Recently, my friend forced me into trying Restaurant 1. They ordered the triple-bacon-stack-baconator-bacon-bonanza on a bacon-burrito-bun. It was good. Would recommend.
+									<?php
+					$query = " SELECT Rating.comments
+FROM project.Rater Rater, project.Rating Rating
+WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
+(SELECT MIN(Rating2.post_date) FROM project.Rating Rating2)";
+							
+					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+					//Fetch the results and print them
+					while ($row = pg_fetch_row($result)) {
+						echo "$row[0]";
+						echo "<br/>\n";
+					}
+					
+				?>
 				</p>
 				<p>
 					<a class="btn" href="#">Read review »</a>
