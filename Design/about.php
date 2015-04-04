@@ -83,7 +83,7 @@
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/jreinlein">
-					<div class="cropped-img" style="background-image:url('https://avatars0.githubusercontent.com/u/7434338?v=3&s=460'); min-height:300px" /> </div>
+					<div class="cropped-img" style="background-image:url('james.jpg'); min-height:300px" /> </div>
 
 					<div class="caption">
 						<h2>
@@ -99,7 +99,7 @@
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/joseph-roque">
-					<div class="cropped-img" style="background-image:url('http://josephroque.ca/assets/jroque_headshot_380x380.png'); min-height:300px" /> </div>
+					<div class="cropped-img" style="background-image:url('joseph.png'); min-height:300px" /> </div>
 
 					<div class="caption">
 						<h2>
