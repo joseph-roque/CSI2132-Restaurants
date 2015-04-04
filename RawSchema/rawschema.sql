@@ -13,6 +13,7 @@ CREATE TABLE Rater
 	join_date TIMESTAMP NOT NULL,
 	type_id SMALLINT NOT NULL,
 	reputation SMALLINT NOT NULL DEFAULT 1,
+	password TEXT NOT NULL,
 	PRIMARY KEY (user_id),
 	FOREIGN KEY (type_id) REFERENCES RaterType(type_id)
 		ON UPDATE CASCADE ON DELETE RESTRICT, --What do we want?
