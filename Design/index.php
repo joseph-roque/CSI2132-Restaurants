@@ -78,8 +78,8 @@
 							<div class="input-group">
 								<input type="text" class="form-control" placeholder="Restaurants, Cuisines..."
 								id="query" name="query" value="">
-									<div class="input-group-btn">
-								<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
+								<div class="input-group-btn">
+									<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
 								</div>
 							</div>
 						</form>
@@ -285,15 +285,15 @@ WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN
 			</div>
 		</div>
 
-		<!-- Bottom Logo -->
-		<div class="col-md-12 column">
-			<nav class="navbar-form">
-					<img style="max-width:50px; margin-top: -17px; margin-left: -7px"
-						 src="logo-fire.png">
-			</nav>
-		</div>
 	</div>
 	
+<!-- Bottom Logo
+<footer class="footer">
+	<div class="container text-center">
+		<img style="max-width: 50px"
+			 src="logo-fire.png">
+	</div>
+</footer> -->
 
 </body>
 </html>

@@ -8,13 +8,24 @@
 */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
+  position: relative;
+  min-height: 100%;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
+  /* height of footer 
+  margin-bottom: 60px; */
   padding-top: 3px;
   background-image: url("bg.png");
+}
+/* Added */
+.footer {
+  position: absolute;
+  bottom: 2%;
+  left: auto;
+  right: auto;
+  height: 60px;
 }
 article,
 aside,
@@ -2643,7 +2654,7 @@ input[type="search"] {
   width:20%;
   margin-left: auto;
   margin-right: auto;
-  min-width: 200px;
+  min-width: 235px;
 }
 .radio,
 .checkbox {
@@ -4178,7 +4189,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-fixed-top,
 .navbar-fixed-bottom {
   text-align:center;
-  position: fixed;
+  position: relative;
   padding-bottom: 5px;
   right: 0;
   left: 0;

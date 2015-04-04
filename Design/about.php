@@ -128,16 +128,16 @@
 
 					</div>
 				</div>
-			
-			<!-- Bottom Logo -->
-			<nav class="navbar-fixed-bottom">
-					<img style="max-width:50px"
-						 src="logo-fire.png">
-			</nav>
 	</div>
 </div>
 
-	
+<!-- Bottom Logo
+<footer class="footer">
+	<div class="container text-center">
+		<img style="max-width: 50px"
+			 src="logo-fire.png">
+	</div>
+</footer> -->
 
 </body>
 </html>

@@ -83,21 +83,23 @@
 						<form role="form">
 							<div class="row">
 							<!-- Name -->
-								<div class="form-group-xxs">
+								<div class="form-group-xs">
 									 <label for="input-name">Name</label>
 									 <input type="email" class="form-control" id="input-email" autofocus/>
 								</div>
+							</div>
+							<div class="row">
 							<!-- Email -->
-								<div class="form-group-xxs">
+								<div class="form-group-xs">
 									 <label for="input-email">Email address</label>
 									 <input type="email" class="form-control" id="input-email" required/>
 								</div>
 							</div>
 							<!-- Comments -->
 							<div class="row">
-								<div class="form-group-xxs">
-									 <label for="input-comments">Comments</label>
-									 <textarea name="comments" rows="10" cols="30" placeholder="We're listening...!" required></textarea>
+								<div class="form-group-xs">
+									 <label for="input-comments">Comments? Suggestions</label>
+									 <textarea style="width:100%" name="comments" rows="10"  placeholder="We're listening...!" required></textarea>
 								</div>
 							</div>
 							<!-- Submit button -->
@@ -109,14 +111,16 @@
 				</div>
 			</div>
 			
-			<!-- Bottom Logo -->
-			<nav class="navbar-fixed-bottom">
-					<img style="max-width:50px"
-						 src="logo-fire.png">
-			</nav>
 	</div>
 </div>
 
+<!-- Bottom Logo
+<footer class="footer">
+	<div class="container text-center">
+		<img style="max-width: 50px"
+			 src="logo-fire.png">
+	</div>
+</footer> -->
 	
 
 </body>
