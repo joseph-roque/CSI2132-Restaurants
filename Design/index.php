@@ -116,7 +116,9 @@
 							<?php
 								//Query to be ran will be changed when we implement ratings
 								//The DB should already be connected at this point
-								$query = "SELECT R.name FROM project.restaurant R WHERE R.name='Chinese Wonders'";
+								$query = "SELECT R.name
+									FROM project.Restaurant R
+									WHERE R.restaurant_id = 1";
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								//Fetch the results and print them
 								while ($row = pg_fetch_row($result)) {
@@ -148,8 +150,21 @@
 					<div class="cropped-img" style="background-image:url('http://i.telegraph.co.uk/multimedia/archive/01718/steak_1718547b.jpg')" /> </div>
 
 					<div class="caption">
-						<h2>
-							Restaurant 2</a>
+					<h2>
+					<?php
+								//Query to be ran will be changed when we implement ratings
+								//The DB should already be connected at this point
+								$query = "SELECT R.name
+									FROM project.Restaurant R
+									WHERE R.restaurant_id = 2";
+								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+								//Fetch the results and print them
+								while ($row = pg_fetch_row($result)) {
+									echo "$row[0]";
+									echo "<br/>\n";
+								}
+					?>
+						</a>
 						</h2>
 						<p>
 							Better known locally as "Pho Ling Do Bang Do Ding Da Do 2", this hole-in-the-wall eatery features some of the grimiest pho known to Ottawa.
@@ -165,7 +180,20 @@
 						
 					<div class="caption">
 						<h2>
-							Restaurant 3</a>
+							<?php
+								//Query to be ran will be changed when we implement ratings
+								//The DB should already be connected at this point
+								$query = "SELECT R.name
+									FROM project.Restaurant R
+									WHERE R.restaurant_id = 3";
+								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+								//Fetch the results and print them
+								while ($row = pg_fetch_row($result)) {
+									echo "$row[0]";
+									echo "<br/>\n";
+								}
+					?>
+							</a>
 						</h2>
 						<p>
 							You haven't been to a sports bar until you've been to Restaurant 3. A new addition to the downtown nightlife, this sports bar is praised for
