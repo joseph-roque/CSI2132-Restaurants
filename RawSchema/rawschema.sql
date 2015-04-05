@@ -8,8 +8,8 @@ CREATE TABLE RaterType
 CREATE TABLE Rater
 (
 	user_id SERIAL,
-	email VARCHAR(90) NOT NULL,
-	name VARCHAR(70) NOT NULL,
+	email VARCHAR(90) NOT NULL UNIQUE,
+	name VARCHAR(70) NOT NULL UNIQUE,
 	join_date TIMESTAMP NOT NULL,
 	type_id SMALLINT NOT NULL,
 	reputation SMALLINT NOT NULL DEFAULT 1,
@@ -38,7 +38,7 @@ CREATE TABLE CuisineType
 CREATE TABLE Restaurant
 (
 	restaurant_id SERIAL,
-	name VARCHAR(70) NOT NULL,
+	name VARCHAR(70) NOT NULL UNIQUE,
 	cuisine SMALLINT NOT NULL,
 	url TEXT, -- allow restaurant to have no URL
 	PRIMARY KEY (restaurant_id),
