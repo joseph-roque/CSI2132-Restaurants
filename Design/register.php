@@ -104,7 +104,7 @@
 								 <label><input type="checkbox" /> Remember Me</label>
 							</div> -->
 							<div class="text-center">
-								<button name="register" id="register" type="submit" class="btn"><strong>Register!</strong></button>
+								<button name="register" id="register" type="submit" class="btn btn-primary"><strong>Register!</strong></button>
 							</div>
 						</form>
 						<?php

@@ -98,7 +98,7 @@
 								 <label><input type="checkbox" /> Remember Me</label>
 							</div> -->
 							<div class="text-center">
-								<button type="submit" class="btn"><strong>Login!</strong></button>
+								<button type="submit" class="btn btn-primary"><strong>Login!</strong></button>
 							</div>
 						</form>
 					</div>

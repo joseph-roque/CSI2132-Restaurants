@@ -104,7 +104,7 @@
 							</div>
 							<!-- Submit button -->
 							<div class="text-center">
-								<button type="submit" class="btn"><strong>Submit</strong></button>
+								<button type="submit" class="btn btn-primary"><strong>Submit</strong></button>
 							</div>
 						</form>
 					</div>

@@ -91,6 +91,9 @@
 				Currently managed by: <i>[manager_name]</i>
 			</p>
 			
+			<button type="write-review" class="btn btn-primary"><strong>Write a Review</strong></button>
+
+			
 		</div>
 		<!-- Maps interface & avg. rating -->
 		<div class="col-md-7 column text-center" style="padding-top: 10px">
@@ -105,45 +108,34 @@
 		</div>
 	</div>
 	<div class="row clearfix">
-		<!-- List of menu items -->
-		<div class="col-md-4 column">
-			<div class="row clearfix">
-				<!-- Item name (with link) -->
-				<div class="col-md-7 column">
-				<h2 class="text-info">
-				Menu
-				</h2>
-					<ul>
-					<li>
-						Amurrican (25)
-					</li>
-					<li>
-						Asian (5)
-					</li>
-					<li>
-						Coffee (18)
-					</li>
-					<li>
-						Italian (14)
-					</li>
-					<li>
-						Middle Eastern (4)
-					</li>
-					<li>
-						Sandwiches (11)
-					</li>
-					<li>
-						Vegetarian (0)
-					</li>
-				</ul>
-				</div>
-				<!-- Rating for item -->
-				<div class="col-md-5 column">
-				</div>
-			</div>
+		<!-- Menu Table -->
+		<div class="col-md-5 column">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Item</th>
+						<th>Type</th>
+						<th>Rating</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>California Roll</td>
+						<td>Entree</td>
+						<td>4/5</td>
+					</tr>
+					<tr>
+						<td>[name]</td>
+						<td>[type_id -> description]</td>
+						<td>[avg. of ratings for MenuItem]</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 		<!-- Reviews -->
-		<div class="	col-md-8 column">
+		<div class="col-md-7 column">
+		
 		</div>
 	</div>
 </div>

@@ -14,18 +14,6 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  /* height of footer 
-  margin-bottom: 60px; */
-  padding-top: 3px;
-  background-image: url("bg.png");
-}
-/* Added */
-.footer {
-  position: absolute;
-  bottom: 2%;
-  left: auto;
-  right: auto;
-  height: 60px;
 }
 article,
 aside,
@@ -6628,30 +6616,4 @@ button.close {
 .navbar-inverse .badge {
   background-color: #fff;
   color: #772953;
-}
-/* Middle of nav-bar */
-.navbar-brand
-{
-    position: absolute;
-    width: 100%;
-    left: 0;
-    text-align: center;
-    margin: auto;
-	
-}
-/* Cropped images in thumbnails */
-.cropped-img{
-    position:relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 50% ; /* % of width, defines aspect ratio*/
-    
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;  
-}
-/* Avg rating in Restaurant view */
-.rating {
-  padding-top: 50px;
-  line-height: 2;
 }
