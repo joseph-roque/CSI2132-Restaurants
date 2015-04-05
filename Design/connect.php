@@ -1,6 +1,7 @@
 <?php
 
 //conect to database
+$link = pg_connect("host=web0.site.uottawa.ca port=15432 dbname=mshan072 user=mshan072 password=\$Hanti1095");
 
 if(!$link){
   die('Could not connect: ' . pg_last_error());

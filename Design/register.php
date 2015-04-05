@@ -142,6 +142,7 @@
 									if($getPass == $getConf){
 										//connect to DB
 										require("connect.php");
+										//Current date in YYYY-MM-DD format
 										$currentDate = date('Y-m-d');
 										pg_query("INSERT INTO project.Rater(email, name, join_date, type_id, password)
 										VALUES('$getEmail', '$getName', '$currentDate', '1', '$getPass');
