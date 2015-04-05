@@ -103,7 +103,7 @@
 				<h2 class="text-info" style="margin-bottom: -10px">
 					Average Rating
 				</h2>
-				<strong><font size="7">[avg. of ratings]</font></strong>
+				<strong><p style="font-size:48px">[avg. of ratings]</font></strong>
 			</div>
 		</div>
 	</div>
