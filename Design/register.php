@@ -116,21 +116,52 @@
 							</div>
 						</form>
 						<?php
-							if (array_key_exists('input-email', $_POST) && array_key_exists('input-pw', $_POST) && array_key_exists('input-name', $_POST)){
-								// Connecting, selecting database   
-								$dbconn = pg_connect("host=web0.site.uottawa.ca port=15432 dbname=mshan072 user=mshan072 password=\$Hanti1095")
-								or die('Could not connect: ' . pg_last_error());
-								$currentDate = date('Y-m-d');
-								$query = "INSERT INTO project.Rater(email, name, join_date, type_id, password)
-									VALUES('".$_POST['input-email']."','".$_POST['input-name']."','"
-									.$currentDate."','"."1','".$_POST['input-pw']."')";
+						if (array_key_exists('input-email', $_POST) && array_key_exists('input-pw', $_POST) && array_key_exists('input-name', $_POST) && array_key_exists('input-pw-confirm', $_POST)){
+							
+							//get form variables
+							$getName = $_POST['input-name'];
+							$getEmail = $_POST['input-email'];
+							$getPass = $_POST['input-pw'];
+							$getConf = $_POST['input-pw-confirm'];
+							
+							require("connect.php");
+							
+							$query = "SELECT * FROM project.Rater WHERE Rater.name='$getName'";
+							$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+							
+							$numRows = pg_num_rows($result);
+							
+							if($numRows == 0){
 								
+								$query = "SELECT * FROM project.Rater WHERE Rater.email='$getEmail'";
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+							
+								$numRows = pg_num_rows($result);
 								
-								pg_free_result($result);
-								
-								pg_close($dbconn);
+								if($numRows == 0){
+									if($getPass == $getConf){
+										//connect to DB
+										require("connect.php");
+										$currentDate = date('Y-m-d');
+										pg_query("INSERT INTO project.Rater(email, name, join_date, type_id, password)
+										VALUES('$getEmail', '$getName', '$currentDate', '1', '$getPass');
+										");
+										
+										echo "<p align='center'>Welcome <b> $getName </b> you are now registered. <a href= './login.php'> Continue </a></p>";
+									}
+									else{
+										echo "<p class='error'>Your password and confirmation do not match.</p>";
+									}
+								}
+								else{
+									echo "<p class='error'>That email is already taken please enter another</p>";
+
+								}
 							}
+							else {
+								echo "<p class='error'>That name is already taken please enter another</p>";
+							}
+						}
 						?>
 					</div>
 				</div>
