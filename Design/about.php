@@ -83,7 +83,7 @@
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/jreinlein">
-					<div class="cropped-img" style="background-image:url('james.jpg'); min-height:300px" /> </div>
+					<div class="cropped-img" style="background-image:url('james.png'); min-height:300px" /> </div>
 
 					<div class="caption">
 						<h2>
@@ -115,7 +115,7 @@
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/mshanti">
-					<div class="cropped-img" style="background-image:url('moe.png'); min-height:300px"/> </div>
+					<div class="cropped-img" style="background-image:url('mohammed.png'); min-height:300px"/> </div>
 						
 					<div class="caption">
 						<h2>
