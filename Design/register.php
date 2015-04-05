@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
+
+
 	<meta charset="utf-8">
 	<title>Sizzl | Register</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,6 +85,12 @@
 						<form id="formID" name="formID" method="post" action="" role="form">
 							<div class="row">
 								<div class="form-group-xs">
+									<label for="input-name">Name</label>
+									<input name ="input-name" type="name" class="form-control" id="input-name" required autofocus/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group-xs">
 									 <label for="input-email">Email address</label>
 									 <input name ="input-email" type="email" class="form-control" id="input-email" required autofocus/>
 								</div>
@@ -108,11 +116,19 @@
 							</div>
 						</form>
 						<?php
-							if (array_key_exists('input-email', $_POST) && array_key_exists('input-pw', $_POST)){
-								echo "query to be implemented";
-							}
-							else{
-								echo "query to be implemented";
+							if (array_key_exists('input-email', $_POST) && array_key_exists('input-pw', $_POST) && array_key_exists('input-name', $_POST)){
+								// Connecting, selecting database   
+								$dbconn = pg_connect("host=web0.site.uottawa.ca port=15432 dbname=mshan072 user=mshan072 password=\$Hanti1095")
+								or die('Could not connect: ' . pg_last_error());
+								$query = "INSERT INTO project.Rater(email, name, join_date, type_id, password)
+									VALUES('".$_POST['input-email']."','".$_POST['input-name']."','"
+									."2015-1-1','"."1','".$_POST['input-pw']."')";
+								
+								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+								
+								pg_free_result($result);
+								
+								pg_close($dbconn);
 							}
 						?>
 					</div>
