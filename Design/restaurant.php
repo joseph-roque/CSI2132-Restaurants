@@ -75,7 +75,7 @@
 		<!-- Textual description -->
 		<div class="col-md-5 column" style="line-height:2">
 			<h2 class="text-primary"><strong>
-					Restaurant Name
+					[Restaurant Name]
 			</strong></h2>
 			<h3 class="text-info" style="margin-top:-5px; margin-bottom:20px">
 				(613) 569-1234
