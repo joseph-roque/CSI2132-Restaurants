@@ -91,7 +91,9 @@
 				Currently managed by: <i>[manager_name]</i>
 			</p>
 			
-			<button type="write-review" class="btn btn-primary"><strong>Write a Review</strong></button>
+			<button type="write-review" class="btn btn-primary">
+				<strong><span class="glyphicon glyphicon-pencil" style="margin-right:10px"></span>Write a Review</strong>
+			</button>
 
 			
 		</div>
@@ -110,6 +112,9 @@
 	<div class="row clearfix">
 		<!-- Menu Table -->
 		<div class="col-md-5 column">
+		<h2 class="text-info" style="margin-bottom:-5px">
+		Menu
+		</h2>
 			<table class="table table-hover" style="margin-top:20px"> <!-- match margin of H2 next to it -->
 				<!-- Header -->
 				<thead>
@@ -137,7 +142,7 @@
 		<!-- Reviews -->
 		<div class="col-md-7 column">
 			<!-- START OF REVIEW -->
-			<h2>
+			<h2 class="text-info">
 				Reviews
 			</h2>
 			<h3>
