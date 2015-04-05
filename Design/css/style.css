@@ -2,7 +2,7 @@
 /* Middle of nav-bar */
 body {
   padding-top: 3px;
-  background-image: url("bg.png");
+  background-image: url("grey.png");
 }
 .navbar-brand {
   position: absolute;
