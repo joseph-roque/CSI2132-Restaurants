@@ -120,9 +120,10 @@
 								// Connecting, selecting database   
 								$dbconn = pg_connect("host=web0.site.uottawa.ca port=15432 dbname=mshan072 user=mshan072 password=\$Hanti1095")
 								or die('Could not connect: ' . pg_last_error());
+								$currentDate = date('Y-m-d');
 								$query = "INSERT INTO project.Rater(email, name, join_date, type_id, password)
 									VALUES('".$_POST['input-email']."','".$_POST['input-name']."','"
-									."2015-1-1','"."1','".$_POST['input-pw']."')";
+									.$currentDate."','"."1','".$_POST['input-pw']."')";
 								
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								
