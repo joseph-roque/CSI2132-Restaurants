@@ -6650,3 +6650,8 @@ button.close {
     background-position: center center;
     background-size: cover;  
 }
+/* Avg rating in Restaurant view */
+.rating {
+  padding-top: 50px;
+  line-height: 2;
+}
