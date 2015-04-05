@@ -8,3 +8,4 @@ CSI2132 Group project for a restaurant rating database
 - Create Make Review page
 - Create Menu Item page?
 - Create Menu Item Review page
+- Add logo to browswer tabs (See http://stackoverflow.com/questions/120420/image-icon-beside-the-site-url )
