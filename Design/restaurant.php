@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php 
 	session_start();
-	$userid = $_SESSION['userid'];
 	$name = $_SESSION['name'];
 
 ?>
@@ -162,10 +161,10 @@
 			$gmapLink = "http://maps.google.com/?q=".$row['street_address'];
 			
 			echo "
-			
+			<iframe src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2800.3172389220795!2d-75.683133!3d45.423106!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050a6db98d73%3A0x188a59c3622fdbae!2sUniversity+of+Ottawa!5e0!3m2!1sen!2sca!4v1428243192262' width='400' height='250' frameborder='0' style=border:0'></iframe>				
 			";
 		?>
-			<iframe src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2800.3172389220795!2d-75.683133!3d45.423106!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050a6db98d73%3A0x188a59c3622fdbae!2sUniversity+of+Ottawa!5e0!3m2!1sen!2sca!4v1428243192262' width='400' height='250' frameborder='0' style=border:0'></iframe>
+			<!-- CANT FIX THIS HELP ME !-->
 			<br>
 			<div class="rating">
 				<h2 class="text-info" style="margin-bottom: -10px">
@@ -208,6 +207,20 @@
 		<!-- Reviews -->
 		<div class="col-md-7 column">
 			<!-- START OF REVIEW -->
+			<?php
+				require('connect.php');
+				$result = pg_query("
+					SELECT *
+					FROM project.RatingItem RI, project.MenuItem M, project.Location L, project.Restaurant R, project.Rater RA
+					WHERE RI.item_id = M.item_id AND M.restaurant_id = L.restaurant_id AND L.restaurant_id = R.restaurant_id
+					AND L.location_id = 1 AND RI.user_id = RA.user_id
+				");
+				
+				while($row = pg_fetch_assoc($result)){
+					
+				}
+				
+			?>
 			<h2 class="text-info">
 				Reviews
 			</h2>

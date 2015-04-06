@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php 
 	session_start();
-	$userid = $_SESSION['userid'];
 	$name = $_SESSION['name'];
 ?>
 
@@ -126,11 +125,9 @@
 									
 									$dbPass = $row['password'];
 									$dbName = $row['name'];
-									$dbId = $row['user_id'];
 									
 									if($dbPass == $getPass){
 										echo "<p align='center'>You have been logged in as <b> $dbName</b>. <a href= './index.php'> Continue </a></p>";
-										$_SESSION['userid'] = $dbId;
 										$_SESSION['name'] = $dbName;
 									}
 									else{
