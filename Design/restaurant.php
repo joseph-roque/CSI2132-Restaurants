@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+	session_start();
+	$userid = $_SESSION['userid'];
+	$name = $_SESSION['name'];
+
+?>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -75,20 +81,65 @@
 		<!-- Textual description -->
 		<div class="col-md-5 column" style="line-height:2">
 			<h2 class="text-primary"><strong>
-					Restaurant Name
+				<?php
+					require('connect.php');
+					$id = $_GET['id'];
+					
+					$result = pg_query("
+						SELECT * 
+						FROM project.restaurant R, project.location L
+						WHERE L.location_id = $id AND L.restaurant_id = R.restaurant_id; 
+					");
+					
+					$row = pg_fetch_assoc($result);
+					
+					echo $row['name'];
+				?>
 			</strong></h2>
+			<?php
+					require('connect.php');
+					$id = $_GET['id'];
+					
+					$result = pg_query("
+						SELECT * FROM project.location WHERE location_id = $id;
+					");
+					
+					$row = pg_fetch_assoc($result);
+			?>
 			<h3 class="text-info" style="margin-top:-5px; margin-bottom:20px">
-				(613) 569-1234
+				<?php
+					echo $row['phone_number'];
+				?>
 			</h3>
-			<p><strong>
-				Hours Open: [hour_open] — [hour_close]
+			<p>
+			<?php 
+				$open = $row['hour_open'];
+				$close = $row['hour_close'];
+				$first = $row['first_open_date'];
+				$manager = $row['manager_name'];
+				
+				$result = pg_query("
+					SELECT * 
+					FROM project.cuisinetype C, project.restaurant R, project.location L
+					WHERE L.location_id = $id AND L.restaurant_id = R.restaurant_id AND R.cuisine = C.cuisine_id; 
+				");
+				
+				$row = pg_fetch_assoc($result);
+				
+				$cuisine = $row['description'];
+				
+				
+			echo"<strong>
+				Hours Open: $open — $close
 				</strong>
 				<br>
-				[cuisine - clickable with search for all others alike]
+				<a href = 'http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=2'>$cuisine</a>
 				<br>
-				Established: [first_open_date]
+				Established: $first
 				<br>
-				Currently managed by: <i>[manager_name]</i>
+				Currently managed by: <i>$manager</i>
+				";
+			?>
 			</p>
 			
 			<button type="write-review" class="btn btn-primary">
@@ -99,7 +150,22 @@
 		</div>
 		<!-- Maps interface & avg. rating -->
 		<div class="col-md-7 column text-center" style="padding-top: 10px">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2800.3172389220795!2d-75.683133!3d45.423106!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050a6db98d73%3A0x188a59c3622fdbae!2sUniversity+of+Ottawa!5e0!3m2!1sen!2sca!4v1428243192262" width="400" height="250" frameborder="0" style="border:0"></iframe>
+		<?php
+								$result = pg_query("
+						SELECT * FROM project.location WHERE location_id = $id;
+					");
+					
+					$row = pg_fetch_assoc($result);
+		
+			
+		
+			$gmapLink = "http://maps.google.com/?q=".$row['street_address'];
+			
+			echo "
+			
+			";
+		?>
+			<iframe src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2800.3172389220795!2d-75.683133!3d45.423106!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050a6db98d73%3A0x188a59c3622fdbae!2sUniversity+of+Ottawa!5e0!3m2!1sen!2sca!4v1428243192262' width='400' height='250' frameborder='0' style=border:0'></iframe>
 			<br>
 			<div class="rating">
 				<h2 class="text-info" style="margin-bottom: -10px">

@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php 
+	session_start();
+	$userid = $_SESSION['userid'];
+	$name = $_SESSION['name'];
+?>
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -120,8 +126,12 @@
 									
 									$dbPass = $row['password'];
 									$dbName = $row['name'];
+									$dbId = $row['user_id'];
+									
 									if($dbPass == $getPass){
 										echo "<p align='center'>You have been logged in as <b> $dbName</b>. <a href= './index.php'> Continue </a></p>";
+										$_SESSION['userid'] = $dbId;
+										$_SESSION['name'] = $dbName;
 									}
 									else{
 										echo "<p class = 'error'>The password for that email does not match. Please try again</p>";
