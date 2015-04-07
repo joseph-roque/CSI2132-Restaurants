@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php 
+	session_start();
+	$name = "";
+	$userid = "";
+	if(array_key_exists('name', $_SESSION) && array_key_exists('userid', $_SESSION)){
+		$name = $_SESSION['name'];
+		$userid = $_SESSION['userid'];
+	}
+		
+?>
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -6,14 +16,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	 
-		<?php
-			// Connecting, selecting database    
-			$dbconn = pg_connect("host=web0.site.uottawa.ca port=15432 dbname=mshan072 user=mshan072 password=\$Hanti1095")        
-			or die('Could not connect: ' . pg_last_error());
-		?>
-
-
 
 	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
 	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
@@ -95,25 +97,28 @@
 				<!-- One -->
 				<div class="col-md-4">
 					<div class="thumbnail">
-					<a href="#">
-					<div class="cropped-img" style="background-image:url('http://afghanchopan.com/wp-content/uploads/2013/08/garden-salad.jpg')" /> </div>
+					
+					<?php
+						require('connect.php');
+						$query = "SELECT *
+								FROM project.Restaurant R
+								WHERE R.restaurant_id = 1";
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						
+						$row = pg_fetch_assoc($result);
+						
+						$name = $row['name'];
+						$id = $row['restaurant_id'];
+						
+						echo "
+							<a href='http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=$id'>
+							<div class='cropped-img' style='background-image:url('http://afghanchopan.com/wp-content/uploads/2013/08/garden-salad.jpg')' /> </div>
 
-					<div class="caption">
-						<h2>
-							<?php
-								//Query to be ran will be changed when we implement ratings
-								//The DB should already be connected at this point
-								$query = "SELECT R.name
-									FROM project.Restaurant R
-									WHERE R.restaurant_id = 1";
-								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-								//Fetch the results and print them
-								while ($row = pg_fetch_row($result)) {
-									echo "$row[0]";
-									echo "<br/>\n";
-								}
-							?></a>
-						</h2>
+							<div class='caption'>
+							<h2>$name</a></h2>
+						";
+					?>
+					
 						<p>
 							<?php
 								//Query to be ran will be changed when we implement ratings
