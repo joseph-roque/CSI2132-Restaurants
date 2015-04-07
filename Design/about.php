@@ -2,9 +2,14 @@
 
 <?php 
 	session_start();
-	$name = $_SESSION['name']; 
+	$name = "";
+	$userid = "";
+	if(array_key_exists('name', $_SESSION) && array_key_exists('userid', $_SESSION)){
+		$name = $_SESSION['name'];
+		$userid = $_SESSION['userid'];
+	}
+		
 ?>
-
 
 <html lang="en">
 <head>

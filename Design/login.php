@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <?php 
 	session_start();
-	$name = $_SESSION['name'];
+	$name = "";
+	$userid = "";
+	if(array_key_exists('name', $_SESSION) && array_key_exists('userid', $_SESSION)){
+		$name = $_SESSION['name'];
+		$userid = $_SESSION['userid'];
+	}
+		
 ?>
 
 <html lang="en">
@@ -125,10 +131,12 @@
 									
 									$dbPass = $row['password'];
 									$dbName = $row['name'];
+									$dbUserid = $row['user_id'];
 									
 									if($dbPass == $getPass){
 										echo "<p align='center'>You have been logged in as <b> $dbName</b>. <a href= './index.php'> Continue </a></p>";
 										$_SESSION['name'] = $dbName;
+										$_SESSION['userid'] = $dbUserid;
 									}
 									else{
 										echo "<p class = 'error'>The password for that email does not match. Please try again</p>";
