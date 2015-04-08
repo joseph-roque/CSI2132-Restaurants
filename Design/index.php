@@ -272,7 +272,7 @@ WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN
 				?>
 				</p>
 				<p>
-					<a class="btn" href="#">Read review »</a>
+					<a class="btn" href="#">Read review</a>
 				</p>
 			</div>
 		</div>

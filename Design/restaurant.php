@@ -135,7 +135,7 @@
 				
 				
 			echo"<strong>
-				Hours Open: $open — $close
+				Hours Open: $open - $close
 				</strong>
 				<br>
 				<a href = 'http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=2'>$cuisine</a>
@@ -147,9 +147,11 @@
 			?>
 			</p>
 			
+			<form action="review-restaurant.php">
 			<button type="write-review" class="btn btn-primary">
 				<strong><span class="glyphicon glyphicon-pencil" style="margin-right:10px"></span>Write a Review</strong>
 			</button>
+			</form>
 
 			
 		</div>
@@ -237,11 +239,22 @@
 				by <a href="#">[Author]</a>
 			</h4>
 			<strong>Price: </strong>[price] | <strong>Food: </strong> [food] | <strong>Mood: </strong> [mood] | <strong>Staff: </strong> [staff]
-			<p>
-				[Comments of Review goes here]
+			<p class="demo">
+				<script>
+				function shorten() {
+				var str= "
+					[Comments of Review goes here] This is a test to see how I can shorten the things by a thing a ma jigger.
+					Bacon ipsum dolor amet ribeye turducken pastrami tenderloin strip steak. Bresaola salami ham corned beef, rump pork belly kevin shankle sausage kielbasa beef brisket jerky shank turkey. Tri-tip fatback ball tip tenderloin leberkas sirloin rump landjaeger. Pork chop ham hock leberkas prosciutto. Pork loin kielbasa pork belly t-bone, porchetta beef short ribs sausage turkey prosciutto jerky landjaeger ball tip ribeye venison.
+
+					Flank ham hock shankle pancetta hamburger salami ball tip sausage landjaeger. Short loin pork loin drumstick, capicola venison strip steak chicken meatloaf swine chuck picanha turkey spare ribs pig. Turducken salami shoulder, tri-tip jowl drumstick ball tip doner corned beef. Corned beef fatback bresaola, ham hock pork cow shankle strip steak short loin picanha chuck pork chop jowl cupim. T-bone landjaeger tri-tip porchetta chuck shoulder venison cow ham hock bresaola bacon. Turkey pork belly tail hamburger short ribs spare ribs jowl.
+					";
+					var res = str.substring(1, 50);
+					document.getElementById("demo").innerHTML = res;
+
+				}
 			</p>
 			<p>
-				<a class="btn" href="#">Read review »</a>
+				<a class="btn" href="#">Read review</a>
 			</p>
 			
 			<hr> 
