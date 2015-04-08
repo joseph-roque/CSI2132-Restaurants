@@ -101,7 +101,7 @@
 					<?php
 						require('connect.php');
 						$query = "SELECT *
-								FROM project.Restaurant R
+								FROM Restaurant R
 								WHERE R.restaurant_id = 1";
 						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 						
@@ -111,19 +111,23 @@
 						$id = $row['restaurant_id'];
 						
 						echo "
-							<a href='http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=$id'>
-							<div class='cropped-img' style='background-image:url('http://afghanchopan.com/wp-content/uploads/2013/08/garden-salad.jpg')' /> </div>
+							<a href='http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=$id'>"
+							?>
+							
+
+							<div class='cropped-img' style='background-image:url("http://afghanchopan.com/wp-content/uploads/2013/08/garden-salad.jpg")' /> </div>
 
 							<div class='caption'>
-							<h2>$name</a></h2>
-						";
-					?>
+					
+							<?php
+							echo "<h2>$name</a></h2>";
+							?>
 					
 						<p>
 							<?php
 								//Query to be ran will be changed when we implement ratings
 								//The DB should already be connected at this point
-								$query = 'SELECT R.name FROM project.restaurant R WHERE restaurant_id=8';
+								$query = 'SELECT R.name FROM restaurant R WHERE restaurant_id=8';
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								//Fetch the results and print them
 								while ($row = pg_fetch_row($result)) {
@@ -147,7 +151,7 @@
 								//Query to be ran will be changed when we implement ratings
 								//The DB should already be connected at this point
 								$query = "SELECT R.name
-									FROM project.Restaurant R
+									FROM Restaurant R
 									WHERE R.restaurant_id = 2";
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								//Fetch the results and print them
@@ -176,7 +180,7 @@
 								//Query to be ran will be changed when we implement ratings
 								//The DB should already be connected at this point
 								$query = "SELECT R.name
-									FROM project.Restaurant R
+									FROM Restaurant R
 									WHERE R.restaurant_id = 3";
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 								//Fetch the results and print them
@@ -241,9 +245,9 @@
 				by <a href="#">
 				<?php
 					$query = " SELECT Rater.name
-							FROM project.Rater Rater, project.Rating Rating
+							FROM Rater Rater, Rating Rating
 							WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
-							(SELECT MIN(Rating2.post_date) FROM project.Rating Rating2)";
+							(SELECT MIN(Rating2.post_date) FROM Rating Rating2)";
 							
 					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 					//Fetch the results and print them
@@ -258,9 +262,9 @@
 				<p>
 									<?php
 					$query = " SELECT Rating.comments
-FROM project.Rater Rater, project.Rating Rating
+FROM Rater Rater, Rating Rating
 WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
-(SELECT MIN(Rating2.post_date) FROM project.Rating Rating2)";
+(SELECT MIN(Rating2.post_date) FROM Rating Rating2)";
 							
 					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 					//Fetch the results and print them

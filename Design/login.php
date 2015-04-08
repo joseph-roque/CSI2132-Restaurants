@@ -121,12 +121,12 @@
 								
 								require('connect.php');
 								
-								$result = pg_query("SELECT * FROM project.Rater WHERE Rater.email = '$getEmail';") or die('Query failed: ' . pg_last_error());
+								$result = pg_query("SELECT * FROM Rater WHERE Rater.email = '$getEmail';") or die('Query failed: ' . pg_last_error());
 								
 								$numRows = pg_num_rows($result);
 								
 								if($numRows != 0){
-									$res = pg_query("SELECT * FROM project.Rater WHERE Rater.email = '$getEmail';") or die('Query failed: ' . pg_last_error());
+									$res = pg_query("SELECT * FROM Rater WHERE Rater.email = '$getEmail';") or die('Query failed: ' . pg_last_error());
 									$row = pg_fetch_assoc($res);
 									
 									$dbPass = $row['password'];

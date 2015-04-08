@@ -12,4 +12,6 @@
 	//code to excecute query
 	pg_query($query);
 
+	//echo "The current date is $date";
+
 ?> 

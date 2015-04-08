@@ -137,7 +137,7 @@
 							
 							require("connect.php");
 							
-							$query = "SELECT * FROM project.Rater WHERE Rater.name='$getName'";
+							$query = "SELECT * FROM Rater WHERE Rater.name='$getName'";
 							$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 							
 							$numRows = pg_num_rows($result);
@@ -147,7 +147,7 @@
 							}
 							else if($numRows == 0){
 								
-								$query = "SELECT * FROM project.Rater WHERE Rater.email='$getEmail'";
+								$query = "SELECT * FROM Rater WHERE Rater.email='$getEmail'";
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
 							
 								$numRows = pg_num_rows($result);
@@ -158,7 +158,7 @@
 										require("connect.php");
 										//Current date in YYYY-MM-DD format
 										$currentDate = date('Y-m-d');
-										pg_query("INSERT INTO project.Rater(email, name, join_date, type_id, password)
+										pg_query("INSERT INTO Rater(email, name, join_date, type_id, password)
 										VALUES('$getEmail', '$getName', '$currentDate', '1', '$getPass');
 										");
 										

@@ -92,7 +92,7 @@
 					
 					$result = pg_query("
 						SELECT * 
-						FROM project.restaurant R, project.location L
+						FROM restaurant R, location L
 						WHERE L.location_id = $id AND L.restaurant_id = R.restaurant_id; 
 					");
 					
@@ -106,7 +106,7 @@
 					$id = $_GET['id'];
 					
 					$result = pg_query("
-						SELECT * FROM project.location WHERE location_id = $id;
+						SELECT * FROM location WHERE location_id = $id;
 					");
 					
 					$row = pg_fetch_assoc($result);
@@ -125,7 +125,7 @@
 				
 				$result = pg_query("
 					SELECT * 
-					FROM project.cuisinetype C, project.restaurant R, project.location L
+					FROM cuisinetype C, restaurant R, location L
 					WHERE L.location_id = $id AND L.restaurant_id = R.restaurant_id AND R.cuisine = C.cuisine_id; 
 				");
 				
@@ -146,20 +146,29 @@
 				";
 			?>
 			</p>
-			
-			<form action="review-restaurant.php">
-			<button type="write-review" class="btn btn-primary">
-				<strong><span class="glyphicon glyphicon-pencil" style="margin-right:10px"></span>Write a Review</strong>
+			<script>
+				function redirect() {
+    			var link = "review-restaurant.php"
+    			var currentLink = window.location.href;
+    			var index = currentLink.lastIndexOf("?");
+    			var tmp = currentLink.substr(index,currentLink.length);
+
+    			link = link.concat(tmp);
+
+    			window.location.href = link;
+			}
+			</script>
+			<button  onclick = "redirect()" name = "write-review" method  = "post"  type="write-review" class="btn btn-primary">
+				<strong><span class=" glyphicon glyphicon-pencil" style="margin-right:10px"></span>Write a Review</strong>
 			</button>
 			</form>
-
 			
 		</div>
 		<!-- Maps interface & avg. rating -->
 		<div class="col-md-7 column text-center" style="padding-top: 10px">
 		<?php
 								$result = pg_query("
-						SELECT * FROM project.location WHERE location_id = $id;
+						SELECT * FROM location WHERE location_id = $id;
 					");
 					
 					$row = pg_fetch_assoc($result);
@@ -219,7 +228,7 @@
 				require('connect.php');
 				$result = pg_query("
 					SELECT *
-					FROM project.RatingItem RI, project.MenuItem M, project.Location L, project.Restaurant R, project.Rater RA
+					FROM RatingItem RI, MenuItem M, Location L, Restaurant R, Rater RA
 					WHERE RI.item_id = M.item_id AND M.restaurant_id = L.restaurant_id AND L.restaurant_id = R.restaurant_id
 					AND L.location_id = 1 AND RI.user_id = RA.user_id
 				");

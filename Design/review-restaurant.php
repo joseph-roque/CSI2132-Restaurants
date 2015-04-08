@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php 
+	session_start();
+	$name = "";
+	$userid = "";
+	if(array_key_exists('name', $_SESSION) && array_key_exists('userid', $_SESSION)){
+		$name = $_SESSION['name'];
+		$userid = $_SESSION['userid'];
+	}
+?>
+
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -73,7 +83,18 @@
 				</div>	
 			</nav>
 			<h2 class="text-info text-center">
-			Writing a review for <strong>[restaurant name]</strong>
+			<?php
+				require('connect.php');
+				$id = $_GET['id'];
+				$query = "
+				SELECT R.name FROM Restaurant R, Location L
+				WHERE L.restaurant_id = R.restaurant_id AND L.location_id = $id;
+				";
+				$result = pg_query($query);
+				$row = pg_fetch_assoc($result);
+				$rName = $row['name'];
+				echo "Writing a review for <strong>$rName</strong>";
+			?>
 			</h2>
 		</div>
 	</div>
@@ -91,10 +112,12 @@
 				<h4>Staff</h4>
 				<input id="staff" name = "staff" method = "post" type="number" class="rating" data-min="0" data-max="5" data-step="1" data-size="md" data-show-clear="false" data-show-caption="false" required/>
 			</div>
+
+
 					
 			<div class="col-md-9 column">
 				<label for="input-comments">Leave your review below</label>
-				<textarea style="width:100%" method = "post" name="comments" id = "commentText" rows="16"  placeholder="Review must be 50 characters minimum!" required></textarea>
+				<textarea style="width:100%" method = "post" name="comments" id = "comments" rows="16"  placeholder="Review must be 50 characters minimum!" required></textarea>
 				<div class="pull-right" style="margin-top:15px">
 					<button type="submit" name = "submit" action = "post" class="btn btn-primary"><strong>Submit Review</strong></button>
 				</div>
@@ -102,32 +125,54 @@
 		</form>
 
 		<?php
-		$id = GET['id'];
-		if(!$id){
-		if()
+		if($userid && $name){
+			$userid = $_SESSION['userid'];
+			$id = $_GET['id'];
 			if(array_key_exists('food', $_POST) && array_key_exists('price', $_POST) && array_key_exists('mood', $_POST)
-				&& array_key_exists('staff', $_POST) && array_key_exists('commentText', $_POST)){
+				&& array_key_exists('staff', $_POST) && array_key_exists('comments', $_POST)){
 				require('connect.php');
 
 				$food = $_POST['food'];
 				$price = $_POST['price'];
 				$mood = $_POST['mood'];
 				$staff = $_POST['staff'];
-				$commentText = $_POST['commentText'];
+				$comments = $_POST['comments'];
+				$query = "
+					SELECT restaurant_id FROM Location L WHERE L.location_id = $id;
+				";
+				$result = pg_query($query);
+				$row = pg_fetch_assoc($result);
+
+				$restaurant_id = $row['restaurant_id'];
+
+				//Current date in YYYY-MM-DD format
+				$currentDate = date('m-d-Y H:i:s', time());
 
 				$query = "
-					INSERT INTO project. $fo
+					INSERT INTO Rating(user_id, post_date, price, food, mood, staff, comments, restaurant_id)
+					VALUES($userid, '$currentDate', $price, $food, $mood, $staff, '$comments', $restaurant_id);
 				";
+
 				$result = pg_query($query);
 
 				$row = pg_fetch_assoc($result);
 				$name = $row['name'];
-							}
+
+			}
 		}
 		?>
 
 		
 	</div>
+
+					<div class="alert alert-dismissable alert-success">
+				 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+				<h4>
+					Alert!
+				</h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
+			</div>
+
+
 </div>
 
 </body>
