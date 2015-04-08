@@ -128,7 +128,7 @@
 						</form>
 						<?php
 						if (array_key_exists('input-email', $_POST) && array_key_exists('input-pw', $_POST) && array_key_exists('input-name', $_POST) && array_key_exists('input-pw-confirm', $_POST)){
-							
+				
 							//get form variables
 							$getName = $_POST['input-name'];
 							$getEmail = $_POST['input-email'];
@@ -142,7 +142,10 @@
 							
 							$numRows = pg_num_rows($result);
 							
-							if($numRows == 0){
+							if(strpos($getName,'@')){
+								echo "Your name cannot contain the @ symbol";
+							}
+							else if($numRows == 0){
 								
 								$query = "SELECT * FROM project.Rater WHERE Rater.email='$getEmail'";
 								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
