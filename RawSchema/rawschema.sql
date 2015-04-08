@@ -58,11 +58,11 @@ CREATE TABLE Rating
 	mood SMALLINT NOT NULL DEFAULT 0,
 	staff SMALLINT NOT NULL DEFAULT 0,
 	comments TEXT NOT NULL,
-	restaurant_id INTEGER NOT NULL,
+	location_id INTEGER NOT NULL,
 	PRIMARY KEY (user_id, post_date),
 	FOREIGN KEY (user_id) REFERENCES Rater(user_id)
 		ON UPDATE CASCADE ON DELETE SET DEFAULT,
-	FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
+	FOREIGN KEY (location_id) REFERENCES Location(location_id)
 		ON UPDATE CASCADE ON DELETE CASCADE, -- no restaurant, no ratings
 	CONSTRAINT price_valid_rating CHECK (price >=0 AND price <= 5),
 	CONSTRAINT food_valid_rating CHECK (food >= 0 AND food <= 5),
@@ -85,18 +85,8 @@ CREATE TABLE Location
 	FOREIGN KEY (restaurant_id) REFERENCES Restaurant(restaurant_id)
 		ON UPDATE CASCADE ON DELETE CASCADE, -- no restaurant = no location
 	CONSTRAINT valid_phone CHECK (phone_number ~* E'^1?\\d{10}(x\\d{1,4}|)$')
-		--1) Starts with either +1 / +1- / 1- / 1 or nothing
-		--2) Followed by a space or not
-		--3) Followed by either '(XYZ)' or 'XYZ'
-		--4) Followed by hyphen/space or not
-		--5) Repeat 2-3 for 3 digits, then 4 digits
-		--6) Followed by 'x1234' for extension of up to 4 digits
-		-- Thoughts on simplifying this? (eg 16135550123)
-		-- Accepts following formats: 16135550123 / 1-613-555-0123 / 613 555 0123 x555 / (613) 555-0123 / +1-613-555-0123 and variations
-
-		-- Possible simplification: When user inputs phone number in text field, before we put it in the database
+		-- When user inputs phone number in text field, before we put it in the database
 		-- we get rid of any spaces, dashes, etc. and just check if it's 10 digits with/without 1 at the start and extension at end
-		-- Example regex: '^1?\d{10}(x\d{1,4}|)$'
 		-- Accepts following formats: 16135550123 / 6135550123 / 6135550123x00 / 16135550123x1234
 );
 
