@@ -12,15 +12,9 @@
 
 <html lang="en">
 <head>  
+	<?php $page_title = "Register" ?>
 
-
-	<meta charset="utf-8">
-	<title>Sizzl | Register</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-	<?php include("includes/resources.html");?>
+	<?php include("includes/resources.php");?>
 </head>
 
 <body>

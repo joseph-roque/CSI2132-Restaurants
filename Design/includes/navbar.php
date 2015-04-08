@@ -15,14 +15,64 @@
 		</ul>
 		<!-- Left -->
 		<ul class="nav navbar-nav navbar-left">
-			<li><a href="index.php">Home</a></li>
-			<li><a href="about.php">About</a></li>
-			<li><a href="contact.php"><b>Contact</b></a></li>
+			<li><a href="index.php">
+				<?php
+					if ($page_title == "Home")
+						echo "<strong>"
+				?>					
+				Home
+				<?php
+					if ($page_title == "Home")
+						echo "</strong>"
+				?>						
+			</a></li>
+			<li><a href="about.php">
+				<?php
+					if ($page_title == "About")
+						echo "<strong>"
+				?>					
+				About
+				<?php
+					if ($page_title == "About")
+						echo "</strong>"
+				?>						
+			</a></li>
+			<li><a href="contact.php">
+				<?php
+					if ($page_title == "Contact")
+						echo "<strong>"
+				?>					
+				Contact
+				<?php
+					if ($page_title == "Contact")
+						echo "</strong>"
+				?>						
+			</a></li>
 		</ul>
 		<!-- Right -->
 		<ul class="nav navbar-nav navbar-right">
-			<li><a href="login.php">Login</a></li>
-			<li><a href="register.php">Register</a></li>
+			<li><a href="login.php">
+				<?php
+					if ($page_title == "Login")
+						echo "<strong>"
+				?>			
+				Login
+				<?php
+					if ($page_title == "Login")
+						echo "</strong>"
+				?>			
+			</a></li>
+			<li><a href="register.php">
+				<?php
+					if ($page_title == "Register")
+						echo "<strong>"
+				?>
+				Register
+				<?php
+					if ($page_title == "Register")
+						echo "</strong>"
+				?>
+			</a></li>
 		</ul>
 	</div>	
 </nav>

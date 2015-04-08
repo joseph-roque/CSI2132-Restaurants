@@ -7,13 +7,9 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 ?>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Sizzl | Contact</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-
-	<?php include("includes/resources.html");?>
+	<?php $page_title = "Contact" ?>
+	
+	<?php include("includes/resources.php");?>
 </head>
 
 <body>
