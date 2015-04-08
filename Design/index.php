@@ -17,76 +17,19 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
-	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
-	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
-	
-<!-- SWITCH TO MIN EVENTUALLY? -->
-	<link href="css/bootstrap.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
-
-	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-	<!--[if lt IE 9]>
-	<script src="js/html5shiv.js"></script>
-	<![endif]-->
-
-	<!-- Fav and touch icons -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-	<link rel="shortcut icon" href="img/favicon.png">
-	
-	<!--<script src="js/jquery-2.1.3.js"></script>-->
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-	<script type="text/javascript" src="js/jquery.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
+	<?php include("includes/resources.html");?>
 </head>
 
 <body background="bg.png">
 <div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">
+			<?php include("includes/header.php");?>
+			<?php include("includes/navbar.php");?>
+			<h3 class="text-center text-muted">
+				Your one-stop shop for dank-ass restaurant reviews
+			</h3>
 		
-			<!-- Logo & subtitle text -->
-			<div class="logo">
-				<img class="img-responsive center-block" src="logo.png" style="width:40%">
-				<h3 class="text-center text-muted">
-					Your one-stop shop for dank-ass restaurant reviews
-				</h3>
-			</div>
-			
-			<!-- Navigation Bar -->
-			<nav class="navbar navbar-default" role="navigation">
-				<div class="navbar-collapse collapse">
-					<!-- Search Bar -->
-					<ul class="navbar-brand">
-						<form class="navbar-form" role="search" method="get" id="search-form" name="search-form">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Restaurants, Cuisines..."
-								id="query" name="query" value="">
-								<div class="input-group-btn">
-									<button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
-								</div>
-							</div>
-						</form>
-					</ul>
-					<!-- Left -->
-					<ul class="nav navbar-nav navbar-left">
-						<li><a href="index.php"><b>Home</b></a></li>
-						<li><a href="about.php">About</a></li>
-						<li><a href="contact.php">Contact</a></li>
-					</ul>
-					<!-- Right -->
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="login.php">Login</a></li>
-						<li><a href="register.php">Register</a></li>
-					</ul>
-				</div>	
-			</nav>
-			
 						
 			<!-- Most Popular Restaurants -->
 			<div class="most-popular">
@@ -239,7 +182,7 @@
 					Most Recent Reviews
 				</h2>
 				<h2>
-					I LOVE BACON add title query
+					[review title]
 				</h2>
 				<h4>
 				by <a href="#">
@@ -253,27 +196,27 @@
 					//Fetch the results and print them
 					while ($row = pg_fetch_row($result)) {
 						echo "$row[0]";
-						echo "<br/>\n";
 					}
 					
 				?>
 				</a>
+				<i> -- [rater type]</i>
 				</h4>
 				<p>
-									<?php
-					$query = " SELECT Rating.comments
-FROM Rater Rater, Rating Rating
-WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
-(SELECT MIN(Rating2.post_date) FROM Rating Rating2)";
+					<?php
+						$query = " SELECT Rating.comments
+						FROM Rater Rater, Rating Rating
+						WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
+						(SELECT MIN(Rating2.post_date) FROM Rating Rating2)";
 							
-					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-					//Fetch the results and print them
-					while ($row = pg_fetch_row($result)) {
-						echo "$row[0]";
-						echo "<br/>\n";
-					}
+						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
+						//Fetch the results and print them
+						while ($row = pg_fetch_row($result)) {
+							echo "$row[0]";
+							echo "<br/>";
+						}
 					
-				?>
+					?>
 				</p>
 				<p>
 					<a class="btn" href="#">Read review</a>
