@@ -77,29 +77,55 @@
 			</h2>
 		</div>
 	</div>
-		
-	<div class="row clearfix">
-		<div class="col-md-3 column">
-			<!-- STAR Ratings (1-5) -->
-			<!-- See http://plugins.krajee.com/star-rating/demo for more info -->
-			<h4>Food</h4>
-			<input id="food" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
-			<h4>Price</h4>
-			<input id="price" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
-			<h4>Mood</h4>
-			<input id="mood" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
-			<h4>Staff</h4>
-			<input id="staff" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
-		</div>
-				
-		<div class="col-md-9 column">
-			<label for="input-comments">Leave your review below</label>
-			<textarea style="width:100%" name="comments" rows="16"  placeholder="Review must be 50 characters minimum!" required></textarea>
-			
-			<div class="pull-right" style="margin-top:15px">
-				<button type="submit" class="btn btn-primary"><strong>Submit Review</strong></button>
+	<form id="formID" name="formID" method="post" action="" role="form">
+		<div class="row clearfix">
+			<div class="col-md-3 column">
+				<!-- STAR Ratings (1-5) -->
+				<!-- See http://plugins.krajee.com/star-rating/demo for more info -->
+				<h4>Food</h4>
+				<input id="food" name = "food" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
+				<h4>Price</h4>
+				<input id="price" name = "price" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
+				<h4>Mood</h4>
+				<input id="mood" name = "mood" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
+				<h4>Staff</h4>
+				<input id="staff" name = "staff" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
 			</div>
-		</div>
+					
+			<div class="col-md-9 column">
+				<label for="input-comments">Leave your review below</label>
+				<textarea style="width:100%" method = "post" name="comments" id = "commentText" rows="16"  placeholder="Review must be 50 characters minimum!" required></textarea>
+				<div class="pull-right" style="margin-top:15px">
+					<button type="submit" name = "submit" action = "post" class="btn btn-primary"><strong>Submit Review</strong></button>
+				</div>
+			</div>
+		</form>
+
+		<?php
+		$id = GET['id'];
+		if(!$id){
+		if()
+			if(array_key_exists('food', $_POST) && array_key_exists('price', $_POST) && array_key_exists('mood', $_POST)
+				&& array_key_exists('staff', $_POST) && array_key_exists('commentText', $_POST)){
+				require('connect.php');
+
+				$food = $_POST['food'];
+				$price = $_POST['price'];
+				$mood = $_POST['mood'];
+				$staff = $_POST['staff'];
+				$commentText = $_POST['commentText'];
+
+				$query = "
+					INSERT INTO project. $fo
+				";
+				$result = pg_query($query);
+
+				$row = pg_fetch_assoc($result);
+				$name = $row['name'];
+							}
+		}
+		?>
+
 		
 	</div>
 </div>
