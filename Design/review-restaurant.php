@@ -7,6 +7,8 @@
 		$name = $_SESSION['name'];
 		$userid = $_SESSION['userid'];
 	}
+
+
 ?>
 
 <html lang="en">
@@ -128,21 +130,20 @@
 
 				$row = pg_fetch_assoc($result);
 				$name = $row['name'];
-
+			// 	echo "
+			// 	<div class='alert alert-dismissable alert-success'>
+			// 	 <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>
+			// 	<h4>
+			// 		Alert!
+			// 	</h4> <strong>Sucess!</strong> You have sucessfully submitted a review. <a href='#'' class='index.php'>Home</a>
+			// </div>";
+				echo "You have successfully submited a review <a href='index.php'>Back to home.</a>";
 			}
 		}
 		?>
 
 		
 	</div>
-
-					<div class="alert alert-dismissable alert-success">
-				 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-				<h4>
-					Alert!
-				</h4> <strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
-			</div>
-
 
 </div>
 
