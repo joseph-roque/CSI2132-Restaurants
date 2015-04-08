@@ -83,13 +83,13 @@
 				<!-- STAR Ratings (1-5) -->
 				<!-- See http://plugins.krajee.com/star-rating/demo for more info -->
 				<h4>Food</h4>
-				<input id="food" name = "food" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
+				<input id="food" name = "food" method = "post" type="number" class="rating" data-min="0" data-max="5" data-step="1" data-size="md" data-show-clear="false" data-show-caption="false" required/>
 				<h4>Price</h4>
-				<input id="price" name = "price" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
+				<input id="price" name = "price" method = "post" type="number" class="rating" data-min="0" data-max="5" data-step="1" data-size="md" data-show-clear="false" data-show-caption="false" required/>
 				<h4>Mood</h4>
-				<input id="mood" name = "mood" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
+				<input id="mood" name = "mood" method = "post" type="number" class="rating" data-min="0" data-max="5" data-step="1" data-size="md" data-show-clear="false" data-show-caption="false" required/>
 				<h4>Staff</h4>
-				<input id="staff" name = "staff" method = "post" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false" required/>
+				<input id="staff" name = "staff" method = "post" type="number" class="rating" data-min="0" data-max="5" data-step="1" data-size="md" data-show-clear="false" data-show-caption="false" required/>
 			</div>
 					
 			<div class="col-md-9 column">
