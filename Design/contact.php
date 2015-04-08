@@ -108,7 +108,7 @@
 							<!-- Comments -->
 							<div class="row">
 								<div class="form-group-xs">
-									 <label for="input-comments">Comments? Suggestions</label>
+									 <label for="input-comments">Comments? Suggestions?</label>
 									 <textarea style="width:100%" name="comments" rows="10"  placeholder="We're listening...!" required></textarea>
 								</div>
 							</div>
@@ -123,15 +123,6 @@
 			
 	</div>
 </div>
-
-<!-- Bottom Logo
-<footer class="footer">
-	<div class="container text-center">
-		<img style="max-width: 50px"
-			 src="logo-fire.png">
-	</div>
-</footer> -->
-	
 
 </body>
 </html>

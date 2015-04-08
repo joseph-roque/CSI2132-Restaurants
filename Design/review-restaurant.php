@@ -21,7 +21,6 @@
 	<script src="js/star-rating.min.js" type="text/javascript"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
 	
-	<!-- JQUERY and STAR RATINGS -->
 
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
@@ -77,38 +76,33 @@
 			Writing a review for <strong>[restaurant name]</strong>
 			</h2>
 		</div>
-		
-		
-
-		<div class="col-md-4 column ">
-				<div class="row">
-				<h4>Food</h4>
-
-					<input id="input-id" type="number" class="rating" data-size="xs" data-showClear="false" data-showCaption="false"/>
-				
-
-					<div class="form-group-xs">
-						 <label for="input-name">Name</label>
-						 <input type="email" class="form-control" id="input-email" autofocus/>
-					</div>
-				</div>
-			</div>
-				
-				<div class="col-md-8 column">
-				sadasdsad
-				</div>
-		
-</div>
-
-
-<!-- Bottom Logo
-<footer class="footer">
-	<div class="container text-center">
-		<img style="max-width: 50px"
-			 src="logo-fire.png">
 	</div>
-</footer> -->
-	
+		
+	<div class="row clearfix">
+		<div class="col-md-3 column">
+			<!-- STAR Ratings (1-5) -->
+			<!-- See http://plugins.krajee.com/star-rating/demo for more info -->
+			<h4>Food</h4>
+			<input id="food" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
+			<h4>Price</h4>
+			<input id="price" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
+			<h4>Mood</h4>
+			<input id="mood" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
+			<h4>Staff</h4>
+			<input id="staff" type="number" class="rating" data-min="0" data-max="5" data-size="md" data-show-clear="false" data-show-caption="false"/>
+		</div>
+				
+		<div class="col-md-9 column">
+			<label for="input-comments">Leave your review below</label>
+			<textarea style="width:100%" name="comments" rows="16"  placeholder="Review must be 50 characters minimum!" required></textarea>
+			
+			<div class="pull-right" style="margin-top:15px">
+				<button type="submit" class="btn btn-primary"><strong>Submit Review</strong></button>
+			</div>
+		</div>
+		
+	</div>
+</div>
 
 </body>
 </html>
