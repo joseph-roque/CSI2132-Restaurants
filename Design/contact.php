@@ -25,26 +25,26 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			<div class="register-form">
 				<div class="row clearfix">
 					<div class="col-md-12 column">
-						<form role="form">
+						<form metohd = "post" role="form">
 							<div class="row">
 							<!-- Name -->
 								<div class="form-group-xs">
-									 <label for="input-name">Name</label>
-									 <input type="email" class="form-control" id="input-email" autofocus/>
+									 <label name = "input-name" for="input-name">Name</label>
+									 <input name = "input-name"  method = "post" type="text" class="form-control" id="input-name" autofocus/>
 								</div>
 							</div>
 							<div class="row">
 							<!-- Email -->
 								<div class="form-group-xs">
-									 <label for="input-email">Email address</label>
-									 <input type="email" class="form-control" id="input-email" required/>
+									 <label name = "input-email" for="input-email">Email address</label>
+									 <input name = "input-email" type="email" class="form-control" id="input-email" required/>
 								</div>
 							</div>
 							<!-- Comments -->
 							<div class="row">
 								<div class="form-group-xs">
-									 <label for="input-comments">Comments? Suggestions?</label>
-									 <textarea style="width:100%" name="comments" rows="10"  placeholder="We're listening...!" required></textarea>
+									 <label name = "input-comments" for="input-comments">Comments? Suggestions?</label>
+									 <textarea name = "input-commments" style="width:100%" name="comments" rows="10"  placeholder="We're listening...!" required></textarea>
 								</div>
 							</div>
 							<!-- Submit button -->
@@ -52,6 +52,15 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 								<button type="submit" class="btn btn-primary"><strong>Submit</strong></button>
 							</div>
 						</form>
+						<?php
+							if(array_key_exists('input-name', $_POST))
+								echo "A";
+								if(array_key_exists('input-email', $_POST))
+									echo "B";
+								if(array_key_exists('input-comments', $_POST)){
+								echo "C";
+							}
+						?>
 					</div>
 				</div>
 			</div>
