@@ -29,13 +29,15 @@
 				require('connect.php');
 				$id = $_GET['id'];
 				$query = "
-				SELECT R.name FROM Restaurant R, Location L
-				WHERE L.restaurant_id = R.restaurant_id AND L.location_id = $id;
+				SELECT R.name AS rname, M.name AS iname
+				FROM Restaurant R, MenuItem M
+				WHERE M.restaurant_id = R.restaurant_id AND M.item_id = $id
 				";
 				$result = pg_query($query);
 				$row = pg_fetch_assoc($result);
-				$rName = $row['name'];
-				echo "Writing a review for [fix this query nigga]<strong>$rName</strong>";
+				$rName = $row['rname'];
+				$iName = $row['iname'];
+				echo "Writing a review for $iName at <strong>$rName</strong>";
 			?>
 			</h2>
 		</div>
@@ -64,25 +66,20 @@
 		if($userid != "" && $name != ""){
 			$userid = $_SESSION['userid'];
 			$id = $_GET['id'];
-			if(array_key_exists('food', $_POST) && array_key_exists('price', $_POST) && array_key_exists('mood', $_POST)
-				&& array_key_exists('staff', $_POST) && array_key_exists('comments', $_POST)){
+			if(array_key_exists('food', $_POST)){
 				require('connect.php');
 
 				$food = $_POST['food'];
-				$price = $_POST['price'];
-				$mood = $_POST['mood'];
-				$staff = $_POST['staff'];
 				$comments = $_POST['comments'];
 
-
-				$location_id = $id;
+				$item_id = $_GET['id'];
 
 				//Current date in YYYY-MM-DD format
 				$currentDate = date('m-d-Y H:i:s', time());
 
 				$query = "
-					INSERT INTO Rating(user_id, post_date, price, food, mood, staff, comments, location_id)
-					VALUES($userid, '$currentDate', $price, $food, $mood, $staff, '$comments', $location_id);
+					INSERT INTO RatingItem(user_id, post_date, item_id, rating, comments)
+					VALUES($userid, '$currentDate', $item_id, $food, '$comments');
 				";
 
 				$result = pg_query($query); 
