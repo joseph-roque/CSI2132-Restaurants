@@ -24,6 +24,69 @@
 		<?php include("includes/header.php");?>
 		<?php include("includes/navbar.php");?>
 		<div class="col-md-12 column">
+			<!-- ALL REVIEWS PREVIOUSLY WRITTEN -->
+			<h2 class="text-info text-center">
+				All reviews for <strong>[thing]</strong> at <strong>[place]</strong>
+			</h2>
+			
+			<table class="table table-hover"> <!-- match margin of H2 next to it -->
+				<!-- Header -->
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Posting Date</th>
+						<th>Rating</th>
+						<th>Comment</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+					$result1 = pg_query("
+						SELECT M.name, M.price, I.description, M.item_id
+						FROM MenuItem M, ItemType I
+						WHERE M.restaurant_id = 1 AND M.type_id = I.type_id
+						ORDER BY(M.type_id)
+					");
+					while($res2 = pg_fetch_assoc($result1)){
+						$iName = $res2['name'];
+						$price = $res2['price'];
+						$description = $res2['description'];
+						$itemid = $res2['item_id'];
+						$itemAvgRating = 0;
+						$sql1 = pg_query("
+								SELECT RI.rating
+								FROM RatingItem RI
+								WHERE RI.item_id = $itemid;
+							");
+						$total = 0;
+						while($tmp = pg_fetch_assoc($sql1)){
+							$total = $total + 1;
+							$rating = $tmp['rating'];
+							$itemAvgRating = $itemAvgRating + (int) $rating;
+						}
+						if($total != 0){
+							$itemAvgRating = $itemAvgRating/$total;
+							$itemAvgRating = round($itemAvgRating, 1);
+						}
+						else{
+							$itemAvgRating = "N/A";
+						}
+						echo "
+							<tr>
+								<td>$iName</td>
+								<td>$$price</td>
+								<td>$description</td>
+								<td>$itemAvgRating</td>
+								<td></tr>";
+					}
+
+				?>
+					
+				</tbody>
+			</table>
+			
+			<!-- WRITE A NEW REVIEW -->
+			<hr>
 			<h2 class="text-info text-center">
 			<?php
 				require('connect.php');
