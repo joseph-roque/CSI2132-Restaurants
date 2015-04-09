@@ -21,9 +21,9 @@
 <body>
 <div class="container">
 	<div class="row clearfix">
+		<?php include("includes/header.php");?>
+		<?php include("includes/navbar.php");?>
 		<div class="col-md-12 column">
-			<?php include("includes/header.php");?>
-			<?php include("includes/navbar.php");?>
 			<h2 class="text-info text-center">
 			<?php
 				require('connect.php');
