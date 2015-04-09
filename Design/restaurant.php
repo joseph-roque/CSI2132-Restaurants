@@ -181,7 +181,7 @@
 						<th>Price</th>
 						<th>Type</th>
 						<th>Rating</th>
-						<th>Edit</th>
+						<th>Review</th>
 					</tr>
 				</thead>
 				<!-- All menu items -->

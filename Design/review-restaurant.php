@@ -106,7 +106,7 @@
 				echo "You have successfully submited a review <a href='index.php'>Back to home.</a>";
 			}
 		}else {
-			echo "You have to be rater in order to submit a review! <a href = 'register.php'>Join Now!</a>";
+			echo "You must have an account as a rater in order to submit a review. <a href = 'register.php'>Join Now!</a>";
 		}
 		?>
 

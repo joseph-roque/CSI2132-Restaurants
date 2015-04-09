@@ -19,6 +19,8 @@ CSI2132 Group project for a restaurant rating database
   * Create a page for that!
 - Show type of rater on RESTAURANT (just like INDEX)
 - Link EDIT MENU ITEM to proper id
+- Create an ADD MENU ITEM page
+- Create an ADD RESTAURANT page
 
 ## Design To-Do
 - Add logo to browser tabs (See http://stackoverflow.com/questions/120420/image-icon-beside-the-site-url )
