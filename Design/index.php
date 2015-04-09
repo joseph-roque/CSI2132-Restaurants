@@ -18,9 +18,9 @@
 <body background="bg.png">
 <div class="container">
 	<div class="row clearfix">
+		<?php include("includes/header.php");?>
+		<?php include("includes/navbar.php");?>
 		<div class="col-md-12 column">
-			<?php include("includes/header.php");?>
-			<?php include("includes/navbar.php");?>
 			<h3 class="text-center text-muted">
 				Your one-stop shop for dank-ass restaurant reviews
 			</h3>

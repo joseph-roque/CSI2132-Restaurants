@@ -19,7 +19,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			<?php include("includes/navbar.php");?>
 			
 			<h2 class="text-center text-info">
-					Contact us, we promise not to bite
+				Contact us, we promise not to bite
 			</h2>
 			
 			<div class="register-form">
