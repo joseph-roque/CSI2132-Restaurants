@@ -49,7 +49,7 @@
 						$id = $row['restaurant_id'];
 						
 						echo "
-							<a href='http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=$id'>"
+							<a href='restaurant.php?id=$id'>"
 							?>
 							
 
@@ -101,7 +101,7 @@
 						</a>
 						</h2>
 						<p>
-							Better known locally as "Pho Ling Do Bang Do Ding Da Do 2", this hole-in-the-wall eatery features some of the grimiest pho known to Ottawa.
+							[comments]
 						</p>
 					</div>
 				</div>
@@ -130,8 +130,7 @@
 							</a>
 						</h2>
 						<p>
-							You haven't been to a sports bar until you've been to Restaurant 3. A new addition to the downtown nightlife, this sports bar is praised for
-							its super hot waitresses with unreasonably-sized jugs. No comment on the food.
+							[comments]
 						</p>
 
 					</div>
@@ -177,7 +176,7 @@
 					Most Recent Reviews
 				</h2>
 				<h2>
-					[review title]
+					[restaurant title]
 				</h2>
 				<h4>
 				by <a href="#">

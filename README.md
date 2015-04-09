@@ -22,12 +22,11 @@ CSI2132 Group project for a restaurant rating database
 - Add a restaurant/location
 - Edit navbar.php so that it toggles Login/Logout and name of user (with link to profile)
 - Fix menu item ratings not working
-- CHANGE RESTAURANT LINKS ON INDEX PAGE!
 - Show multiple MOST RECENT REVIEWS on index
+- Fix pictures on index page
 
 
 ## Design To-Do
-- Complete Google Maps embed in Restaurant page
 - Create View Rating page
 - Create Menu Item page?
 - Create Menu Item Review page
