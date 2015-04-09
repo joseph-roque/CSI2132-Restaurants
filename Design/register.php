@@ -56,8 +56,8 @@
 							</div>
 							<div class="row">
 								<div class="form-group-xs">
-								<label for="form-control">Type of Rater</label>
-								<select class="form-control">
+								<label id = "input-type" name = "input-type" method="post" for="form-control">Type of Rater</label>
+								<select name = "input-type" id = "input-type" method= "post" class="form-control">
 									<option>Casual</option>
 									<option>Blogger</option>
 									<option>Verified Critic</option>
@@ -70,14 +70,27 @@
 							</div>
 						</form>
 						<?php
-						if (array_key_exists('input-email', $_POST) && array_key_exists('input-pw', $_POST) && array_key_exists('input-name', $_POST) && array_key_exists('input-pw-confirm', $_POST)){
+
+						if (array_key_exists('input-email', $_POST) && array_key_exists('input-pw', $_POST) && array_key_exists('input-name', $_POST)
+						 && array_key_exists('input-pw-confirm', $_POST) && array_key_exists('input-type', $_POST)){
 				
 							//get form variables
 							$getName = $_POST['input-name'];
 							$getEmail = $_POST['input-email'];
 							$getPass = $_POST['input-pw'];
 							$getConf = $_POST['input-pw-confirm'];
-							
+							$getType = $_POST['input-type'];
+
+							if($getType == "Casual")
+								$getType = 1;
+							else if($getType == "Blogger")
+								$getType = 2;
+							else if($getType == "Verified Critic")
+								$getType = 3;
+							else if($getType == "Other")
+								$getType = 0;
+
+
 							require("connect.php");
 							
 							$query = "SELECT * FROM Rater WHERE Rater.name='$getName'";
@@ -101,8 +114,9 @@
 										require("connect.php");
 										//Current date in YYYY-MM-DD format
 										$currentDate = date('Y-m-d');
-										pg_query("INSERT INTO Rater(email, name, join_date, type_id, password)
-										VALUES('$getEmail', '$getName', '$currentDate', '1', '$getPass');
+										pg_query("
+											INSERT INTO Rater(email, name, join_date, type_id, reputation, password)
+											VALUES('$getEmail', '$getName', '$currentDate', $getType, 1, '$getPass');
 										");
 										
 										echo "<p align='center'>Welcome <b> $getName </b> you are now registered. <a href= './login.php'> Continue </a></p>";
