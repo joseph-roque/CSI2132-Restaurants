@@ -26,11 +26,24 @@ body {
 .rating {
   line-height: 2;
 }
-/* Added */
 .footer {
   position: absolute;
   bottom: 2%;
   left: auto;
   right: auto;
   height: 60px;
+}
+.form-group-xs {
+  margin-bottom: 15px;
+  width:40%;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 250px;
+}
+.form-group-xxs {
+  margin-bottom: 15px;
+  width:20%;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 235px;
 }

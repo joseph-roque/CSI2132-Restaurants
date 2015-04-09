@@ -54,10 +54,17 @@
 									 <input name ="input-pw-confirm" type="password" class="form-control" id="input-pw-confirm" required/>
 								</div>
 							</div>
-							<!-- DISABLED UNLESS YOU KNOW HOW TO DO THIS
-							<div class="checkbox">
-								 <label><input type="checkbox" /> Remember Me</label>
-							</div> -->
+							<div class="row">
+								<div class="form-group-xs">
+								<label for="form-control">Type of Rater</label>
+								<select class="form-control">
+									<option>Casual</option>
+									<option>Blogger</option>
+									<option>Verified Critic</option>
+									<option>Other</option>
+								</select>
+								</div>
+							</div>
 							<div class="text-center">
 								<button name="register" id="register" type="submit" class="btn btn-primary"><strong>Register!</strong></button>
 							</div>
