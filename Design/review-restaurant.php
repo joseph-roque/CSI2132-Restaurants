@@ -80,20 +80,16 @@
 				$mood = $_POST['mood'];
 				$staff = $_POST['staff'];
 				$comments = $_POST['comments'];
-				$query = "
-					SELECT restaurant_id FROM Location L WHERE L.location_id = $id;
-				";
-				$result = pg_query($query);
-				$row = pg_fetch_assoc($result);
 
-				$restaurant_id = $row['restaurant_id'];
+
+				$location_id = $id;
 
 				//Current date in YYYY-MM-DD format
 				$currentDate = date('m-d-Y H:i:s', time());
 
 				$query = "
-					INSERT INTO Rating(user_id, post_date, price, food, mood, staff, comments, restaurant_id)
-					VALUES($userid, '$currentDate', $price, $food, $mood, $staff, '$comments', $restaurant_id);
+					INSERT INTO Rating(user_id, post_date, price, food, mood, staff, comments, location_id)
+					VALUES($userid, '$currentDate', $price, $food, $mood, $staff, '$comments', $location_id);
 				";
 
 				$result = pg_query($query);

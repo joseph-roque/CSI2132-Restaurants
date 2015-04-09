@@ -173,48 +173,68 @@
 		<div class="recent-reviews">
 			<div class="col-md-9 column">
 				<h2 class="text-info text-center">
-					Most Recent Reviews
+					Most Recent Review
 				</h2>
-				<h2>
-					[restaurant title]
-				</h2>
-				<h4>
-				by <a href="#">
 				<?php
-					$query = " SELECT Rater.name
-							FROM Rater Rater, Rating Rating
-							WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
-							(SELECT MIN(Rating2.post_date) FROM Rating Rating2)";
+					$query = " SELECT * 
+					FROM Rating R
+					WHERE R.post_date IN (SELECT MAX(post_date) FROM Rating )";
 							
 					$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-					//Fetch the results and print them
-					while ($row = pg_fetch_row($result)) {
-						echo "$row[0]";
-					}
 					
-				?>
-				</a>
-				<i> -- [rater type]</i>
+					//Fetch the results and print them
+					$result = pg_fetch_assoc($result);
+					//start off with basic results an achieve actual results from queries
+					$rName = $result['location_id'];
+					$uName = $result['user_id'];
+					$comment = $result['comments'];
+					$food = $result['food'];
+					$mood = $result['mood'];
+					$price = $result['price'];
+					$staff = $result['staff'];
+
+
+					$result = pg_query("SELECT R.name, R.restaurant_id FROM Restaurant R, Location L
+					 WHERE L.restaurant_id = R.restaurant_id AND L.location_id = $rName 
+					 ");
+					$result = pg_fetch_assoc($result);
+
+					$rName = $result['name'];
+					//restaurant ID
+					$rId = $result['restaurant_id'];
+
+					$result = pg_query("SELECT R.name, R.type_id FROM Rater R
+					 WHERE R.user_id = $uName
+					 ");
+					$result = pg_fetch_assoc($result);
+					$uName = $result['name'];
+					$type = $result['type_id'];
+
+					if($type == "1")
+						$type = "Casual";
+					else if($type == 2)
+						$type = "Blogger";
+					else if($type == 3)
+						$type = "Verified Critic";
+					else if($type == 0)
+						$type = "Other";
+					
+			echo "	<h2>
+					$rName
+				</h2> 
+				<h4>
+				by <a href='profile.php?name=$uName'>$uName</a>
+				<i> -- $type</i>
 				</h4>
 				<p>
-					<?php
-						$query = " SELECT Rating.comments
-						FROM Rater Rater, Rating Rating
-						WHERE Rater.user_id = Rating.user_id AND Rating.post_date IN 
-						(SELECT MIN(Rating2.post_date) FROM Rating Rating2)";
-							
-						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-						//Fetch the results and print them
-						while ($row = pg_fetch_row($result)) {
-							echo "$row[0]";
-							echo "<br/>";
-						}
-					
-					?>
+					$comment
 				</p>
+				<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
 				<p>
-					<a class="btn" href="#">Read review</a>
+					<a class='btn' href='restaurant.php?id=$rId'>Read review</a>
 				</p>
+				";
+				?>
 			</div>
 		</div>
 

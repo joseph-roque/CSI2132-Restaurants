@@ -57,14 +57,20 @@
 			<h3 class="text-info" style="margin-top:-5px; margin-bottom:20px">
 				<?php
 					$number = $row['phone_number'];
+					 $numbers_only = preg_replace("/[^\d]/", "", $number);
+
+  					$number = preg_replace("/^1?(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $numbers_only);
 					echo "$number";
 				?>
 			</h3>
 			<p>
 			<?php 
 				$open = $row['hour_open'];
+				$open = substr_replace($open, ":", strlen($open)-2, 0);
 				$close = $row['hour_close'];
+				$close = substr_replace($close, ":", strlen($close)-2, 0);
 				$first = $row['first_open_date'];
+				$first = substr($first, 0, -8);
 				$manager = $row['manager_name'];
 				
 				$result = pg_query("
@@ -197,7 +203,7 @@
 						$sql1 = pg_query("
 								SELECT RI.rating
 								FROM RatingItem RI
-								WHERE RI.item_id = $id;
+								WHERE RI.item_id = $itemid;
 							");
 						$total = 0;
 						while($tmp = pg_fetch_assoc($sql1)){
@@ -226,6 +232,10 @@
 					
 				</tbody>
 			</table>
+			<!--Maybe DELETE? IF YOU DON'T LIKE? -->
+			<button  onclick = "redirect()" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
+				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add a Menu Item</strong>
+			</button>
 		</div>
 		<!-- Reviews -->
 		<div class="col-md-6 column">
@@ -255,7 +265,7 @@
 						$comment
 					</p>
 					<h4>
-						by <a href='#'>$author</a>
+						by <a href='profile.php?name=$author'>$author</a>
 					</h4>
 					<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
 					<hr>
