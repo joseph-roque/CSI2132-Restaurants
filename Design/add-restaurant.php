@@ -38,13 +38,20 @@
 					<!-- Cuisine Type -->
 					<div class="row">
 						<div class="form-group-xs">
-							<label for="input-email">Type of Cuisine</label>
-							<select name = "input-type" id = "input-type" method= "post" class="form-control">
+							<label for="input-cuisine">Type of Cuisine</label>
+							<select name = "input-cuisine" id = "input-type" method= "post" class="form-control">
 							<!-- FETCH ALL POSSIBLE CUISINE TYPES IN HERE -->
-								<option>Casual</option>
-								<option>Blogger</option>
-								<option>Verified Critic</option>
 								<option>Other</option>
+								<option>Mexican</option>
+								<option>Indian</option>
+								<option>Korean</option>
+								<option>Chinese</option>
+								<option>Italian</option>
+								<option>Fine Dining</option>
+								<option>Breakfast</option>
+								<option>Middle Easter</option>
+								<option>Sandwhiches</option>
+
 							</select>
 						</div>
 					</div>
@@ -52,69 +59,115 @@
 					<div class="row">
 						<div class="form-group-xs">
 							 <label for="input-url">Website URL</label>
-							 <input name ="input-url" type="password" class="form-control" id="input-url"/>
+							 <input name ="input-url" type="text" class="form-control" id="input-url"/>
 						</div>
 					</div>
 					<!-- Open Date -->
 					<div class="row">
 						<div class="form-group-xs">
 							 <label for="input-open-date">Opening Date (YYYY-MM-DD)</label>
-							 <input name ="input-open-date" type="password" class="form-control" id="input-open-date" required/>
+							 <input name ="input-open-date" type="text" class="form-control" id="input-open-date" required/>
 						</div>
 					</div>
 					<!-- Manager Name -->
 					<div class="row">
 						<div class="form-group-xs">
-							 <label for="input-mng-name">Manager Name</label>
-							 <input name ="input-mng-name" type="password" class="form-control" id="input-mng-name"/>
+							 <label for="input-mng">Manager Name</label>
+							 <input name ="input-mng" type="text" class="form-control" id="input-mng-name"/>
 						</div>
 					</div>
 					<!-- Phone Number -->
 					<div class="row">
 						<div class="form-group-xs">
 							 <label for="input-phone">Phone Number (e.g. 16135550123)</label>
-							 <input name ="input-phone" type="password" class="form-control" id="input-phone"/>
+							 <input name ="input-phone" type="text" class="form-control" id="input-phone"/>
 						</div>
 					</div>
 					<!-- Street Address -->
 					<div class="row">
 						<div class="form-group-xs">
 							 <label for="input-address">Street Address</label>
-							 <input name ="input-address" type="password" class="form-control" id="input-address"/>
+							 <input name ="input-address" type="text" class="form-control" id="input-address"/>
 						</div>
 					</div>
 					<!-- Hours Open -->
 					<div class="row">
 						<div class="form-group-xs">
-							 <label for="input-hours-open">Opening Hour (e.g. 0600)</label>
-							 <input name ="input-hours-open" type="password" class="form-control" id="input-hours-open"/>
+							 <label for="input-open">Opening Hour (e.g. 0600)</label>
+							 <input name ="input-open" type="text" class="form-control" id="input-hours-open"/>
 						</div>
 					</div>
 					<!-- Hours Closed -->
 					<div class="row">
 						<div class="form-group-xs">
-							 <label for="input-hours-closed">Closing Hour (e.g. 2100)</label>
-							 <input name ="input-hours-closed" type="password" class="form-control" id="input-hours-closed"/>
+							 <label for="input-close">Closing Hour (e.g. 2100)</label>
+							 <input name ="input-close" type="text" class="form-control" id="input-hours-closed"/>
 						</div>
 					</div>
-					<div class="row">
-						<div class="form-group-xs">
-							<label id = "input-type" name = "input-type" method="post" for="form-control">Type of Rater</label>
-							<select name = "input-type" id = "input-type" method= "post" class="form-control">
-								<option>Casual</option>
-								<option>Blogger</option>
-								<option>Verified Critic</option>
-								<option>Other</option>
-							</select>
-						</div>
-					</div>
+					
 					<div class="text-center">
-						<button name="register" id="register" type="submit" class="btn btn-primary"><strong>Register!</strong></button>
+						<button name="register" id="register" type="submit" class="btn btn-primary"><strong>Add Restaurant</strong></button>
 					</div>
 				</form>
+				<?php
+					if(array_key_exists('input-name', $_POST) && array_key_exists('input-cuisine', $_POST) && array_key_exists('input-url', $_POST) &&
+					array_key_exists('input-open-date', $_POST) && array_key_exists('input-mng', $_POST) && array_key_exists('input-phone', $_POST) &&
+					array_key_exists('input-address', $_POST) && array_key_exists('input-open', $_POST) && array_key_exists('input-close', $_POST) ){
+						require('connect.php');
+						$name = $_POST['input-name'];
+						$url = $_POST['input-url'];
+						$cuisine = $_POST['input-cuisine'];
+						if($cuisine == "Other")
+							$cuisine = 0;
+						else if($cuisine == "Mexican")
+							$cuisine = 1;
+						else if($cuisine == "Indian")
+							$cuisine = 2;
+						else if($cuisine == "Korean")
+							$cuisine = 3;
+						else if($cuisine == "Chinese")
+							$cuisine = 4;
+						else if($cuisine == "Italian")
+							$cuisine = 5;
+						else if($cuisine == "Fine Dining")
+							$cuisine = 6;
+						else if($cuisine == "Breakfast")
+							$cuisine = 7;
+						else if($cuisine == "Middle Eastern")
+							$cuisine = 8;
+						else if ($cuisine == "Sandwhiches")
+							$cuisine = 9;
+						$r1 = pg_query("SELECT * FROM Restaurant R WHERE R.name = '$name'");
+						$num = pg_num_rows($r1);
+						$r1 = pg_fetch_assoc($r1);
+						$rId = $r1['restaurant_id']; 
+						if($num == 0){
+							pg_query("INSERT INTO Restaurant(name, cuisine, url)
+								VALUES('$name', $cuisine, '$url')
+							");
+						}
+						$first_open = $_POST['input-open-date'];
+						$mng = $_POST['input-mng'];
+						$phone = $_POST['input-phone'];
+						$address = $_POST['input-address'];
+						$r1 = pg_query("SELECT * FROM Location WHERE street_address = '$address'");
+						$num = pg_num_rows($r1);
+						if($num == 0){
+							$open = $_POST['input-open'];
+							$close = $_POST['input-close']; 
+							pg_query("INSERT INTO Location(first_open_date, manager_name, phone_number, street_address, hour_open, hour_close, restaurant_id)
+								VALUES('$first_open', '$mng', '$phone', '$address', $open, $close, $rId);
+								");
+							echo "<p align='center'>You have successfully added the restaurant.<a href= './index.php'> Continue </a></p>";
+						}
+						else {
+							echo "That location is already in our database!";
+						}
+					}
+
+				?>
 			</div>
 	</div>
 </div>
-
 </body>
 </html>

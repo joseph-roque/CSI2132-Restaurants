@@ -161,8 +161,10 @@
 					}
 					if($total!= 0)
 						$avgRating = $avgRating/$total;
-					$avgRating = round($avgRating, 1); 
-				echo "$avgRating"
+				$avgRating = round($avgRating, 1); 
+				if($avgRating != 0)
+					echo "$avgRating";
+				else echo "N/A";
 				?></font></strong>
 			</div>
 		</div>
@@ -187,10 +189,13 @@
 				<!-- All menu items -->
 				<tbody>
 				<?php
+					$rId = pg_query("SELECT restaurant_id FROM Location WHERE Location.location_id = $id");
+					$rId = pg_fetch_assoc($rId);
+					$rId = $rId['restaurant_id'];
 					$result1 = pg_query("
 						SELECT M.name, M.price, I.description, M.item_id
 						FROM MenuItem M, ItemType I
-						WHERE M.restaurant_id = 1 AND M.type_id = I.type_id
+						WHERE M.restaurant_id = $rId AND M.type_id = I.type_id
 						ORDER BY(M.type_id)
 					");
 					while($res2 = pg_fetch_assoc($result1)){
