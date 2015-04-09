@@ -21,29 +21,31 @@
 		<?php include("includes/header.php");?>
 		<?php include("includes/navbar.php");?>
 		<div class="col-md-12 column">
-			<h3 class="text-center text-muted">
+			<h3 class="text-center text-muted" style="margin-top:-10px">
 				Your one-stop shop for dank-ass restaurant reviews
 			</h3>
+			<h1 class="text-center text-success">
+					Most Popular Restaurants
+			</h1>
 		
-				<!-- Frames for restaurants -->
-				<?php
-					require('connect.php');
-					$res = pg_query("
-					SELECT rest.name, loc.location_id, AVG(temp.avgRating) AS avg
-					FROM Restaurant rest
-					INNER JOIN Location loc
-						ON rest.restaurant_id=loc.restaurant_id
-					INNER JOIN
-						(SELECT loc2.location_id locid2, (rate2.food+rate2.staff+rate2.price+rate2.mood)/4.0 AS avgRating
-							FROM Location loc2
-							INNER JOIN Rating rate2
-								ON loc2.location_id=rate2.location_id) temp
-						ON loc.location_id=locid2
-					GROUP BY rest.name, loc.location_id
-					ORDER BY avg DESC;
-					");
+			<!-- Frames for restaurants -->
+			<?php
+				require('connect.php');
+				$res = pg_query("
+				SELECT rest.name, loc.location_id, AVG(temp.avgRating) AS avg
+				FROM Restaurant rest
+				INNER JOIN Location loc
+					ON rest.restaurant_id=loc.restaurant_id
+				INNER JOIN
+					(SELECT loc2.location_id locid2, (rate2.food+rate2.staff+rate2.price+rate2.mood)/4.0 AS avgRating
+						FROM Location loc2
+						INNER JOIN Rating rate2
+							ON loc2.location_id=rate2.location_id) temp
+					ON loc.location_id=locid2
+				GROUP BY rest.name, loc.location_id
+				ORDER BY avg DESC;
+				");	
 				//Counter for top 3 restaurant;
-				echo "<h4>$res</h4>";
 				$i = 0;
 				//Most popular restaurants!
 				//Loop to iterate through 3 top restaurants gets the queries and puts them in
@@ -86,17 +88,18 @@
 					echo "<h2>
 							$name
 						</a>
-						</h2>";
+						</h2>
+						<hr>";
 					echo "	
 						<h3>
-						Top Comment:
+						Highest-Rating Comment:
 						</h3>
-						<p>
-							$comment
-						</p>
 						<h5>
 						by <a href='profile.php?=$raterName'>$raterName</a>
 						</h5>
+						<p>
+							$comment
+						</p>
 					</div>
 				</div>
 				</div>";

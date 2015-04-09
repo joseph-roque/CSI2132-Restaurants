@@ -47,3 +47,7 @@ body {
   margin-right: auto;
   min-width: 235px;
 }
+.thumbnail {
+  height: 500px;
+  overflow:hidden
+}
