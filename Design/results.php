@@ -32,7 +32,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 				<!-- ADD RESTAURANT bottom right -->
 			<div class="pull-right">
 				<strong>Can't find the restaurant you're looking for?
-				<button  onclick = "redirect()" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary" style="margin-left:10px">
+				<button  onclick = "redirect('add-restaurant.php')" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary" style="margin-left:10px">
 					<span class="glyphicon glyphicon-plus" style="margin-right:10px"></span>Add a Restaurant</strong>
 				</button>
 			</div>

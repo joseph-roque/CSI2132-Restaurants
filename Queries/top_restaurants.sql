@@ -1,4 +1,4 @@
-SELECT rest.name, AVG(temp.avgRating) avg
+SELECT rest.name, rest.restaurant_id AVG(temp.avgRating) avg
 	FROM Restaurant rest
 	INNER JOIN Location loc
 		ON rest.restaurant_id=loc.restaurant_id

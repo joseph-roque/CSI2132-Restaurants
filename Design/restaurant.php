@@ -100,22 +100,15 @@
 				";
 			?>
 			</p>
-			<script>
-				function redirect() {
-    			var link = "review-restaurant.php"
-    			var currentLink = window.location.href;
-    			var index = currentLink.lastIndexOf("?");
-    			var tmp = currentLink.substr(index,currentLink.length);
 
-    			link = link.concat(tmp);
-
-    			window.location.href = link;
-			}
-			</script>
-			<button  onclick = "redirect()" name = "write-review" method  = "post"  type="write-review" class="btn btn-primary">
+			<button  onclick = "redirect('review-restaurant.php')" name = "write-review" method  = "post"  type="write-review" class="btn btn-primary">
 				<strong><span class=" glyphicon glyphicon-pencil" style="margin-right:10px"></span>Write a Review</strong>
 			</button>
 			</form>
+			
+			<div class="text-danger" style="margin-top:10px">
+				Want this restaurant taken down? <a href="contact.php"><strong>Contact the administrator!</a></strong>
+			</div>
 			
 		</div>
 		<!-- Maps interface & avg. rating -->
@@ -188,6 +181,7 @@
 						<th>Price</th>
 						<th>Type</th>
 						<th>Rating</th>
+						<th>Edit</th>
 					</tr>
 				</thead>
 				<!-- All menu items -->
@@ -229,6 +223,9 @@
 								<td>$$price</td>
 								<td>$description</td>
 								<td>$itemAvgRating</td>
+								<td>";
+								// see /includes/ folder, only way I could figure out how to include HTML into PHP easily
+								include('includes/edit-menu.php'); echo "</td>
 							</tr>
 						";
 					}
@@ -238,13 +235,12 @@
 				</tbody>
 			</table>
 			<!--Maybe DELETE? IF YOU DON'T LIKE? -->
-			<button  onclick = "redirect()" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
+			<button  onclick = "redirect('review-restaurant.php')" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
 				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add a Menu Item</strong>
 			</button>
 		</div>
 		<!-- Reviews -->
 		<div class="col-md-6 column">
-			<!-- START OF REVIEW -->
 			<h2 class="text-info">
 				Reviews
 			</h2>
@@ -277,8 +273,11 @@
 					";
 				}
 			?>
+<<<<<<< HEAD
 			<hr> 
 			<!-- END OF REVIEW -->
+=======
+>>>>>>> 77dba250f185a071617c9561848ff4d52a4b6e64
 		</div>
 	</div>
 </div>
