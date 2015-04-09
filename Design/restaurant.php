@@ -224,10 +224,10 @@
 								<td>$description</td>
 								<td>$itemAvgRating</td>
 								<td>";
-								// see /includes/ folder, only way I could figure out how to include HTML into PHP easily
-								include('includes/edit-menu.php'); echo "</td>
-							</tr>
-						";
+
+								include("includes/edit-menu.php");
+
+								echo "</td></tr>";
 					}
 
 				?>

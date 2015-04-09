@@ -7,3 +7,8 @@ function redirect(link) {
 
 	window.location.href = link;
 }
+
+function redirectMenu(link, num) {
+
+	window.location.href = link;
+}
