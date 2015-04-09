@@ -2628,22 +2628,7 @@ input[type="search"] {
   margin-right: auto;
   min-width: 300px;
 }
-/* Added */
-.form-group-xs {
-  margin-bottom: 15px;
-  width:40%;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 250px;
-}
-/* Added */
-.form-group-xxs {
-  margin-bottom: 15px;
-  width:20%;
-  margin-left: auto;
-  margin-right: auto;
-  min-width: 235px;
-}
+
 .radio,
 .checkbox {
   position: relative;

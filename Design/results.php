@@ -12,7 +12,7 @@
 
 <html lang="en">
 <head>
-	<?php $page_title = "Restaurant" ?>
+	<?php $page_title = "Results" ?>
 	
 	<?php include("includes/resources.php");?>
 </head>
