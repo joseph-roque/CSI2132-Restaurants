@@ -25,116 +25,84 @@
 				Your one-stop shop for dank-ass restaurant reviews
 			</h3>
 		
-						
-			<!-- Most Popular Restaurants -->
-			<div class="most-popular">
-				<h1 class="text-center text-success">
-					Most Popular Restaurants
-				</h1>
-				
-				<!-- One -->
-				<div class="col-md-4">
-					<div class="thumbnail">
+				<!-- Frames for restaurants -->
+				<?php
+					require('connect.php');
+					$res = pg_query("
+					SELECT rest.name, loc.location_id, AVG(temp.avgRating) AS avg
+					FROM Restaurant rest
+					INNER JOIN Location loc
+						ON rest.restaurant_id=loc.restaurant_id
+					INNER JOIN
+						(SELECT loc2.location_id locid2, (rate2.food+rate2.staff+rate2.price+rate2.mood)/4.0 AS avgRating
+							FROM Location loc2
+							INNER JOIN Rating rate2
+								ON loc2.location_id=rate2.location_id) temp
+						ON loc.location_id=locid2
+					GROUP BY rest.name, loc.location_id
+					ORDER BY avg DESC;
+					");
+				//Counter for top 3 restaurant;
+				echo "<h4>$res</h4>";
+				$i = 0;
+				//Most popular restaurants!
+				//Loop to iterate through 3 top restaurants gets the queries and puts them in
+				while($i < 3 && $tmp = pg_fetch_assoc($res)){
+					$i++;	
+					$name = $tmp['name'];
+					$locationId = $tmp['location_id'];
+					$res1 = pg_query("
+					SELECT use.name, rate.food, rate.mood, rate.price, rate.staff, rate.comments
+					FROM Rating rate
+					INNER JOIN Rater use
+						ON rate.user_id=use.user_id
+					INNER JOIN Location loc
+						ON rate.location_id=loc.location_id
+					WHERE loc.location_id = $locationId -- Replace with location_id of specific location
+						AND (rate.food+rate.mood+rate.price+rate.staff) >= ALL
+							(SELECT rate2.food+rate2.mood+rate2.price+rate2.staff
+								FROM Rating rate2
+								INNER JOIN Rater use2
+									ON rate2.user_id=use2.user_id
+								INNER JOIN Location loc2
+									ON rate2.location_id=loc2.location_id
+								WHERE loc2.location_id = $locationId)
+					");
+					$res1 = pg_fetch_assoc($res1);
 					
-					<?php
-						require('connect.php');
-						$query = "SELECT *
-								FROM Restaurant R
-								WHERE R.restaurant_id = 1";
-						$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-						
-						$row = pg_fetch_assoc($result);
-						
-						$name = $row['name'];
-						$id = $row['restaurant_id'];
-						
-						echo "
-							<a href='restaurant.php?id=$id'>"
-							?>
-							
-
-							<div class='cropped-img' style='background-image:url("http://afghanchopan.com/wp-content/uploads/2013/08/garden-salad.jpg")' /> </div>
-
-							<div class='caption'>
+					$comment = $res1['comments'];
+					$raterName = $res1['name'];
 					
-							<?php
-							echo "<h2>$name</a></h2>";
-							?>
-					
-						<p>
-							<?php
-								//Query to be ran will be changed when we implement ratings
-								//The DB should already be connected at this point
-								$query = 'SELECT R.name FROM restaurant R WHERE restaurant_id=8';
-								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-								//Fetch the results and print them
-								while ($row = pg_fetch_row($result)) {
-									echo "$row[0]";
-									echo "<br/>\n";
-								}	
-							?>
-						</p>
-					</div>
-				</div>
-			</div>
-				<!-- Two -->
-				<div class="col-md-4">
-					<div class="thumbnail">
-					<a href="#">
+				echo "
+				<div class='col-md-4'>
+					<div class='thumbnail'>
+					<a href='restaurant.php?id=$locationId'>";
+					?>
 					<div class="cropped-img" style="background-image:url('http://i.telegraph.co.uk/multimedia/archive/01718/steak_1718547b.jpg')" /> </div>
 
 					<div class="caption">
-					<h2>
 					<?php
-								//Query to be ran will be changed when we implement ratings
-								//The DB should already be connected at this point
-								$query = "SELECT R.name
-									FROM Restaurant R
-									WHERE R.restaurant_id = 2";
-								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-								//Fetch the results and print them
-								while ($row = pg_fetch_row($result)) {
-									echo "$row[0]";
-									echo "<br/>\n";
-								}
-					?>
+					$name = $GLOBALS['name'];
+					echo "<h2>
+							$name
 						</a>
-						</h2>
+						</h2>";
+					echo "	
+						<h3>
+						Top Comment:
+						</h3>
 						<p>
-							[comments]
+							$comment
 						</p>
+						<h5>
+						by <a href='profile.php?=$raterName'>$raterName</a>
+						</h5>
 					</div>
 				</div>
-				</div>
-				<!-- Three -->
-				<div class="col-md-4">
-					<div class="thumbnail">
-					<a href="#">
-					<div class="cropped-img" style="background-image:url('http://upload.wikimedia.org/wikipedia/commons/a/a2/Asian_Style_Italian_Pasta.jpg')" /> </div>
-						
-					<div class="caption">
-						<h2>
-							<?php
-								//Query to be ran will be changed when we implement ratings
-								//The DB should already be connected at this point
-								$query = "SELECT R.name
-									FROM Restaurant R
-									WHERE R.restaurant_id = 3";
-								$result = pg_query($query) or die('Query failed: ' . pg_last_error());
-								//Fetch the results and print them
-								while ($row = pg_fetch_row($result)) {
-									echo "$row[0]";
-									echo "<br/>\n";
-								}
-					?>
-							</a>
-						</h2>
-						<p>
-							[comments]
-						</p>
-
-					</div>
-				</div>
+				</div>";
+				}
+				?>
+				
 	</div>
 
 	<div class="row clearfix">
@@ -231,7 +199,7 @@
 				</p>
 				<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
 				<p>
-					<a class='btn' href='restaurant.php?id=$rId'>Read review</a>
+					<a class='btn' href='restaurant.php?id=$rId'>Read other reviews</a>
 				</p>
 				";
 				?>

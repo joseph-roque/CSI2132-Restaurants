@@ -166,7 +166,8 @@
 						$avg = (int) ($price + $food + $mood + $staff)/4;
 						$avgRating = $avgRating + $avg;
 					}
-					$avgRating = $avgRating/$total;
+					if($total!= 0)
+						$avgRating = $avgRating/$total;
 					$avgRating = round($avgRating, 1); 
 				echo "$avgRating"
 				?></font></strong>
@@ -276,10 +277,6 @@
 					";
 				}
 			?>
-			<p>
-				<a class="btn" href="#">Read review</a>
-			</p>
-			
 			<hr> 
 			<!-- END OF REVIEW -->
 		</div>
