@@ -13,14 +13,14 @@ CSI2132 Group project for a restaurant rating database
 - Finish review notification upon completion (pass/fail message)
 - Implement search
 - Make profile page
+- Change type of rater in profile
 - Add Restaurant functionality somehow
 - Add/modify/delete menu items
 - Make a Results page
 - (TOO MUCH WORK) Min. comment length constraint
 - Deletion of restaurant: contact admin
 - Add a restaurant/location
-- Change type of rater in profile
-- Edit navbar.php so that it toggles Login/Logout and name of user?
+- Edit navbar.php so that it toggles Login/Logout and name of user (with link to profile)
 
 
 ## Design To-Do
