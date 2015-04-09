@@ -110,21 +110,25 @@
 		</div>
 		<!-- Maps interface & avg. rating -->
 		<div class="col-md-7 column text-center" style="padding-top: 10px">
+		
+		<a href="https://www.google.com/maps/place/
 		<?php
-								$result = pg_query("
-						SELECT * FROM location WHERE location_id = $id;
-					");
+			$result = pg_query("
+				SELECT * FROM location WHERE location_id = $id;
+			");
 					
-					$row = pg_fetch_assoc($result);
-		
-			
-		
-			$gmapLink = "http://maps.google.com/?q=".$row['street_address'];
-			
-			echo "
-			<iframe src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2800.3172389220795!2d-75.683133!3d45.423106!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cce050a6db98d73%3A0x188a59c3622fdbae!2sUniversity+of+Ottawa!5e0!3m2!1sen!2sca!4v1428243192262' width='400' height='250' frameborder='0' style=border:0'></iframe>				
-			";
-		?>
+			$row = pg_fetch_assoc($result);
+			echo $row['street_address'];
+		?>/"><img src="http://maps.googleapis.com/maps/api/staticmap?center=		
+		<?php
+			$result = pg_query("
+				SELECT * FROM location WHERE location_id = $id;
+			");
+					
+			$row = pg_fetch_assoc($result);
+			echo $row['street_address'];
+		?>&zoom=13&scale=1&size=400x250&maptype=roadmap&format=png&visual_refresh=true" alt="Google Map of new york city"></a>
+
 			<!-- CANT FIX THIS HELP ME !-->
 			<br>
 			<div class="rating">

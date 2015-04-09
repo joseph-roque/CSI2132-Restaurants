@@ -12,8 +12,8 @@ CSI2132 Group project for a restaurant rating database
 - REGISTER: get input from form for choosing type of Rater
 - Finish review notification upon completion (pass/fail message)
 - Implement search
-- Make profile page
-- Change type of rater in profile
+- Finish queries in rater profile
+- Allow to change type of rater in profile
 - Add Restaurant functionality somehow
 - Add/modify/delete menu items
 - Make a Results page
@@ -22,6 +22,8 @@ CSI2132 Group project for a restaurant rating database
 - Add a restaurant/location
 - Edit navbar.php so that it toggles Login/Logout and name of user (with link to profile)
 - Fix menu item ratings not working
+- CHANGE RESTAURANT LINKS ON INDEX PAGE!
+- Show multiple MOST RECENT REVIEWS on index
 
 
 ## Design To-Do
