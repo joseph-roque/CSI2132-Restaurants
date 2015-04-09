@@ -79,12 +79,20 @@
 				<div class='col-md-4'>
 					<div class='thumbnail'>
 					<a href='restaurant.php?id=$locationId'>";
-					?>
-					<div class="cropped-img" style="background-image:url('http://i.telegraph.co.uk/multimedia/archive/01718/steak_1718547b.jpg')" /> </div>
-					<!-- ADD THESE IMAGES INTO AN ARRAY :) -->
-					https://thebodypacifist.files.wordpress.com/2013/07/not-house-made-fries-w-truffle-aioli-angry-ketchup.jpg
-					http://www.indianfoodsco.com/imagesfood/BenIndianPlatter.jpg
-					http://www.thepaninipress.com/wp-content/themes/panini/images/bg-home-boston.jpg
+			?>
+			<!-- Pictures -->
+				<div class="cropped-img" style="background-image:url('<?php
+					$images = array(
+					"http://www.thepaninipress.com/wp-content/themes/panini/images/bg-home-boston.jpg", 
+					"http://www.indianfoodsco.com/imagesfood/BenIndianPlatter.jpg", 
+					"http://www.luxurystnd.com/wp-content/uploads/2015/02/Breakfast-Food-Idea-A1.jpg");
+					
+					echo $images[$i - 1];
+					
+					?>')" /> 
+				</div>
+					
+					
 					<div class="caption">
 					<?php
 					$name = $GLOBALS['name'];
