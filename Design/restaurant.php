@@ -39,8 +39,9 @@
 					");
 					
 					$row = pg_fetch_assoc($result);
-					
-					echo $row['name'];
+					$rName = $row['name'];
+					$rUrl = $row['url'];
+					echo "<a href = 'http://$rUrl'>$rName</a>";
 				?>
 			</strong></h2>
 			<?php
@@ -55,7 +56,8 @@
 			?>
 			<h3 class="text-info" style="margin-top:-5px; margin-bottom:20px">
 				<?php
-					echo $row['phone_number'];
+					$number = $row['phone_number'];
+					echo "$number";
 				?>
 			</h3>
 			<p>
@@ -80,7 +82,7 @@
 				Hours Open: $open - $close
 				</strong>
 				<br>
-				<a href = 'http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=2'>$cuisine</a>
+				<a href = 'http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=2'>$cuisine ADD CUISINE PAGE</a>
 				<br>
 				Established: $first
 				<br>
@@ -129,7 +131,31 @@
 				<h2 class="text-info" style="margin-bottom: -10px">
 					Average Rating
 				</h2>
-				<strong><p style="font-size:48px">[avg. of ratings]</font></strong>
+				<strong><p style="font-size:48px">
+				<?php
+				require('connect.php');
+					$avgRating = 0;
+					$query = "
+						SELECT price, food, mood, staff
+						FROM Rating RA, Location L
+						WHERE L.location_id = $id AND RA.location_id = L.location_id
+						";
+					$result = pg_query($query);
+					
+					$total = 0;
+					while($row = pg_fetch_assoc($result)){
+						$total = (int) $total + 1;
+						$price = (int) $row['price'];
+						$food = (int) $row['food'];
+						$mood = (int) $row['mood'];
+						$staff = (int) $row['staff'];
+						$avg = (int) ($price + $food + $mood + $staff)/4;
+						$avgRating = $avgRating + $avg;
+					}
+					$avgRating = $avgRating/$total;
+					$avgRating = round($avgRating, 1); 
+				echo "$avgRating/5"
+				?></font></strong>
 			</div>
 		</div>
 	</div>
@@ -150,46 +176,86 @@
 				</thead>
 				<!-- All menu items -->
 				<tbody>
+				<?php
+				$result1 = pg_query("
+					SELECT M.name, I.description, M.item_id
+					FROM MenuItem M, ItemType I
+					WHERE M.restaurant_id = 1 AND M.type_id = I.type_id
+					ORDER BY(M.type_id)
+				");
+				while($res2 = pg_fetch_assoc($result1)){
+				$iName = $res2['name'];
+				$description = $res2['description'];
+				$itemid = $res2['item_id'];
+				$itemAvgRating = 0;
+				$sql1 = pg_query("
+						SELECT RI.rating
+						FROM RatingItem RI
+						WHERE RI.item_id = $id;
+					");
+				$total = 0;
+				while($tmp = pg_fetch_assoc($sql1)){
+					$total = $total + 1;
+					$rating = $tmp['rating'];
+					$itemAvgRating = $itemAvgRating + (int) $rating;
+				}
+				if($total != 0){
+					$itemAvgRating = $itemAvgRating/$total;
+					$itemAvgRating = round($itemAvgRating, 1);
+				}
+				else{
+					$itemAvgRating = "N/A";
+				}
+				echo "
 					<tr>
-						<td>California Roll</td>
-						<td>Entree</td>
-						<td>4/5</td>
+						<td>$iName</td>
+						<td>$description</td>
+						<td>$itemAvgRating</td>
 					</tr>
-					<tr>
-						<td>[name]</td>
-						<td>[type_id -> description]</td>
-						<td>[avg. of ratings for MenuItem]</td>
-					</tr>
+				";
+			}
+
+				?>
+					
 				</tbody>
 			</table>
 		</div>
 		<!-- Reviews -->
 		<div class="col-md-7 column">
 			<!-- START OF REVIEW -->
-			<?php
-				require('connect.php');
-				$result = pg_query("
-					SELECT *
-					FROM RatingItem RI, MenuItem M, Location L, Restaurant R, Rater RA
-					WHERE RI.item_id = M.item_id AND M.restaurant_id = L.restaurant_id AND L.restaurant_id = R.restaurant_id
-					AND L.location_id = 1 AND RI.user_id = RA.user_id
-				");
-				
-				while($row = pg_fetch_assoc($result)){
-					
-				}
-				
-			?>
 			<h2 class="text-info">
 				Reviews
 			</h2>
-			<h3>
-				[Title]
-			</h3>
-			<h4>
-				by <a href="#">[Author]</a>
-			</h4>
-			<strong>Price: </strong>[price] | <strong>Food: </strong> [food] | <strong>Mood: </strong> [mood] | <strong>Staff: </strong> [staff]
+			
+			<?php
+				require('connect.php');
+				$result = pg_query("
+					SELECT * FROM Rating R WHERE R.location_id = $id; 
+				");
+				
+				while($row = pg_fetch_assoc($result)){
+					$comment = $row['comments'];
+					$price = $row['price'];
+					$food = $row['food'];
+					$mood = $row['mood'];
+					$staff = $row['staff'];
+					$author = $row['user_id'];
+					$res1 = pg_query("SELECT name FROM Rater WHERE Rater.user_id = $author");
+					$res1 = pg_fetch_assoc($res1);
+					$author = $res1['name'];
+					echo "	
+					<p>
+						$comment
+					</p>
+					<h4>
+						by <a href='#'>$author</a>
+					</h4>
+					<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
+					<hr>
+					";
+				}
+			?>
+
 			<p class="demo">
 				<script>
 				function shorten() {
