@@ -82,6 +82,8 @@
 				$row = pg_fetch_assoc($result);
 				
 				$cuisine = $row['description'];
+
+				$location = $row['street_address'];
 				
 				
 			echo"<strong>
@@ -93,6 +95,8 @@
 				Established: $first
 				<br>
 				Currently managed by: <i>$manager</i>
+				<br>
+				Location: $location
 				";
 			?>
 			</p>

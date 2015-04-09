@@ -29,7 +29,8 @@
 			<h2 class="text-center text-info">
 					Viewing [profile name]'s Profile
 			</h2>
-			
+
+
 			<dl class="dl" style="font-size:20px">
 				<dt>Username</dt> <dd>[username]</dd>
 				<dt>Email</dt> <dd>[email]</dd>
@@ -40,7 +41,7 @@
 		</div>
 		<!-- MENU ITEM REVIEWS -->
 		<div class="col-md-6 column">
-
+			
 			<h2 class="text-info">
 				Menu Item Reviews
 			</h2>
@@ -100,7 +101,27 @@
 
 				?>			
 		</div>
-		
+			<?php
+			$id = $_GET['id'];
+				require('connect.php');
+				$result = pg_query("
+					SELECT * FROM Rater R WHERE R.user_id = $id;
+					");
+				$result = pg_fetch_assoc($result);
+				$name = $result['name'];
+				$email = $result['email'];
+				$join_date = $result['join_date'];
+				$getType = (int) $result['type_id'];
+
+				if($getType == 1)
+					$getType = "Casual";
+				else if($getType == 2)
+					$getType = "Blogger";
+				else if($getType == 3)
+					$getType = "Verified Critic";
+				else if($getType == 0)
+					$getType = "Other";
+			?>		
 		<!-- RESTAURANT REVIEWS -->
 		<div class="col-md-6 column">
 			<h2 class="text-info">

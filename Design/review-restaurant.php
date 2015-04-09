@@ -68,7 +68,7 @@
 		</form>
 
 		<?php
-		if($userid && $name){
+		if($userid != "" && $name != ""){
 			$userid = $_SESSION['userid'];
 			$id = $_GET['id'];
 			if(array_key_exists('food', $_POST) && array_key_exists('price', $_POST) && array_key_exists('mood', $_POST)
@@ -105,6 +105,8 @@
 			// </div>";
 				echo "You have successfully submited a review <a href='index.php'>Back to home.</a>";
 			}
+		}else {
+			echo "You have to be rater in order to submit a review! <a href = 'register.php'>Join Now!</a>";
 		}
 		?>
 
