@@ -102,10 +102,7 @@
 			echo "You have to be rater in order to submit a review! <a href = 'register.php'>Join Now!</a>";
 		}
 		?>
-
-		
 	</div>
-
 </div>
 
 </body>
