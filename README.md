@@ -21,10 +21,10 @@ CSI2132 Group project for a restaurant rating database
 - Deletion of restaurant: contact admin
 - Add a restaurant/location
 - Edit navbar.php so that it toggles Login/Logout and name of user (with link to profile)
+- Fix menu item ratings not working
 
 
 ## Design To-Do
-- Change ratings from numerical to stars
 - Complete Google Maps embed in Restaurant page
 - Create View Rating page
 - Create Menu Item page?

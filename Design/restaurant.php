@@ -131,7 +131,7 @@
 				<h2 class="text-info" style="margin-bottom: -10px">
 					Average Rating
 				</h2>
-				<strong><p style="font-size:48px">
+				<strong><p style="font-size:60px">
 				<?php
 				require('connect.php');
 					$avgRating = 0;
@@ -154,14 +154,14 @@
 					}
 					$avgRating = $avgRating/$total;
 					$avgRating = round($avgRating, 1); 
-				echo "$avgRating/5"
+				echo "$avgRating"
 				?></font></strong>
 			</div>
 		</div>
 	</div>
 	<div class="row clearfix">
 		<!-- Menu Table -->
-		<div class="col-md-5 column">
+		<div class="col-md-6 column">
 		<h2 class="text-info" style="margin-bottom:-5px">
 		Menu
 		</h2>
@@ -170,6 +170,7 @@
 				<thead>
 					<tr>
 						<th>Item</th>
+						<th>Price</th>
 						<th>Type</th>
 						<th>Rating</th>
 					</tr>
@@ -177,43 +178,45 @@
 				<!-- All menu items -->
 				<tbody>
 				<?php
-				$result1 = pg_query("
-					SELECT M.name, I.description, M.item_id
-					FROM MenuItem M, ItemType I
-					WHERE M.restaurant_id = 1 AND M.type_id = I.type_id
-					ORDER BY(M.type_id)
-				");
-				while($res2 = pg_fetch_assoc($result1)){
-				$iName = $res2['name'];
-				$description = $res2['description'];
-				$itemid = $res2['item_id'];
-				$itemAvgRating = 0;
-				$sql1 = pg_query("
-						SELECT RI.rating
-						FROM RatingItem RI
-						WHERE RI.item_id = $id;
+					$result1 = pg_query("
+						SELECT M.name, M.price, I.description, M.item_id
+						FROM MenuItem M, ItemType I
+						WHERE M.restaurant_id = 1 AND M.type_id = I.type_id
+						ORDER BY(M.type_id)
 					");
-				$total = 0;
-				while($tmp = pg_fetch_assoc($sql1)){
-					$total = $total + 1;
-					$rating = $tmp['rating'];
-					$itemAvgRating = $itemAvgRating + (int) $rating;
-				}
-				if($total != 0){
-					$itemAvgRating = $itemAvgRating/$total;
-					$itemAvgRating = round($itemAvgRating, 1);
-				}
-				else{
-					$itemAvgRating = "N/A";
-				}
-				echo "
-					<tr>
-						<td>$iName</td>
-						<td>$description</td>
-						<td>$itemAvgRating</td>
-					</tr>
-				";
-			}
+					while($res2 = pg_fetch_assoc($result1)){
+						$iName = $res2['name'];
+						$price = $res2['price'];
+						$description = $res2['description'];
+						$itemid = $res2['item_id'];
+						$itemAvgRating = 0;
+						$sql1 = pg_query("
+								SELECT RI.rating
+								FROM RatingItem RI
+								WHERE RI.item_id = $id;
+							");
+						$total = 0;
+						while($tmp = pg_fetch_assoc($sql1)){
+							$total = $total + 1;
+							$rating = $tmp['rating'];
+							$itemAvgRating = $itemAvgRating + (int) $rating;
+						}
+						if($total != 0){
+							$itemAvgRating = $itemAvgRating/$total;
+							$itemAvgRating = round($itemAvgRating, 1);
+						}
+						else{
+							$itemAvgRating = "N/A";
+						}
+						echo "
+							<tr>
+								<td>$iName</td>
+								<td>$price</td>
+								<td>$description</td>
+								<td>$itemAvgRating</td>
+							</tr>
+						";
+					}
 
 				?>
 					
@@ -221,7 +224,7 @@
 			</table>
 		</div>
 		<!-- Reviews -->
-		<div class="col-md-7 column">
+		<div class="col-md-6 column">
 			<!-- START OF REVIEW -->
 			<h2 class="text-info">
 				Reviews
