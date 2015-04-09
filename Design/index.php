@@ -224,7 +224,7 @@
 				</h2> 
 				<h4>
 				by <a href='profile.php?name=$uName'>$uName</a>
-				<i> -- $type</i>
+			    | $type
 				</h4>
 				<p>
 					$comment

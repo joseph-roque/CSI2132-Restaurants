@@ -225,7 +225,7 @@
 						echo "
 							<tr>
 								<td>$iName</td>
-								<td>$price</td>
+								<td>$$price</td>
 								<td>$description</td>
 								<td>$itemAvgRating</td>
 							</tr>

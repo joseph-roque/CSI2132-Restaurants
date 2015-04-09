@@ -92,7 +92,7 @@
 					VALUES($userid, '$currentDate', $price, $food, $mood, $staff, '$comments', $location_id);
 				";
 
-				$result = pg_query($query);
+				$result = pg_query($query); 
 
 				$row = pg_fetch_assoc($result);
 				$name = $row['name'];

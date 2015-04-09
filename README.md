@@ -4,12 +4,10 @@ CSI2132 Group project for a restaurant rating database
 ## General To-Do
 - Set up server
 - Menu Items
-  * Add price on rest. page
   * JS modal for adding rating (1-5 stars and comments)
 - List of typical queries
 - Reduce dankness?
 - Make cuisines clickable (redirects you to Results page with the name of cuisine as query)
-- REGISTER: get input from form for choosing type of Rater
 - Finish review notification upon completion (pass/fail message)
 - Implement search
 - Finish queries in rater profile

@@ -146,8 +146,8 @@ echo '
 			<li><a href='profile.php?=$tmp'>";
 					if ($page_title == "Profile")
 						echo "<strong>";
-			echo '
-				Profile';
+			echo "
+				$tmp";
 					if ($page_title == "Profile")
 						echo "</strong>";
 			echo '</a></li>
