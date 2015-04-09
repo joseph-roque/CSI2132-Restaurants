@@ -130,7 +130,7 @@
 					
 			$row = pg_fetch_assoc($result);
 			echo $row['street_address'];
-		?>&zoom=13&scale=1&size=400x250&maptype=roadmap&format=png&visual_refresh=true" alt="Google Map of new york city"></a>
+		?>&zoom=13&scale=1&size=400x250&maptype=roadmap&format=png&visual_refresh=true"></a>
 
 			<!-- CANT FIX THIS HELP ME !-->
 			<br>
@@ -181,7 +181,7 @@
 						<th>Price</th>
 						<th>Type</th>
 						<th>Rating</th>
-						<th>Review</th>
+						<th>View</th>
 					</tr>
 				</thead>
 				<!-- All menu items -->

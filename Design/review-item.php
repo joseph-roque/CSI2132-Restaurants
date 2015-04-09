@@ -37,7 +37,7 @@
 				$row = pg_fetch_assoc($result);
 				$rName = $row['rname'];
 				$iName = $row['iname'];
-				echo "Writing a review for $iName at <strong>$rName</strong>";
+				echo "Write a review for <strong>$iName</strong> at <strong>$rName</strong>";
 			?>
 			</h2>
 		</div>
