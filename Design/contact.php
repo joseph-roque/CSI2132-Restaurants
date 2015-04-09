@@ -55,36 +55,20 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						<?php
 							if(array_key_exists('input-name', $_POST) && array_key_exists('input-email', $_POST)
 								&& array_key_exists('input-comment', $_POST)){
-								$field_name = $_POST['input-name'];
-								$field_email = $_POST['input-email'];
-								$field_message = $_POST['input-comment'];
+								require('connect.php');
+								$name = $_POST['input-name'];
+								$email = $_POST['input-email'];
+								$comment = $_POST['input-comment'];
 
-								$mail_to = 'mshanti95@gmail.com';
-								$subject = 'Message from a site visitor '.$field_name;
+								$query = "
+									INSERT INTO TABLE_NAME(name, email, comment)
+									VALUES('$name', '$email', '$comment');
+								";
+								pg_query($query);
 
-								$body_message = 'From: '.$field_name."\n";
-								$body_message .= 'E-mail: '.$field_email."\n";
-								$body_message .= 'Message: '.$field_message;
-
-								$headers = 'From: '.$field_email."\r\n";
-								$headers .= 'Reply-To: '.$field_email."\r\n";
-
-								$mail_status = mail($mail_to, $subject, $body_message, $headers);
-
-								if ($mail_status) { ?>
-									<script language="javascript" type="text/javascript">
-									alert('Thank you for the message. We will contact you shortly.');
-									</script>
-								<?php
-									}
-									else { ?>
-										<script language="javascript" type="text/javascript">
-											alert('Message failed. Please, send an email to gordon@template-help.com');
-										</script>
-									<?php
-									} 
-								}
-								?>
+								echo "Thank you for your comment, we will contact you back shortly. <a href = 'index.php'>Back to home.</a>";
+							}
+						?>
 					</div>
 				</div>
 			</div>
