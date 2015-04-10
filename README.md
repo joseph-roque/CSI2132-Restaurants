@@ -9,3 +9,4 @@ CSI2132 Group project for a restaurant rating database
 - Connect ADD MENU ITEM page
 - Fix width of price on ADD MENU ITEM
 - Add rating to ADD MENU ITEM
+- Have a page to view all restaurants?

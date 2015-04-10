@@ -158,10 +158,16 @@
 							pg_query("INSERT INTO Location(first_open_date, manager_name, phone_number, street_address, hour_open, hour_close, restaurant_id)
 								VALUES('$first_open', '$mng', '$phone', '$address', $open, $close, $rId);
 								");
-							echo "<p align='center'>You have successfully added the restaurant.<a href= './index.php'> Continue </a></p>";
+							$result = pg_query("SELECT * FROM Location L WHERE L.street_address = '$address'");
+							$result = pg_fetch_assoc($result);
+							$location_id = $result['location_id'];
+							echo "<p align='center'>You have successfully added the restaurant.<a href= 'restaurant.php?id=$location_id'> Continue </a></p>";
 						}
 						else {
-							echo "That location is already in our database!";
+							$result = pg_query("SELECT * FROM Location WHERE Location.street_address = '$address'");
+							$location_id = $result['location_id'];
+							echo "LOCATION ID: $location_id";
+							echo "That <a href='restaurant.php?id=$location_id'>location</a> is already in our database!";
 						}
 					}
 

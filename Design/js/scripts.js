@@ -9,6 +9,8 @@ function redirect(link) {
 }
 
 function redirectMenu(link, num) {
+	if(num == 0)
+		window.location.href;
 
 	window.location.href = link;
 }

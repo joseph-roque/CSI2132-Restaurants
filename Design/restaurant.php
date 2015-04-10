@@ -290,13 +290,52 @@
 						</div>
 						
 						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary">Submit <span class="glyphicon glyphicon-ok"/></button>
+							<button type="button" onclick="redirectMenu("nolink", 0)" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="button" onclick="redirectMenu("nolink", 0)" class="btn btn-primary">Submit <span class="glyphicon glyphicon-ok"/></button>
 						</div>
 					</div>
 				</div>
 			</div>
 			
+			<?php 
+								if(array_key_exists('input-name', $_POST) && array_key_exists('input-type', $_POST) && array_key_exists('input-price', $_POST)){
+									echo "THEY EXISTS!!!";
+									$iName = $_POST['input-name'];
+									$type = $_POST['input-type'];
+									if($type == "Other")
+										$type = 0;
+									else if($type == "Appetizer")
+										$type = 1;
+									else if($type == "Entree")
+										$type = 2;
+									else if($type == "Dessert")
+										$type = 3;
+									else if($type == "Beverage")
+										$type = 4;
+									else if($type == "Alcoholic")
+										$type = 5;
+									$price = $_POST['input-price'];
+									$location_id = $_GET['id'];
+									require('connect.php');
+									$result = pg_query("SELECT * FROM Loaction L WHERE L.location_id = $location_id");
+									$result = pg_fetch_assoc($result);
+
+									$rId = $result['restaurant_id'];
+
+									$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.restaurant_id = $rId AND 
+										MI.name = $iName");
+									$num = pg_num_rows($result);
+
+									if($num == 0){
+										$result = pg_query("INSERT INTO MenuItem(name, type_id, description, price, restaurant_id)
+											VALUES('$iName', $type, $description, $price, $rId);");
+									}
+									else {
+										echo "That item already exists!";
+									}
+									
+								}
+							?>
 			
 			
 			
