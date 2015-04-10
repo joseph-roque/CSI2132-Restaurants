@@ -44,7 +44,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 
 			echo "	
 				<h2 class='text-center text-info' style='margin-bottom:20px'>
-					$count restaurants for $gQuery 
+					<strong>$count</strong> restaurants for \"$gQuery\" 
 				</h2>
 				";
 			while($res = pg_fetch_assoc($result)){
