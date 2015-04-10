@@ -6,8 +6,8 @@ SELECT loc.location_id
 		ON ct.cuisine_id=rest.cuisine
 	INNER JOIN MenuItem item
 		ON rest.restaurant_id=item.restaurant_id
-	WHERE ct.description ~* '%*QUERY%*' --Replace QUERY with actual search terms
-		OR rest.name ~* '%*QUERY%*' --Replace QUERY with actual search terms
-		OR item.name ~* '%*QUERY%*' --Replace QUERY with actual search terms
-		OR rest.url ~* '%*QUERY%*' --Replace QUERY with actual search terms
+	WHERE ct.description ~* '%*Breakfast%*' --Replace QUERY with actual search terms
+		OR rest.name ~* '%*Breakfast%*' --Replace QUERY with actual search terms
+		OR item.name ~* '%*Breakfast%*' --Replace QUERY with actual search terms
+		OR rest.url ~* '%*Breakfast%*' --Replace QUERY with actual search terms
 	GROUP BY loc.location_id

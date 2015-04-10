@@ -59,7 +59,7 @@
 					$query = "
 						SELECT R.name, RI.Post_Date, RI.rating, RI.comments 
 						FROM RatingItem RI, Rater R
-						WHERE item_id = 1 AND R.user_id = RI.user_id
+						WHERE item_id = $id AND R.user_id = RI.user_id
 					";
 					$result = pg_query($query);
 					while($row = pg_fetch_assoc($result)){

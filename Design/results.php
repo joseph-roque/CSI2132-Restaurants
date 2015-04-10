@@ -18,17 +18,19 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 		<?php include("includes/header.php");?>
 		<?php include("includes/navbar.php");?>
 		<div class="col-md-12 column">
-				<h2 class="text-center text-info" style="margin-bottom:20px">
-					[count] restaurants for "[given query]"
+			<?php
+			echo "	
+				<h2 class='text-center text-info' style='margin-bottom:20px'>
+					[count] restaurants for '[given query]'
 				</h2>
-				NOTE: SHOW THE QUERY IN THE SEARCH BAR!!!
 				<!-- Results for all restaurants matching query -->
-				<div class="well well-sm" style="line-height:1.75; font-size:16px">
+				<div class='well well-sm' style='line-height:1.75; font-size:16px'>
 					<strong>[Restaurant Name w/ link]</strong> ([avg. rating]/5 with [count] reviews) <br>
 					[cuisine w/ link] <br>
 					[address] <br>
 					[hours open] - [hours close]
-				</div>			
+				</div>";
+				?>	
 				<!-- ADD RESTAURANT bottom right -->
 			<div class="pull-right">
 				<strong>Can't find the restaurant you're looking for?
