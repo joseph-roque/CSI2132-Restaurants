@@ -35,14 +35,14 @@
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/jreinlein">
-					<div class="cropped-img" style="background-image:url('james.png'); min-height:300px" /> </div>
+					<div class="cropped-img" style="background-image:url('media/james.png'); min-height:300px" /> </div>
 
 					<div class="caption">
 						<h2>
 							James Reinlein</a>
 						</h2>
 						<p>
-							Specialized in dank memes and surfing (the internet, not waves), James likes to waste a lot of his time on Reddit or raging at teammates in online MOBAs.
+							A natural-born artist among engineers, you can thank James for the beautiful website you see in front of your eyes. In charge of the front-end, he built this website from scratch (not really, but we can pretend). 
 						</p>
 					</div>
 				</div>
@@ -51,14 +51,14 @@
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/joseph-roque">
-					<div class="cropped-img" style="background-image:url('joseph.png'); min-height:300px" /> </div>
+					<div class="cropped-img" style="background-image:url('media/joseph.png'); min-height:300px" /> </div>
 
 					<div class="caption">
 						<h2>
 							Joseph Roque</a>
 						</h2>
 						<p>
-							In his free time, Joseph likes to bowl (5-pins only, none of that 10-pin garbage) and recite an unreasonable amount of digits of pi.
+							Master of the back-end, Joseph commandeered the mission to create and maintain the database. It is rumoured he once created an Android app in one straight sitting without eating or going to the bathroom. 
 						</p>
 					</div>
 				</div>
@@ -67,15 +67,14 @@
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
 					<a href="https://github.com/mshanti">
-					<div class="cropped-img" style="background-image:url('mohammed.png'); min-height:300px"/> </div>
+					<div class="cropped-img" style="background-image:url('media/mohammed.png'); min-height:300px"/> </div>
 						
 					<div class="caption">
 						<h2>
 							Mohammed Shanti</a>
 						</h2>
 						<p>
-							Also known as <i>Habibi</i>, Moe spends his leisure time brushing up on his knowledge of the Qur'an and refraining from unlawful drugs.
-							His mother is quite proud.
+							Also known as <i>Habibi</i>, Mohammed is Sizzl's glue. Responsible for connecting the database to the front-end, his knowledge of PHP is impressive. Unfortunately, his comfort with commenting isn't quite up to par.
 						</p>
 
 					</div>

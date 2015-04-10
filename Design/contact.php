@@ -1,8 +1,10 @@
-<!DOCTYPE html> <?php      session_start();     $name = "";     $userid = "";
-if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
+<!DOCTYPE html> 
+<?php
+	session_start();     $name = "";     $userid = "";
+	if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
          $name = $_SESSION['name'];         $userid =
 		 $_SESSION['userid']; 
-	     }
+	}
 		
 ?>
 <html lang="en">

@@ -15,7 +15,6 @@
 	<?php include("includes/resources.php");?>
 </head>
 
-<body background="bg.png">
 <div class="container">
 	<div class="row clearfix">
 		<?php include("includes/header.php");?>

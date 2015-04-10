@@ -2,25 +2,16 @@
 CSI2132 Group project for a restaurant rating database
 
 ## General To-Do
-- List of typical queries
+- Connect list of typical queries
 - Reduce dankness?
 - Make cuisines clickable (redirects you to Results page with the name of cuisine as query)
-- Finish review notification upon completion (fail message)
 - Implement search
-- Allow to change type of rater in profile
-- Add/modify/delete menu items
-- Make a Results page
-- Add a restaurant/location
-- Show multiple MOST RECENT REVIEWS on index
+- Add/delete menu items
 - Fix pictures on index page
-- Link menu items in RESTAURANT to their corresponding menu item review page
-- Connect menu item review page to DB
-- Connect ADD RESTAURANT to DB
-  * Create a page for that!
 - Show type of rater on RESTAURANT (just like INDEX)
-- Link EDIT MENU ITEM to proper id
 - Show other menu-item reviews on ADD MENU ITEM page
-- Create an ADD RESTAURANT page
+- Add description to each page
+- Make the ADD MENU item page
 
 ## Design To-Do
-- Add logo to browser tabs (See http://stackoverflow.com/questions/120420/image-icon-beside-the-site-url )
+- Ensure favicon is good at ( http://realfavicongenerator.net/favicon_checker?ignore_root_issues=true#.VScV1fnF9ps )
