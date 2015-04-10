@@ -263,15 +263,20 @@
 					$mood = $row['mood'];
 					$staff = $row['staff'];
 					$author = $row['user_id'];
-					$res1 = pg_query("SELECT name FROM Rater WHERE Rater.user_id = $author");
+					$res1 = pg_query("SELECT type_id, name FROM Rater WHERE Rater.user_id = $author");
 					$res1 = pg_fetch_assoc($res1);
 					$author = $res1['name'];
+					$type = $res1['type_id'];
+					$res1 = pg_query("SELECT description FROM RaterType WHERE RaterType.type_id = $type");
+					$res1 = pg_fetch_assoc($res1);
+					$type = $res1['description'];
+
 					echo "	
 					<p>
 						$comment
 					</p>
 					<h4>
-						by <a href='profile.php?name=$author'>$author</a>
+						by <a href='profile.php?name=$author'>$author</a> | $type
 					</h4>
 					<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
 					<hr>

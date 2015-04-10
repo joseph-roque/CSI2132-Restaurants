@@ -26,7 +26,20 @@
 		<div class="col-md-12 column">
 			<!-- ALL REVIEWS PREVIOUSLY WRITTEN -->
 			<h2 class="text-info text-center">
-				All reviews for <strong>[thing]</strong> at <strong>[place]</strong>
+			<?php
+				require('connect.php');
+				$id = $_GET['id'];
+				$query = "
+				SELECT R.name AS rname, M.name AS iname
+				FROM Restaurant R, MenuItem M
+				WHERE M.restaurant_id = R.restaurant_id AND M.item_id = $id
+				";
+				$result = pg_query($query);
+				$row = pg_fetch_assoc($result);
+				$rName = $row['rname'];
+				$iName = $row['iname'];
+				echo "All reviews for <strong>$iName</strong> at <strong>$rName</strong>";
+			?>
 			</h2>
 			
 			<table class="table table-hover"> <!-- match margin of H2 next to it -->
@@ -41,45 +54,31 @@
 				</thead>
 				<tbody>
 				<?php
-					$result1 = pg_query("
-						SELECT M.name, M.price, I.description, M.item_id
-						FROM MenuItem M, ItemType I
-						WHERE M.restaurant_id = 1 AND M.type_id = I.type_id
-						ORDER BY(M.type_id)
-					");
-					while($res2 = pg_fetch_assoc($result1)){
-						$iName = $res2['name'];
-						$price = $res2['price'];
-						$description = $res2['description'];
-						$itemid = $res2['item_id'];
-						$itemAvgRating = 0;
-						$sql1 = pg_query("
-								SELECT RI.rating
-								FROM RatingItem RI
-								WHERE RI.item_id = $itemid;
-							");
-						$total = 0;
-						while($tmp = pg_fetch_assoc($sql1)){
-							$total = $total + 1;
-							$rating = $tmp['rating'];
-							$itemAvgRating = $itemAvgRating + (int) $rating;
-						}
-						if($total != 0){
-							$itemAvgRating = $itemAvgRating/$total;
-							$itemAvgRating = round($itemAvgRating, 1);
-						}
-						else{
-							$itemAvgRating = "N/A";
-						}
+					require('connect.php');
+					$id = $_GET['id'];
+					$query = "
+						SELECT R.name, RI.Post_Date, RI.rating, RI.comments 
+						FROM RatingItem RI, Rater R
+						WHERE item_id = 1 AND R.user_id = RI.user_id
+					";
+					$result = pg_query($query);
+					while($row = pg_fetch_assoc($result)){
+						$name = $row['name'];
+						$date = $row['post_date'];
+						$rating = $row['rating'];
+						$comment = $row['comments'];
+						$date = substr($date, 0, -8);
+						if($comment == "")
+							$comment = "N/A";
 						echo "
 							<tr>
-								<td>$iName</td>
-								<td>$$price</td>
-								<td>$description</td>
-								<td>$itemAvgRating</td>
-								<td></tr>";
+								<td>$name</td>
+								<td>$date</td>
+								<td>$rating</td>
+								<td>$comment</td>
+								<td>
+							</tr>";
 					}
-
 				?>
 					
 				</tbody>

@@ -126,27 +126,26 @@
 				<h3>Cuisines
 				</h3>
 				<ul>
+				<?php
+				require('connect.php');
+				$result = pg_query("
+				SELECT ct.description, COUNT(rest.restaurant_id)
+					FROM CuisineType ct
+					LEFT JOIN Restaurant rest
+						ON ct.cuisine_id=rest.cuisine
+					GROUP BY ct.description
+					ORDER BY ct.description
+					");
+
+				while($res = pg_fetch_assoc($result)){
+				$type = $res['description'];
+				$count = $res['count'];
+				echo "
 					<li>
-						<a href=''>Amurrican (25)</a>
-					</li>
-					<li>
-						<a href=''>Asian (5)</a>
-					</li>
-					<li>
-						<a href=''>Coffee (18)</a>
-					</li>
-					<li>
-						<a href=''>Italian (14)</a>
-					</li>
-					<li>
-						<a href=''>Middle Eastern (4)</a>
-					</li>
-					<li>
-						<a href=''>Sandwiches (11)</a>
-					</li>
-					<li>
-						<a href=''>Vegetarian (0)</a>
-					</li>
+						<a href='results.php?query=$type'>$type ($count)</a>
+					</li>";
+				}
+					?>
 				</ul>
 			</div>
 		</div>
