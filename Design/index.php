@@ -179,6 +179,7 @@
 					$result = pg_query("SELECT R.name, R.restaurant_id FROM Restaurant R, Location L
 					 WHERE L.restaurant_id = R.restaurant_id AND L.location_id = $rName 
 					 ");
+					$location_id = $rName;
 					$result = pg_fetch_assoc($result);
 
 					$rName = $result['name'];
@@ -213,7 +214,7 @@
 				</p>
 				<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
 				<p>
-					<a class='btn' href='restaurant.php?id=$rId'>Read other reviews</a>
+					<a class='btn' href='restaurant.php?id=$location_id'>Read other reviews</a>
 				</p>
 				";
 				?>
