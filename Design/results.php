@@ -20,7 +20,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 		<div class="col-md-12 column">
 			<?php
 			require('connect.php');
-
+			$aQuery;
 			$query = $_GET['query'];
 			if (isset($_GET['cui'])) {
 				$cui = $_GET['cui'];
@@ -29,6 +29,10 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			}
 			
 			$gQuery = $query;
+			if($gQuery == ""){
+				$aQuery = "SELECT * FROM Location";
+			}
+			else{
 			$exQuery = explode(" ",$query);
 			$aQuery = "
 			SELECT loc.location_id, AVG((coalesce(rate.food,0)+coalesce(rate.price,0)+coalesce(rate.mood,0)+coalesce(rate.staff,0))/4.0) rateAvg
@@ -59,13 +63,15 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			GROUP BY loc.location_id
 			ORDER BY rateAvg DESC
 			";
+		}
 			$result = pg_query($aQuery);
 			$count = pg_num_rows($result);
 			
-
+			if($gQuery == "")
+				$gQuery = "All Restaurants";
 			echo "	
 				<h2 class='text-center text-info' style='margin-bottom:20px'>
-					<strong>$count</strong> restaurants for \"$gQuery\" 
+					<strong>$count</strong> restaurants found for \"$gQuery\" 
 				</h2>
 				";
 			while($res = pg_fetch_assoc($result)){
