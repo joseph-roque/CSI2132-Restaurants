@@ -2,6 +2,7 @@
 CSI2132 Group project for a restaurant rating database
 
 ## General To-Do
+- Have an ALL Restaurants PAGE NECCESSERAY!!!!!
 - Connect list of typical queries
 - Delete menu items?
 - Fix pictures on index page
