@@ -21,7 +21,7 @@
 		<?php include("includes/navbar.php");?>
 		<div class="col-md-12 column">
 			<h3 class="text-center text-muted" style="margin-top:-10px">
-				Your one-stop shop for dank-ass restaurant reviews
+				Your one-stop shop for restaurant info, reviews, and menus 
 			</h3>
 			<h1 class="text-center text-success">
 					Most Popular Restaurants
