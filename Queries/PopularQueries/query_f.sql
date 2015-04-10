@@ -1,4 +1,4 @@
-SELECT use.name, rest.name, COUNT(rate.post_date)
+SELECT use.name, rest.name, COUNT(rate.post_date), AVG((rate.food+rate.price+rate.mood+rate.staff)/4.0)
 	FROM Restaurant AS rest
 	INNER JOIN Location AS loc
 		ON rest.restaurant_id=loc.restaurant_id
