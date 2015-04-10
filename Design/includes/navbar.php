@@ -20,7 +20,7 @@ echo '
 	<div class="navbar-collapse collapse">
 		<!-- Search Bar -->
 		<ul class="navbar-brand">
-			<form class="navbar-form" role="search" method="get" id="search-form" name="search-form">
+			<form class="navbar-form" role="search" method="get" id="search-form" name="search-form" action="results.php">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Restaurants, Cuisines..."
 					id="query" name="query" value="">
@@ -91,7 +91,7 @@ echo '
 	<div class="navbar-collapse collapse">
 		<!-- Search Bar -->
 		<ul class="navbar-brand">
-			<form class="navbar-form" role="search" method="get" id="search-form" name="search-form">
+			<form class="navbar-form" role="search" method="get" id="search-form" name="search-form" action="results.php">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Restaurants, Cuisines..."
 					id="query" name="query" value="">
