@@ -90,13 +90,13 @@
 				Hours Open: $open - $close
 				</strong>
 				<br>
-				<a href = 'http://localhost/Github/CSI2132-Restaurants/Design/restaurant.php?id=2'>$cuisine ADD CUISINE PAGE</a>
+				<a href = 'results.php?query="; echo $cuisine; echo "'>$cuisine</a>
 				<br>
 				Established: $first
 				<br>
-				Currently managed by: <i>$manager</i>
+				Address: $location
 				<br>
-				Location: $location
+				Currently managed by: <i>$manager</i>
 				";
 			?>
 			</p>
@@ -132,7 +132,6 @@
 			echo $row['street_address'];
 		?>&zoom=13&scale=1&size=400x250&maptype=roadmap&format=png&visual_refresh=true"></a>
 
-			<!-- CANT FIX THIS HELP ME !-->
 			<br>
 			<div class="rating">
 				<h2 class="text-info" style="margin-bottom: -10px">
