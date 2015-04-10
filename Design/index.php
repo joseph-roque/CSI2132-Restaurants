@@ -105,7 +105,7 @@
 						Highest-Rating Comment:
 						</h3>
 						<h5>
-						by <a href='profile.php?=$raterName'>$raterName</a>
+						by <a href='profile.php?name=$raterName'>$raterName</a>
 						</h5>
 						<p>
 							$comment

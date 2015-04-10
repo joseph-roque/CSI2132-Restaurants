@@ -143,7 +143,7 @@ echo '
 			$tmp = $_SESSION['name'];
 			echo "
 			</a></li>
-			<li><a href='profile.php?=$tmp'>";
+			<li><a href='profile.php?name=$tmp'>";
 					if ($page_title == "Profile")
 						echo "<strong>";
 			echo "

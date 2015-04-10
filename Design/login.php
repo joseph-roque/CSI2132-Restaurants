@@ -72,9 +72,13 @@
 								$dbUserid = $row['user_id'];
 								
 								if($dbPass == $getPass){
-									echo "<p align='center'>You have been logged in as <b> $dbName</b>. <a href= './index.php'> Continue </a></p>";
 									$_SESSION['name'] = $dbName;
 									$_SESSION['userid'] = $dbUserid;
+									?>
+									<script>
+									redirectMenu("index.php");
+									</script>
+									<?php
 								}
 								else{
 									echo "<p class = 'error'>The password for that email does not match. Please try again</p>";

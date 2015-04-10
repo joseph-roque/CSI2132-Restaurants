@@ -72,7 +72,7 @@
 							$comment = "N/A";
 						echo "
 							<tr>
-								<td>$name</td>
+								<td><a href='profile.php?name=$name'>$name</a></td>
 								<td>$date</td>
 								<td>$rating</td>
 								<td>$comment</td>

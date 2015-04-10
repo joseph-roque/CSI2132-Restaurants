@@ -24,18 +24,32 @@
 		<div class="col-md-12 column">
 			<?php include("includes/header.php");?>
 			<?php include("includes/navbar.php");?>
-		
+		<?php
+			$name = $_GET['name'];
+			echo "
 			<!-- USER INFO -->
-			<h2 class="text-center text-info">
-					Viewing [profile name]'s Profile
-			</h2>
+			<h2 class='text-center text-info'>
+					Viewing $name's Profile
+			</h2>";
 
+			require('connect.php');
+			$result = pg_query("SELECT * FROM Rater WHERE Rater.name = '$name'");
+			$result = pg_fetch_assoc($result);
+			$email = $result['email'];
+			$join = $result['join_date'];
+			$type = $result['type_id'];
+			$result = pg_query("SELECT description FROM RaterType WHERE RaterType.type_id = $type");
+			$result = pg_fetch_assoc($result);
+			$type = $result['description'];
 
-			<dl class="dl" style="font-size:20px">
-				<dt>Username</dt> <dd>[username]</dd>
-				<dt>Email</dt> <dd>[email]</dd>
-				<dt>Join Date</dt> <dd>[join_date]</dd>
-				<dt>Type of User</dt> <dd>[type]</dd>
+			echo "
+			<dl class='dl' style='font-size:20px'>
+				<dt>Username</dt> <dd>$name</dd>
+				<dt>Email</dt> <dd>$email</dd>
+				<dt>Join Date</dt> <dd>$join</dd>
+				<dt>Type of User</dt> <dd>$type</dd>
+			";
+		?>
 				
 			</dl>
 		</div>
