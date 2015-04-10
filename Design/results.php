@@ -22,31 +22,42 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			require('connect.php');
 
 			$query = $_GET['query'];
+			if (isset($_GET['cui'])) {
+				$cui = $_GET['cui'];
+			} else {
+				$cui = '';
+			}
+			
 			$gQuery = $query;
 			$exQuery = explode(" ",$query);
 			$aQuery = "
-			SELECT loc.location_id, COUNT(loc.location_id) idCount
+			SELECT loc.location_id, AVG((coalesce(rate.food,0)+coalesce(rate.price,0)+coalesce(rate.mood,0)+coalesce(rate.staff,0))/4.0) rateAvg
 				FROM Location loc
-				INNER JOIN Restaurant rest
+				LEFT JOIN Restaurant rest
 					ON loc.restaurant_id=rest.restaurant_id
-				INNER JOIN CuisineType ct
+				LEFT JOIN CuisineType ct
 					ON ct.cuisine_id=rest.cuisine
-				INNER JOIN MenuItem item
+				LEFT JOIN MenuItem item
 					ON rest.restaurant_id=item.restaurant_id
-				WHERE ct.description ~* '%*$query%*'
+				LEFT JOIN Rating rate
+					ON loc.location_id=rate.location_id
+				WHERE ";
+			if (strlen($cui) > 0) {
+				$aQuery.="ct.description='$cui' AND";
+			}
+			$aQuery.=" (ct.description ~* '%*$query%*'
 					OR rest.name ~* '%*$query%*'
 					OR item.name ~* '%*$query%*'
-					OR rest.url ~* '%*$query%*'
-			";
+					OR rest.url ~* '%*$query%*'";
 			foreach($exQuery as $queryTerm) {
 				$aQuery.=" OR ct.description ~* '%*$queryTerm%*'";
 				$aQuery.=" OR rest.name ~* '%*$queryTerm%*'";
 				$aQuery.=" OR item.name ~* '%*$queryTerm%*'";
 				$aQuery.=" OR rest.url ~* '%*$queryTerm%*'";
 			}
-			$aQuery.=" 
+			$aQuery.=") 
 			GROUP BY loc.location_id
-			ORDER BY idCount DESC
+			ORDER BY rateAvg DESC
 			";
 			$result = pg_query($aQuery);
 			$count = pg_num_rows($result);
@@ -59,8 +70,11 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 				";
 			while($res = pg_fetch_assoc($result)){
 				$location_id = $res['location_id'];
-				$q1 = pg_query("SELECT * FROM Restaurant R, Location L WHERE L.location_id = $location_id
-					AND L.restaurant_id = R.restaurant_id");
+				$q1 = pg_query(
+					"SELECT * FROM Restaurant R 
+					INNER JOIN Location L 
+						ON L.restaurant_id=R.restaurant_id 
+					WHERE L.location_id = $location_id");
 				$tmp = pg_fetch_assoc($q1);
 				$name = $tmp['name'];
 				$url = $tmp['url'];
@@ -80,7 +94,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					<!-- Results for all restaurants matching query -->
 					<div class='well well-sm' style='line-height:1.75; font-size:16px'>
 						<strong><a href='restaurant.php?id=$location_id'>$name</a></strong><br>
-						<a href = 'results.php?query=$cuisine'>$cuisine</a><br>
+						<a href = 'results.php?query=$cuisine&cui=$cuisine'>$cuisine</a><br>
 						$address <br>
 						$open - $close
 					</div>";

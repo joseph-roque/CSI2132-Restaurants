@@ -90,7 +90,7 @@
 				Hours Open: $open - $close
 				</strong>
 				<br>
-				<a href = 'results.php?query="; echo $cuisine; echo "'>$cuisine</a>
+				<a href = 'results.php?query="; echo $cuisine; echo "&cui="; echo $cuisine; echo "'>$cuisine</a>
 				<br>
 				Established: $first
 				<br>

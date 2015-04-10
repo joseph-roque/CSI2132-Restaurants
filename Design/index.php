@@ -128,10 +128,12 @@
 				<?php
 				require('connect.php');
 				$result = pg_query("
-				SELECT ct.description, COUNT(rest.restaurant_id)
+				SELECT ct.description, COUNT(loc.location_id)
 					FROM CuisineType ct
 					LEFT JOIN Restaurant rest
 						ON ct.cuisine_id=rest.cuisine
+					LEFT JOIN Location loc
+						ON rest.restaurant_id=loc.restaurant_id
 					GROUP BY ct.description
 					ORDER BY ct.description
 					");
@@ -141,7 +143,7 @@
 				$count = $res['count'];
 				echo "
 					<li>
-						<a href='results.php?query=$type'>$type ($count)</a>
+						<a href='results.php?query=$type&cui=$type'>$type ($count)</a>
 					</li>";
 				}
 					?>
