@@ -23,20 +23,30 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 
 			$query = $_GET['query'];
 			$gQuery = $query;
+			$exQuery = explode(" ",$query);
 			$aQuery = "
-			SELECT loc.location_id
-			FROM Location loc
-			INNER JOIN Restaurant rest
-				ON loc.restaurant_id=rest.restaurant_id
-			INNER JOIN CuisineType ct
-				ON ct.cuisine_id=rest.cuisine
-			INNER JOIN MenuItem item
-				ON rest.restaurant_id=item.restaurant_id
-			WHERE ct.description ~* '%*$query%*' --Replace QUERY with actual search terms
-				OR rest.name ~* '%*$query%*' --Replace QUERY with actual search terms
-				OR item.name ~* '%*$query%*' --Replace QUERY with actual search terms
-				OR rest.url ~* '%*$query%*' --Replace QUERY with actual search terms
+			SELECT loc.location_id, COUNT(loc.location_id) idCount
+				FROM Location loc
+				INNER JOIN Restaurant rest
+					ON loc.restaurant_id=rest.restaurant_id
+				INNER JOIN CuisineType ct
+					ON ct.cuisine_id=rest.cuisine
+				INNER JOIN MenuItem item
+					ON rest.restaurant_id=item.restaurant_id
+				WHERE ct.description ~* '%*$query%*'
+					OR rest.name ~* '%*$query%*'
+					OR item.name ~* '%*$query%*'
+					OR rest.url ~* '%*$query%*'
+			";
+			foreach($exQuery as $queryTerm) {
+				$aQuery.=" OR ct.description ~* '%*$queryTerm%*'";
+				$aQuery.=" OR rest.name ~* '%*$queryTerm%*'";
+				$aQuery.=" OR item.name ~* '%*$queryTerm%*'";
+				$aQuery.=" OR rest.url ~* '%*$queryTerm%*'";
+			}
+			$aQuery.=" 
 			GROUP BY loc.location_id
+			ORDER BY idCount DESC
 			";
 			$result = pg_query($aQuery);
 			$count = pg_num_rows($result);
