@@ -29,7 +29,7 @@
 			echo "
 			<!-- USER INFO -->
 			<h2 class='text-center text-info'>
-					Viewing $name's Profile
+					Viewing <strong>$name</strong>'s Profile
 			</h2>";
 
 			require('connect.php');
@@ -54,7 +54,7 @@
 			</dl>
 		</div>
 		<!-- MENU ITEM REVIEWS -->
-		<div class="col-md-6 column">
+		<div class="col-md-12 column">
 			
 			<h2 class="text-info">
 				Menu Item Reviews
@@ -71,7 +71,7 @@
 						<th>Comments</th>
 					</tr>
 				</thead>
-				<!-- All menu items -->
+				<!-- All MENU ITEMS -->
 				<tbody>
 				<?php
 					$name = $_GET['name'];
@@ -112,10 +112,9 @@
 					}
 				?>
 				</tbody>
-
-		</div>	
+			</table>
+		<hr>
 		<!-- RESTAURANT REVIEWS -->
-		<div class="col-md-6 column">
 			<h2 class="text-info">
 				Restaurant Reviews
 			</h2>
@@ -128,11 +127,11 @@
 						<th>Food</th>
 						<th>Mood</th>
 						<th>Staff</th>
-						<th>price</th>
+						<th>Price</th>
 						<th>Comments</th>
 					</tr>
 				</thead>
-				<!-- All menu items -->
+				<!-- All restaurant reviews -->
 				<tbody>
 				<?php
 					$name = $_GET['name'];
