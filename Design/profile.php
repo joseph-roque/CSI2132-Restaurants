@@ -68,108 +68,109 @@
 						<th>Price</th>
 						<th>Type</th>
 						<th>Rating</th>
+						<th>Comments</th>
 					</tr>
 				</thead>
 				<!-- All menu items -->
 				<tbody>
 				<?php
-					$result1 = pg_query("
-						SELECT M.name, M.price, I.description, M.item_id
-						FROM MenuItem M, ItemType I
-						WHERE M.restaurant_id = 1 AND M.type_id = I.type_id
-						ORDER BY(M.type_id)
-					");
-					while($res2 = pg_fetch_assoc($result1)){
-						$iName = $res2['name'];
-						$price = $res2['price'];
-						$description = $res2['description'];
-						$itemid = $res2['item_id'];
-						$itemAvgRating = 0;
-						$sql1 = pg_query("
-								SELECT RI.rating
-								FROM RatingItem RI
-								WHERE RI.item_id = $id;
-							");
-						$total = 0;
-						while($tmp = pg_fetch_assoc($sql1)){
-							$total = $total + 1;
-							$rating = $tmp['rating'];
-							$itemAvgRating = $itemAvgRating + (int) $rating;
-						}
-						if($total != 0){
-							$itemAvgRating = $itemAvgRating/$total;
-							$itemAvgRating = round($itemAvgRating, 1);
-						}
-						else{
-							$itemAvgRating = "N/A";
-						}
+					$name = $_GET['name'];
+					$result = pg_query("SELECT * FROM Rater WHERE Rater.name = '$name'");
+					$result = pg_fetch_assoc($result);
+					
+					$id = $result['user_id'];
+					
+					$res = pg_query("SELECT * FROM RatingItem RI WHERE RI.user_id = $id");
+					
+					while($result = pg_fetch_assoc($res)){
+					
+						$rating = $result['rating'];
+						$comment = $result['comments'];
+						$iName = $result['item_id'];
+
+						$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.item_id = $iName");
+						$result = pg_fetch_assoc($result);
+
+						$iName = $result['name'];
+						$price = $result['price'];
+						$type = $result['type_id'];	
+
+						$result = pg_query("SELECT description FROM CuisineType WHERE cuisine_id = $type");
+						$result = pg_fetch_assoc($result);
+
+						$type = $result['description'];
+
 						echo "
-							<tr>
-								<td>$iName</td>
-								<td>$price</td>
-								<td>$description</td>
-								<td>$itemAvgRating</td>
-							</tr>
-						";
+								<tr>
+									<td>$iName</td>
+									<td>$$price</td>
+									<td>$type</td>
+									<td>$rating</td>
+									<td>$comment</td>
+								</tr
+								";
 					}
+				?>
+				</tbody>
 
-				?>			
-		</div>
-			<?php
-			$id = $_GET['id'];
-				require('connect.php');
-				$result = pg_query("
-					SELECT * FROM Rater R WHERE R.user_id = $id;
-					");
-				$result = pg_fetch_assoc($result);
-				$name = $result['name'];
-				$email = $result['email'];
-				$join_date = $result['join_date'];
-				$getType = (int) $result['type_id'];
-
-				if($getType == 1)
-					$getType = "Casual";
-				else if($getType == 2)
-					$getType = "Blogger";
-				else if($getType == 3)
-					$getType = "Verified Critic";
-				else if($getType == 0)
-					$getType = "Other";
-			?>		
+		</div>	
 		<!-- RESTAURANT REVIEWS -->
 		<div class="col-md-6 column">
 			<h2 class="text-info">
 				Restaurant Reviews
 			</h2>
+
+			<table class="table table-hover" style="margin-top:20px"> <!-- match margin of H2 next to it -->
+				<!-- Header -->
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Food</th>
+						<th>Mood</th>
+						<th>Staff</th>
+						<th>price</th>
+						<th>Comments</th>
+					</tr>
+				</thead>
+				<!-- All menu items -->
+				<tbody>
+				<?php
+					$name = $_GET['name'];
+					$result = pg_query("SELECT * FROM Rater WHERE Rater.name = '$name'");
+					$result = pg_fetch_assoc($result);
+					
+					$id = $result['user_id'];
+					
+					$res = pg_query("SELECT * FROM Rating R WHERE R.user_id = $id");
+					
+					while($result = pg_fetch_assoc($res)){
+					
+						$comment = $result['comments'];
+						$rName = $result['location_id'];
+						$food = $result['food'];
+						$mood = $result['mood'];
+						$staff = $result['staff'];
+						$price = $result['price'];
+
+						$result = pg_query("SELECT * FROM Restaurant R, Location L WHERE L.location_id = $rName AND L.restaurant_id = R.restaurant_id");
+						$result = pg_fetch_assoc($result);
+
+						$rName = $result['name'];
+
+						echo "
+								<tr>
+									<td>$rName</td>
+									<td>$food</td>
+									<td>$mood</td>
+									<td>$staff</td>
+									<td>$price</td>
+									<td>$comment</td>
+								</tr
+								";
+					}
+				?>
+				</tbody>
 			
-			<?php
-				require('connect.php');
-				$result = pg_query("
-					SELECT * FROM Rating R WHERE R.location_id = $id; 
-				");
-				
-				while($row = pg_fetch_assoc($result)){
-					$comment = $row['comments'];
-					$price = $row['price'];
-					$food = $row['food'];
-					$mood = $row['mood'];
-					$staff = $row['staff'];
-					$author = $row['user_id'];
-					$res1 = pg_query("SELECT name FROM Rater WHERE Rater.user_id = $author");
-					$res1 = pg_fetch_assoc($res1);
-					$author = $res1['name'];
-					echo "	
-					<p>
-						$comment
-					</p>
-					<h4>
-						by <a href='#'>$author</a>
-					</h4>
-					<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
-					<hr>
-					";
-				}
-			?>
 		</div>
 	</div>
 	
