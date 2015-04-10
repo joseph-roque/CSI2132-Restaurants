@@ -238,10 +238,74 @@
 					
 				</tbody>
 			</table>
-			<!--Maybe DELETE? IF YOU DON'T LIKE? -->
+			<!-- Adding new menu item -->
+			
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add Menu Item</strong>
+			</button>
+
+			<!-- MODAL BUTTON -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<!-- MODAL DIALOG -->
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Add Menu Item</h4>
+						</div>
+						
+						<div class="modal-body">
+							<form id="formID" name="formID" method="post" action="" role="form">
+								<!-- ITEM NAME -->
+								<div class="row">
+									<div class="form-group-xs">
+										<label for="input-name">Item Name</label>
+										<input name ="input-name" type="name" class="form-control" id="input-name" required />
+									</div>
+								</div>
+								<!-- ITEM PRICE -->
+								<div class="row">
+									<div class="input-group input-group-modal">
+										<label for="input-price" style="display:table-caption">Price</label>
+										<span class="input-group-addon">$</span>
+										<input name ="input-price" type="price" class="form-control" placeholder="12.50" id="input-price" required />
+									</div>
+								</div>
+								<!-- ITEM TYPE -->
+								<div class="row">
+									<div class="form-group-xs">
+										<label id = "input-type" name = "input-type" method="post" for="form-control">Type of Food</label>
+										<select name = "input-type" id = "input-type" method= "post" class="form-control">
+											<option>Other</option>
+											<option>Appetizer</option>
+											<option>Entree</option>
+											<option>Dessert</option>
+											<option>Beverage</option>
+											<option>Alcoholic</option>
+										</select>
+									</div>
+								</div>
+							</form>
+						</div>
+						
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary">Submit <span class="glyphicon glyphicon-ok"/></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			
+			
+			<!-- LEGACY BUTTON
+			
 			<button  onclick = "redirect('review-restaurant.php')" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
 				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add a Menu Item</strong>
-			</button>
+			</button> -->
 		</div>
 		<!-- Reviews -->
 		<div class="col-md-6 column">
