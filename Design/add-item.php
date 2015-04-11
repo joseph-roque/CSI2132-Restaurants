@@ -38,8 +38,8 @@
 					<!-- PRICE -->
 					<div class="row">
 						<div class="form-group-xs">
-							<label for="input-price">Price</label>
-							<input name ="input-price" type="name" class="form-control" id="input-price" required />
+							<label for="input-price">Price ($)</label>
+							<input name ="input-price" type="name" class="form-control" id="input-price" placeholder="12.50" required />
 						</div>
 					</div>
 					<!-- FOOD TYPE -->
