@@ -206,18 +206,20 @@
 						WHERE item.restaurant_id=$rId
 						GROUP BY item.item_id, item.name, item.price, iType.description, item.type_id
 						ORDER BY ";
-						if (isset($_GET['sort'])) {
-							$orderBy = $_GET['sort'];
-						}
-						else $orderBy = "type";
-						switch($orderBy) {
+
+					if (isset($_GET['sort'])) {
+						$orderBy = $_GET['sort'];
+					} else {
+						$orderBy = "type";
+					}
+
+					switch($orderBy) {
 						case 'type': default: $menuQuery .= "item.type_id"; break;
 						case 'item': $menuQuery .="item.name"; break;
 						case 'price': $menuQuery.="item.price DESC"; break;
 						case 'rating': $menuQuery.="avgRating DESC"; break;
 					}
 					
-					echo "THE QUERY IS $orderBy";
 					$result = pg_query($menuQuery);
 					while($res = pg_fetch_assoc($result)){
 						$iName = $res['name'];
