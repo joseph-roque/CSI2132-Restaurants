@@ -12,12 +12,6 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 	<?php include("includes/resources.php");?>
 
 	<script type="text/javascript">
-		function getParameterByName(name) {
-			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
-			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-		}
-
 		function sortResults(sorting) {
 			var query = getParameterByName("query");
 			var cui = getParameterByName("cui");
