@@ -9,5 +9,4 @@ CSI2132 Group project for a restaurant rating database
 - Connect ADD MENU ITEM page to DB
 
 JOSEPH:
-- Sort menu items by rating
-- Sort restaurant search results
+-Finished popular queries
