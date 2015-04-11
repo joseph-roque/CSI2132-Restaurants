@@ -300,9 +300,6 @@
 				<a class="btn-group" role="group" href="popular.php?query=k">
 					<button type="button" class="btn btn-link">K</button>
 				</a>
-				<a class="btn-group" role="group" href="popular.php?query=l">
-					<button type="button" class="btn btn-link">L</button>
-				</a>
 				<a class="btn-group" role="group" href="popular.php?query=m">
 					<button type="button" class="btn btn-link">M</button>
 				</a>
