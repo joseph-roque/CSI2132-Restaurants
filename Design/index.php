@@ -136,8 +136,6 @@
 						$image = $images[$type3*3 + 1];
 					else $image = $images[$type3*3 + 0];
 				}
-				echo "<h1> THE TYPES ARE $type1, $type2, $type3</h1>";
-
 			?>
 				<div class="cropped-img" style="background-image:url('<?php echo $image ?>')" /> 
 				</div>
