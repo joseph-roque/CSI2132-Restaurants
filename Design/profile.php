@@ -37,6 +37,7 @@
 			$result = pg_fetch_assoc($result);
 			$email = $result['email'];
 			$join = $result['join_date'];
+			$join = substr($join, 0, -8);
 			$type = $result['type_id'];
 			$result = pg_query("SELECT description FROM RaterType WHERE RaterType.type_id = $type");
 			$result = pg_fetch_assoc($result);
