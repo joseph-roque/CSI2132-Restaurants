@@ -178,9 +178,12 @@
 				<!-- Header -->
 				<thead>
 					<tr>
-						<th>Item</th>
-						<th>Price</th>
-						<th>Type</th>
+						<?php
+							$id = $_GET['id'];
+							echo "<th><a href='restaurant.php?id=$id&sort=item'>Item</a></th>";
+							echo "<th><a href='restaurant.php?id=$id&sort=price'>Price</a></th>";
+							echo "<th><a href='restaurant.php?id=$id&sort=type'>Type</a></th>";
+						?>
 						<th>Rating</th>
 						<th>View</th>
 					</tr>
@@ -191,12 +194,24 @@
 					$rId = pg_query("SELECT restaurant_id FROM Location WHERE Location.location_id = $id");
 					$rId = pg_fetch_assoc($rId);
 					$rId = $rId['restaurant_id'];
-					$result1 = pg_query("
+
+					$menuQuery = "
 						SELECT M.name, M.price, I.description, M.item_id
 						FROM MenuItem M, ItemType I
 						WHERE M.restaurant_id = $rId AND M.type_id = I.type_id
-						ORDER BY(M.type_id)
-					");
+						ORDER BY ";
+					if (isset($_GET['sort'])) {
+						$orderBy = $_GET['sort'];
+					} else {
+						$orderBy = "type";
+					}
+					switch($orderBy) {
+						case 'type': $menuQuery.="M.type_id"; break;
+						case 'item': $menuQuery.="M.name"; break;
+						case 'price': $menuQuery.="M.price DESC"; break;
+					}
+
+					$result1 = pg_query($menuQuery);
 					while($res2 = pg_fetch_assoc($result1)){
 						$iName = $res2['name'];
 						$price = $res2['price'];
