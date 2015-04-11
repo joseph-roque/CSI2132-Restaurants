@@ -64,7 +64,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						</h2>
 						";
 					$result = pg_query("SELECT ct.description FROM CuisineType ct ORDER BY ct.description");
-					echo "<select id='cuisineDrop' name='cuisineDrop' onchange='changeCuisine_query_c()' class='center-block'>";
+					echo "<select style='margin-bottom:20px' id='cuisineDrop' name='cuisineDrop' onchange='changeCuisine_query_c()' class='center-block'>";
 					while($res = pg_fetch_array($result)) {
 						$description = $res[0];
 						echo "<option value='$description'";
@@ -111,7 +111,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						</h2>
 						";
 					$result = pg_query("SELECT ct.description FROM CuisineType ct ORDER BY ct.description");
-					echo "<select id='cuisineDrop' name='cuisineDrop' onchange='changeCuisine_query_e()' class='center-block'>";
+					echo "<select style='margin-bottom:20px' id='cuisineDrop' name='cuisineDrop' onchange='changeCuisine_query_e()' class='center-block'>";
 					while($res = pg_fetch_array($result)) {
 						$description = $res[0];
 						echo "<option value='$description'";
@@ -192,7 +192,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						</h2>
 						";
 
-					echo "<select class='center-block' id='monthDrop' name='monthDrop' onchange='changeDate()'>";
+					echo "<select style='margin-bottom:20px' class='center-block' id='monthDrop' name='monthDrop' onchange='changeDate()'>";
 					$month = 1;
 					while($month <= 12) {
 						switch($month) {
@@ -219,7 +219,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					echo "</select>";
 
-					echo "<select class='center-block' id='yearDrop' name='yearDrop' onchange='changeDate()'>";
+					echo "<select style='margin-bottom:20px' class='center-block' id='yearDrop' name='yearDrop' onchange='changeDate()'>";
 					$year = date("Y");
 					while($year >= 1900) {
 						echo "<option value='$year'";
@@ -285,7 +285,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						</h2>
 
 
-						<select class='center-block' id='rateDrop' name='rateDrop' onchange='changeRating()'>
+						<select style='margin-bottom:20px' class='center-block' id='rateDrop' name='rateDrop' onchange='changeRating()'>
 							$food
 							$mood
 							$staff
