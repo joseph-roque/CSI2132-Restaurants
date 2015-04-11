@@ -30,7 +30,14 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			
 			$gQuery = $query;
 			if($gQuery == ""){
-				$aQuery = "SELECT * FROM Location";
+				$aQuery = "
+				SELECT loc.location_id, AVG((coalesce(rate.food,0)+coalesce(rate.price,0)+coalesce(rate.mood,0)+coalesce(rate.staff,0))/4.0) rateAvg
+					FROM Location loc
+					LEFT JOIN Rating rate
+						ON rate.location_id=loc.location_id
+					GROUP BY loc.location_id
+					ORDER BY rateAvg DESC
+				";
 			}
 			else{
 			$exQuery = explode(" ",$query);

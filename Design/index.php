@@ -115,7 +115,10 @@
 				</div>";
 				}
 				?>
-				
+				<!-- BUTTON TO VIEW ALL RESTAURANTS (EMPTY SEARCH QUERY -->
+				<div class="text-center center-block">
+					<a href="results.php?query=" class="btn btn-link" style="font-size:125%"><span class=" glyphicon glyphicon-cutlery" style="margin-right:10px"></span>View All Restaurants</a>
+				</div>
 	</div>
 
 	<div class="row clearfix">

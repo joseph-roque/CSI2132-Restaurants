@@ -9,7 +9,7 @@ CREATE TABLE Rater
 (
 	user_id SERIAL,
 	email VARCHAR(90) NOT NULL UNIQUE,
-	name VARCHAR(70) NOT NULL UNIQUE,
+	name TEXT NOT NULL UNIQUE,
 	join_date TIMESTAMP NOT NULL,
 	type_id SMALLINT NOT NULL,
 	reputation SMALLINT NOT NULL DEFAULT 1,
@@ -38,7 +38,7 @@ CREATE TABLE CuisineType
 CREATE TABLE Restaurant
 (
 	restaurant_id SERIAL,
-	name VARCHAR(70) NOT NULL UNIQUE,
+	name TEXT NOT NULL UNIQUE,
 	cuisine SMALLINT NOT NULL,
 	url TEXT, -- allow restaurant to have no URL
 	PRIMARY KEY (restaurant_id),
@@ -53,7 +53,7 @@ CREATE TABLE Location
 (
 	location_id SERIAL,
 	first_open_date TIMESTAMP NOT NULL,
-	manager_name VARCHAR(70), 
+	manager_name TEXT, 
 	phone_number VARCHAR(16),
 	street_address TEXT, --not sure about this
 	hour_open DECIMAL(4,0), -- 24h format (eg 0630 is 6:30 am)
@@ -100,7 +100,7 @@ CREATE TABLE ItemType
 CREATE TABLE MenuItem
 (
 	item_id SERIAL,
-	name VARCHAR(70) NOT NULL,
+	name TEXT NOT NULL,
 	type_id SMALLINT NOT NULL, -- entree, main meal, beverage, dessert, etc.
 	description TEXT, --not sure about this
 	price DECIMAL(4,2),

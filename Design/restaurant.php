@@ -178,9 +178,12 @@
 				<!-- Header -->
 				<thead>
 					<tr>
-						<th>Item</th>
-						<th>Price</th>
-						<th>Type</th>
+						<?php
+							$id = $_GET['id'];
+							echo "<th><a href='restaurant.php?id=$id&sort=item'>Item</a></th>";
+							echo "<th><a href='restaurant.php?id=$id&sort=price'>Price</a></th>";
+							echo "<th><a href='restaurant.php?id=$id&sort=type'>Type</a></th>";
+						?>
 						<th>Rating</th>
 						<th>View</th>
 					</tr>
@@ -191,12 +194,24 @@
 					$rId = pg_query("SELECT restaurant_id FROM Location WHERE Location.location_id = $id");
 					$rId = pg_fetch_assoc($rId);
 					$rId = $rId['restaurant_id'];
-					$result1 = pg_query("
+
+					$menuQuery = "
 						SELECT M.name, M.price, I.description, M.item_id
 						FROM MenuItem M, ItemType I
 						WHERE M.restaurant_id = $rId AND M.type_id = I.type_id
-						ORDER BY(M.type_id)
-					");
+						ORDER BY ";
+					if (isset($_GET['sort'])) {
+						$orderBy = $_GET['sort'];
+					} else {
+						$orderBy = "type";
+					}
+					switch($orderBy) {
+						case 'type': $menuQuery.="M.type_id"; break;
+						case 'item': $menuQuery.="M.name"; break;
+						case 'price': $menuQuery.="M.price DESC"; break;
+					}
+
+					$result1 = pg_query($menuQuery);
 					while($res2 = pg_fetch_assoc($result1)){
 						$iName = $res2['name'];
 						$price = $res2['price'];
@@ -238,12 +253,12 @@
 					
 				</tbody>
 			</table>
-			<!-- Adding new menu item -->
 			
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add Menu Item</strong>
+			<!-- BUTTON FOR ADDING NEW MENU ITEM -->
+			<button  onclick = "redirect('add-item.php')" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
+				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add a Menu Item</strong>
 			</button>
+<<<<<<< HEAD
 
 			<!-- MODAL BUTTON -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -316,13 +331,41 @@
 									require('connect.php');
 									$result = pg_query("SELECT * FROM Loaction L WHERE L.location_id = $location_id");
 									$result = pg_fetch_assoc($result);
+=======
+			
+			
+			<!-- OLD PHP WRITTEN BY MOE FOR THE JS MODAL -->
+			<?php 
+				if(array_key_exists('input-name', $_POST) && array_key_exists('input-type', $_POST) && array_key_exists('input-price', $_POST)){
+					echo "THEY EXISTS!!!";
+					$iName = $_POST['input-name'];
+					$type = $_POST['input-type'];
+					if($type == "Other")
+						$type = 0;
+					else if($type == "Appetizer")
+						$type = 1;
+					else if($type == "Entree")
+						$type = 2;
+					else if($type == "Dessert")
+						$type = 3;
+					else if($type == "Beverage")
+						$type = 4;
+					else if($type == "Alcoholic")
+						$type = 5;
+					$price = $_POST['input-price'];
+					$location_id = $_GET['id'];
+					require('connect.php');
+					$result = pg_query("SELECT * FROM Loaction L WHERE L.location_id = $location_id");
+					$result = pg_fetch_assoc($result);
+>>>>>>> origin/master
 
-									$rId = $result['restaurant_id'];
+					$rId = $result['restaurant_id'];
 
-									$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.restaurant_id = $rId AND 
-										MI.name = $iName");
-									$num = pg_num_rows($result);
+					$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.restaurant_id = $rId AND 
+						MI.name = $iName");
+					$num = pg_num_rows($result);
 
+<<<<<<< HEAD
 									if($num == 0){
 										$result = pg_query("INSERT INTO MenuItem(name, type_id, description, price, restaurant_id)
 											VALUES('$iName', $type, $description, $price, $rId);");
@@ -352,6 +395,18 @@
 			<button  onclick = "redirect('review-restaurant.php')" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
 				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add a Menu Item</strong>
 			</button> -->
+=======
+					if($num == 0){
+						$result = pg_query("INSERT INTO MenuItem(name, type_id, description, price, restaurant_id)
+							VALUES('$iName', $type, $description, $price, $rId);");
+					}
+					else {
+						echo "That item already exists!";
+					}
+					
+				}
+			?>
+>>>>>>> origin/master
 		</div>
 		<!-- Reviews -->
 		<div class="col-md-6 column">
