@@ -16,6 +16,19 @@
 	<?php $page_title = "Profile" ?>
 
 	<?php include("includes/resources.php");?>
+
+	<script type="text/javascript">
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		function popularQueryH() {
+			var name = getParameterByName("name");
+			document.location.href="popular.php?query=h&extrao=" + name;
+		}
+	</script>
 </head>
 
 <body>
@@ -56,6 +69,90 @@
 		</div>
 		<!-- MENU ITEM REVIEWS -->
 		<div class="col-md-12 column">
+
+		<!-- RESTAURANT REVIEWS -->
+			<h2 class="text-info">Restaurant Reviews</h2>
+			<h5><a onClick="popularQueryH(); return false;" href="#">(See other restaurants this user might like)</a></h5>
+
+			<table class="table table-hover" style="margin-top:20px"> <!-- match margin of H2 next to it -->
+				<!-- Header -->
+				<thead>
+					<tr>
+						<?php 
+							$name = $_GET['name'];
+							$sm = $_GET['sm'];
+							echo "
+							<th><a href='profile.php?name=$name&sr=date&sm=$sm'>Date</a></th>
+							<th><a href='profile.php?name=$name&sr=name&sm=$sm'>Name</a></th>
+							<th><a href='profile.php?name=$name&sr=food&sm=$sm'>Food</a></th>
+							<th><a href='profile.php?name=$name&sr=mood&sm=$sm'>Mood</a></th>
+							<th><a href='profile.php?name=$name&sr=staff&sm=$sm'>Staff</a></th>
+							<th><a href='profile.php?name=$name&sr=price&sm=$sm'>Price</a></th>
+							<th><a href='profile.php?name=$name&sr=overall&sm=$sm'>Overall</a></th>
+							<th>Comments</th>
+							";
+						?>
+					</tr>
+				</thead>
+				<!-- All restaurant reviews -->
+				<tbody>
+				<?php
+					$name = $_GET['name'];
+					$query = "SELECT rest.name, loc.location_id, rate.food, rate.mood, rate.staff, rate.price, rate.comments, COALESCE((rate.food+rate.mood+rate.staff+rate.price)/4.0, 0) avgRate, rate.post_date
+						FROM Rater use
+						INNER JOIN Rating rate
+							ON use.user_id=rate.user_id
+						INNER JOIN Location loc
+							ON rate.location_id=loc.location_id
+						INNER JOIN Restaurant rest
+							ON loc.restaurant_id=rest.restaurant_id
+						WHERE use.name='$name'
+						ORDER BY ";
+
+					$sortRest = 'date';
+					if (isset($_GET['sr'])) {
+						$sortRest = $_GET['sr'];
+					}
+					switch($sortRest) {
+						case 'date': default: $query.="rate.post_date DESC"; break;
+						case 'name': $query.="rest.name, rate.post_date DESC"; break;
+						case 'food': $query.="rate.food DESC, rate.post_date DESC"; break;
+						case 'mood': $query.="rate.mood DESC, rate.post_date DESC"; break;
+						case 'price': $query.="rate.price DESC, rate.post_date DESC"; break;
+						case 'staff': $query.="rate.staff DESC, rate.post_date DESC"; break;
+						case 'overall': $query.="avgRate DESC, rate.post_date DESC"; break;
+					}
+
+					$result = pg_query($query);
+					while($res = pg_fetch_array($result)){
+						$restName = $res[0];
+						$locationId = $res[1];
+						$food = $res[2];
+						$mood = $res[3];
+						$staff = $res[4];
+						$price = $res[5];
+						$comment = $res[6];
+						$overall = round($res[7], 1);
+						$postDate = substr($res[8], 0, -8);
+
+						echo "
+								<tr>
+									<td width='100px'>$postDate</td>
+									<td><a href='restaurant.php?id=$locationId'>$restName</a></td>
+									<td>$food</td>
+									<td>$mood</td>
+									<td>$staff</td>
+									<td>$price</td>
+									<td>$overall</td>
+									<td>$comment</td>
+								</tr
+								";
+					}
+				?>
+				</tbody>
+			</table>
+
+		<hr>
 			
 			<h2 class="text-info">
 				Menu Item Reviews
@@ -65,116 +162,76 @@
 				<!-- Header -->
 				<thead>
 					<tr>
-						<th>Item</th>
-						<th>Price</th>
-						<th>Type</th>
-						<th>Rating</th>
-						<th>Comments</th>
+						<?php 
+							$name = $_GET['name'];
+							$sr = $_GET['sr'];
+							echo "
+							<th><a href='profile.php?name=$name&sr=$sr&sm=date'>Date</a></th>
+							<th><a href='profile.php?name=$name&sr=$sr&sm=name'>Item</a></th>
+							<th><a href='profile.php?name=$name&sr=$sr&sm=price'>Price</a></th>
+							<th><a href='profile.php?name=$name&sr=$sr&sm=type'>Type</a></th>
+							<th><a href='profile.php?name=$name&sr=$sr&sm=rating'>Rating</a></th>
+							<th>Comments</th>
+							";
+						?>
 					</tr>
 				</thead>
 				<!-- All MENU ITEMS -->
 				<tbody>
 				<?php
 					$name = $_GET['name'];
-					$result = pg_query("SELECT * FROM Rater WHERE Rater.name = '$name'");
-					$result = pg_fetch_assoc($result);
-					
-					$id = $result['user_id'];
-					
-					$res = pg_query("SELECT * FROM RatingItem RI WHERE RI.user_id = $id");
-					
-					while($result = pg_fetch_assoc($res)){
-					
-						$rating = $result['rating'];
-						$comment = $result['comments'];
-						$iName = $result['item_id'];
+					$sortMenu = 'date';
+					if (isset($_GET['sm'])) {
+						$sortMenu = $_GET['sm'];
+					}
 
-						$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.item_id = $iName");
-						$result = pg_fetch_assoc($result);
-
-						$iName = $result['name'];
-						$price = $result['price'];
-						$type = $result['type_id'];	
-
-						$result = pg_query("SELECT description FROM CuisineType WHERE cuisine_id = $type");
-						$result = pg_fetch_assoc($result);
-
-						$type = $result['description'];
+					$query = "SELECT iRate.post_date, item.name, item.price, ct.description, iRate.rating, iRate.comments
+						FROM Rater use
+						INNER JOIN RatingItem iRate
+							ON use.user_id=iRate.user_id
+						INNER JOIN MenuItem item
+							ON iRate.item_id=item.item_id
+						INNER JOIN ItemType iType
+							ON item.type_id=iType.type_id
+						INNER JOIN Restaurant rest
+							ON item.restaurant_id=rest.restaurant_id
+						INNER JOIN CuisineType ct
+							ON rest.cuisine=ct.cuisine_id
+						WHERE use.name='$name'
+						ORDER BY ";
+					switch($sortMenu) {
+						case 'date': default: $query.="iRate.post_date DESC"; break;
+						case 'name': $query.="item.name, iRate.post_date DESC"; break;
+						case 'price': $query.="item.price DESC, iRate.post_date DESC"; break;
+						case 'type': $query.="ct.description, iRate.post_date DESC"; break;
+						case 'rating': $query.="iRate.rating DESC, iRate.post_date DESC"; break;
+					}
+					
+					$result = pg_query($query);
+					while($res = pg_fetch_array($result)){
+						$postDate = substr($res[0], 0, -8);
+						$itemName = $res[1];
+						$itemPrice = $res[2];
+						$cuisineType = $res[3];
+						$rating = $res[4];
+						$comments = $res[5];
 
 						echo "
 								<tr>
-									<td>$iName</td>
-									<td>$$price</td>
-									<td>$type</td>
+									<td width='100px'>$postDate</td>
+									<td>$itemName</td>
+									<td>\$$itemPrice</td>
+									<td>$cuisineType</td>
 									<td>$rating</td>
-									<td>$comment</td>
+									<td>$comments</td>
 								</tr
 								";
 					}
 				?>
 				</tbody>
 			</table>
-		<hr>
-		<!-- RESTAURANT REVIEWS -->
-			<h2 class="text-info">
-				Restaurant Reviews
-			</h2>
-
-			<table class="table table-hover" style="margin-top:20px"> <!-- match margin of H2 next to it -->
-				<!-- Header -->
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Food</th>
-						<th>Mood</th>
-						<th>Staff</th>
-						<th>Price</th>
-						<th>Comments</th>
-					</tr>
-				</thead>
-				<!-- All restaurant reviews -->
-				<tbody>
-				<?php
-					$name = $_GET['name'];
-					$result = pg_query("SELECT * FROM Rater WHERE Rater.name = '$name'");
-					$result = pg_fetch_assoc($result);
-					
-					$id = $result['user_id'];
-					
-					$res = pg_query("SELECT * FROM Rating R WHERE R.user_id = $id");
-					
-					while($result = pg_fetch_assoc($res)){
-					
-						$comment = $result['comments'];
-						$rName = $result['location_id'];
-						$food = $result['food'];
-						$mood = $result['mood'];
-						$staff = $result['staff'];
-						$price = $result['price'];
-
-						$result = pg_query("SELECT * FROM Restaurant R, Location L WHERE L.location_id = $rName AND L.restaurant_id = R.restaurant_id");
-						$result = pg_fetch_assoc($result);
-
-						$rName = $result['name'];
-
-						echo "
-								<tr>
-									<td>$rName</td>
-									<td>$food</td>
-									<td>$mood</td>
-									<td>$staff</td>
-									<td>$price</td>
-									<td>$comment</td>
-								</tr
-								";
-					}
-				?>
-				</tbody>
-			
 		</div>
 	</div>
-	
 </div>
-
 </body>
 </html>

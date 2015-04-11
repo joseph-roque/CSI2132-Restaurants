@@ -253,7 +253,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "h":
-					//TODO
+					echo "<h2>Not finished</h2>";
 					break;
 				case "i":
 					echo "	
