@@ -261,7 +261,7 @@
 								<div class="row">
 									<div class="form-group-xs">
 										<label for="input-name">Item Name</label>
-										<input name ="input-name" type="name" class="form-control" id="input-name" required />
+										<input name ="input-name" method = "post" type="name" class="form-control" id="input-name" required />
 									</div>
 								</div>
 								<!-- ITEM PRICE -->
@@ -269,7 +269,7 @@
 									<div class="input-group input-group-modal">
 										<label for="input-price" style="display:table-caption">Price</label>
 										<span class="input-group-addon">$</span>
-										<input name ="input-price" type="price" class="form-control" placeholder="12.50" id="input-price" required />
+										<input name ="input-price" method = "post" type="price" class="form-control" placeholder="12.50" id="input-price" required />
 									</div>
 								</div>
 								<!-- ITEM TYPE -->
@@ -286,20 +286,17 @@
 										</select>
 									</div>
 								</div>
-							</form>
-						</div>
-						
-						<div class="modal-footer">
-							<button type="button" onclick="redirectMenu("nolink", 0)" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<button type="button" onclick="redirectMenu("nolink", 0)" class="btn btn-primary">Submit <span class="glyphicon glyphicon-ok"/></button>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<?php 
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+									<button type="button" onclick="location.reload()" class="btn btn-primary">Submit <span class="glyphicon glyphicon-ok"/></button>
+
+								<?php 
 								if(array_key_exists('input-name', $_POST) && array_key_exists('input-type', $_POST) && array_key_exists('input-price', $_POST)){
-									echo "THEY EXISTS!!!";
+									?>
+									<script>
+										window.location.href = "index.php";
+									</script>
+									<?php
 									$iName = $_POST['input-name'];
 									$type = $_POST['input-type'];
 									if($type == "Other")
@@ -334,9 +331,19 @@
 										echo "That item already exists!";
 									}
 									
+								}else {
+									echo "THEY DONT EXISTS!!!!!";
 								}
 							?>
+								</div>
 			
+							</form>
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
 			
 			
 			
