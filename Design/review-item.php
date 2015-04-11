@@ -116,7 +116,7 @@
 			<!-- Text area for comments -->
 			<div class="col-md-9 column">
 					<label for="comments">Leave your review below</label>
-					<textarea style="width:100%" method="post" name="comments" id="comments" rows="8"  placeholder="Note that leaving a verbal review is not necessary"></textarea>
+					<textarea style="width:100%" method="post" name="comments" id="comments" rows="8"  placeholder="Note that leaving a written comment is not necessary"></textarea>
 					</input>
 					<div class="pull-right" style="margin-top:15px">
 						<button type="submit" name = "submit" action = "post" class="btn btn-primary"><strong>Submit Review</strong></button>
