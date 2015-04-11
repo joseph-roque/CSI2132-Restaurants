@@ -183,8 +183,8 @@
 							echo "<th><a href='restaurant.php?id=$id&sort=item'>Item</a></th>";
 							echo "<th><a href='restaurant.php?id=$id&sort=price'>Price</a></th>";
 							echo "<th><a href='restaurant.php?id=$id&sort=type'>Type</a></th>";
+							echo "<th><a href='restaurant.php?id=$id&sort=rating'>Rating</a></th>";
 						?>
-						<th>Rating</th>
 						<th>View</th>
 					</tr>
 				</thead>
@@ -195,10 +195,14 @@
 					$rId = pg_fetch_assoc($rId);
 					$rId = $rId['restaurant_id'];
 
-					$menuQuery = "
-						SELECT M.name, M.price, I.description, M.item_id
-						FROM MenuItem M, ItemType I
-						WHERE M.restaurant_id = $rId AND M.type_id = I.type_id
+					$menuQuery = "SELECT item.name, item.price, item.description, AVG(itemRate.rating) avgRating
+						FROM MenuItem item
+						LEFT JOIN RatingItem itemRate
+							ON item.item_id=itemRate.item_id
+						INNER JOIN ItemType iType
+							ON item.type_id=iType.type_id
+						WHERE item.restaurant_id=$rId
+						GROUP BY item.name, item.price, item.description
 						ORDER BY ";
 					if (isset($_GET['sort'])) {
 						$orderBy = $_GET['sort'];
@@ -206,31 +210,19 @@
 						$orderBy = "type";
 					}
 					switch($orderBy) {
-						case 'type': $menuQuery.="M.type_id"; break;
-						case 'item': $menuQuery.="M.name"; break;
-						case 'price': $menuQuery.="M.price DESC"; break;
+						case 'type': $menuQuery.="item.type_id"; break;
+						case 'item': $menuQuery.="item.name"; break;
+						case 'price': $menuQuery.="item.price DESC"; break;
+						case 'rating': $menuQuery.="avgRating DESC"; break;
 					}
 
-					$result1 = pg_query($menuQuery);
-					while($res2 = pg_fetch_assoc($result1)){
-						$iName = $res2['name'];
-						$price = $res2['price'];
-						$description = $res2['description'];
-						$itemid = $res2['item_id'];
-						$itemAvgRating = 0;
-						$sql1 = pg_query("
-								SELECT RI.rating
-								FROM RatingItem RI
-								WHERE RI.item_id = $itemid;
-							");
-						$total = 0;
-						while($tmp = pg_fetch_assoc($sql1)){
-							$total = $total + 1;
-							$rating = $tmp['rating'];
-							$itemAvgRating = $itemAvgRating + (int) $rating;
-						}
-						if($total != 0){
-							$itemAvgRating = $itemAvgRating/$total;
+					$result = pg_query($menuQuery);
+					while($res = pg_fetch_array($result)){
+						$iName = $res[0];
+						$price = $res[1];
+						$description = $res[2];
+						$itemAvgRating = $res[3];
+						if($itemAvgRating > 0){
 							$itemAvgRating = round($itemAvgRating, 1);
 						}
 						else{
@@ -239,7 +231,7 @@
 						echo "
 							<tr>
 								<td>$iName</td>
-								<td>$$price</td>
+								<td>\$$price</td>
 								<td>$description</td>
 								<td>$itemAvgRating</td>
 								<td>";
