@@ -379,7 +379,28 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "k":
-					echo "<h2>Not finished</h2>";
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Raters who give the highest ratings
+						</h2>
+						";
+
+					$result = pg_query($query);
+					while($res = pg_fetch_array($result)) {
+						$userName = $res[0];
+						$joinDate = substr($res[1], 0, -8);
+						$ratingCount = round($res[2], 1);
+						$avgRate = round($res[3], 1);
+
+						echo "
+							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+								<strong><a href='profile.php?id=$userName'>$userName</a></strong><br>
+								Joined: $joinDate <br>
+								<strong>Total # of ratings:</strong> $ratingCount <br>
+								<strong>Average rating:</strong> $avgRate <br>
+							</div>
+						";
+					}
 					break;
 				case "l":
 					echo "<h2>Not finished</h2>";
