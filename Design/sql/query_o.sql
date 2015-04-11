@@ -1,4 +1,4 @@
-SELECT use.name, rt.description, use.email, rest.name, MAX(temp.rateTotal) rate_max, MIN(temp.rateTotal) rate_min
+SELECT use.name, use.user_id, rt.description, use.email, loc.location_id, rest.name, MAX(temp.rateTotal) rate_max, MIN(temp.rateTotal) rate_min, (MAX(temp.rateTotal) - MIN(temp.rateTotal)) rate_diff
 	FROM Rater use
 	INNER JOIN RaterType rt
 		ON use.type_id=rt.type_id
@@ -12,6 +12,6 @@ SELECT use.name, rt.description, use.email, rest.name, MAX(temp.rateTotal) rate_
 		(SELECT rate2.user_id r2_uid, rate2.post_date r2_pd, rate2.location_id r2_lid, (rate2.food+rate2.price+rate2.staff+rate2.mood) rateTotal
 			FROM Rating rate2) temp
 		ON rate.user_id=temp.r2_uid AND rate.post_date=temp.r2_pd AND rate.location_id=temp.r2_lid
-	GROUP BY use.name, rt.description, use.email, rest.name
+	GROUP BY use.name, use.user_id, rt.description, use.email, loc.location_id, rest.name
 	HAVING MAX(temp.rateTotal) - MIN(temp.rateTotal) >= 12
-	ORDER BY use.name;
+	ORDER BY rate_diff, use.name, rest.name;

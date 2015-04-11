@@ -46,7 +46,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			$query = file_get_contents("sql/query_".$queryName.".sql");
 						
 			switch($queryName) {
-				case "c":
+				case "c": default:
 					$extraOne = 'Breakfast';
 					if (isset($_GET['extrao'])) {
 						$extraOne = $_GET['extrao'];
@@ -90,6 +90,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "d":
+					echo "<h2>Not finished</h2>";
 					//See restaurant page - order by "price"
 					break;
 				case "e":
@@ -316,14 +317,43 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "k":
+					echo "<h2>Not finished</h2>";
 					break;
 				case "l":
+					echo "<h2>Not finished</h2>";
 					break;
 				case "m":
+					echo "<h2>Not finished</h2>";
 					break;
 				case "n":
+					echo "<h2>Not finished</h2>";
 					break;
 				case "o":
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Raters with the most diverse ratings
+						</h2>
+						";
+					$result = pg_query($query);
+					while ($res = pg_fetch_array($result)) {
+						$userName = $res[0];
+						$userId = $res[1];
+						$userDescription = $res[2];
+						$userEmail = $res[3];
+						$locationId = $res[4];
+						$restName = $res[5];
+						$highRate = round($res[6], 2);
+						$lowRate = round($res[7], 2);
+						echo "
+							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+								<strong><a href='restaurant.php?id=$locationId'>$restName</a></strong><br>
+								<a href='results.php?query=$description&cui=$description'>$description</a><br>
+								Rater:<a href='profile.php?id=$userId'>$userName</a><br>
+								Low rating: $lowRate <br>
+								High rating: $highRate
+							</div>
+							";
+					}
 					break;
 			} 
 		?>
