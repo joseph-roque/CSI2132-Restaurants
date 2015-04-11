@@ -10,6 +10,20 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 	<?php $page_title = "Results" ?>
 	
 	<?php include("includes/resources.php");?>
+
+	<script type="text/javascript">
+		function getParameterByName(name) {
+			name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+			return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		function sortResults(sorting) {
+			var query = getParameterByName("query");
+			var cui = getParameterByName("cui");
+			document.location.href="results.php?query=" + query + "&cui=" + cui + "&sort=" + sorting;
+		}
+	</script>
 </head>
 
 <body>
@@ -17,65 +31,96 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 	<div class="row clearfix">
 		<?php include("includes/header.php");?>
 		<?php include("includes/navbar.php");?>
+
+		<!-- Buttons to sort results - rating/relevance/alphabetical-->
+		<div class="col-md-12 column text-center" style="margin-top:50px;margin-bottom:10px">
+		Sort these results by
+			<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-top:10px">
+				<a onClick="sortResults('rating'); return false;" class="btn-group" role="group" href="results.php">
+					<button type="button" class="btn btn-link">Rating</button>
+				</a>
+				<a onClick="sortResults('rel'); return false;" class="btn-group" role="group" href="results.php">
+					<button type="button" class="btn btn-link">Relevance</button>
+				</a>
+				<a onClick="sortResults('alpha'); return false;" class="btn-group" role="group" href="results.php">
+					<button type="button" class="btn btn-link">Alphabetical</button>
+				</a>
+			</div>
+		</div>
+
 		<div class="col-md-12 column">
 			<?php
 			require('connect.php');
 			$aQuery;
 			$query = $_GET['query'];
+
+			$cui = "";
 			if (isset($_GET['cui'])) {
 				$cui = $_GET['cui'];
-			} else {
-				$cui = '';
+			}
+
+			$sort = "rating";
+			if (isset($_GET['sort'])) {
+				$sort = $_GET['sort'];
 			}
 			
 			$gQuery = $query;
 			if($gQuery == ""){
-				$aQuery = "
-				SELECT loc.location_id, AVG((coalesce(rate.food,0)+coalesce(rate.price,0)+coalesce(rate.mood,0)+coalesce(rate.staff,0))/4.0) rateAvg
+				$gQuery = "All Restaurants";
+				$aQuery = 
+					"SELECT loc.location_id, rest.name, AVG((coalesce(rate.food,0)+coalesce(rate.price,0)+coalesce(rate.mood,0)+coalesce(rate.staff,0))/4.0) rateAvg
 					FROM Location loc
+					LEFT JOIN Restaurant rest
+						ON rest.restaurant_id=loc.restaurant_id
 					LEFT JOIN Rating rate
 						ON rate.location_id=loc.location_id
-					GROUP BY loc.location_id
-					ORDER BY rateAvg DESC
+					GROUP BY loc.location_id, rest.name
 				";
+				switch($sort) {
+					case 'rating': default: $aQuery.=' ORDER BY rateAvg, rest.name'; break;
+					case 'rel': $aQuery.=' ORDER BY rateAvg, rest.name'; break;
+					case 'alpha': $aQuery.=' ORDER BY rest.name, rateAvg'; break;
+				}
 			}
 			else{
-			$exQuery = explode(" ",$query);
-			$aQuery = "
-			SELECT loc.location_id, AVG((coalesce(rate.food,0)+coalesce(rate.price,0)+coalesce(rate.mood,0)+coalesce(rate.staff,0))/4.0) rateAvg
-				FROM Location loc
-				LEFT JOIN Restaurant rest
-					ON loc.restaurant_id=rest.restaurant_id
-				LEFT JOIN CuisineType ct
-					ON ct.cuisine_id=rest.cuisine
-				LEFT JOIN MenuItem item
-					ON rest.restaurant_id=item.restaurant_id
-				LEFT JOIN Rating rate
-					ON loc.location_id=rate.location_id
-				WHERE ";
-			if (strlen($cui) > 0) {
-				$aQuery.="ct.description='$cui' AND";
+				$exQuery = explode(" ",$query);
+				$aQuery = 
+					"SELECT loc.location_id, rest.name, AVG((coalesce(rate.food,0)+coalesce(rate.price,0)+coalesce(rate.mood,0)+coalesce(rate.staff,0))/4.0) rateAvg, COUNT(loc.location_id) idCount
+					FROM Location loc
+					LEFT JOIN Restaurant rest
+						ON loc.restaurant_id=rest.restaurant_id
+					LEFT JOIN CuisineType ct
+						ON ct.cuisine_id=rest.cuisine
+					LEFT JOIN MenuItem item
+						ON rest.restaurant_id=item.restaurant_id
+					LEFT JOIN Rating rate
+						ON loc.location_id=rate.location_id
+					WHERE ";
+				if (strlen($cui) > 0) {
+					$aQuery.="ct.description='$cui' AND";
+				}
+				$aQuery.=" (ct.description ~* '%*$query%*'
+						OR rest.name ~* '%*$query%*'
+						OR item.name ~* '%*$query%*'
+						OR rest.url ~* '%*$query%*'";
+				foreach($exQuery as $queryTerm) {
+					$aQuery.=" OR ct.description ~* '%*$queryTerm%*'";
+					$aQuery.=" OR rest.name ~* '%*$queryTerm%*'";
+					$aQuery.=" OR item.name ~* '%*$queryTerm%*'";
+					$aQuery.=" OR rest.url ~* '%*$queryTerm%*'";
+				}
+				$aQuery.=") 
+				GROUP BY loc.location_id, rest.name";
+
+				switch($sort) {
+					case 'rating': default: $aQuery.=' ORDER BY rateAvg, idCount, rest.name'; break;
+					case 'rel': $aQuery.=' ORDER BY idCount, rateAvg, rest.name'; break;
+					case 'alpha': $aQuery.=' ORDER BY rest.name, rateAvg, idCount'; break;
+				}
 			}
-			$aQuery.=" (ct.description ~* '%*$query%*'
-					OR rest.name ~* '%*$query%*'
-					OR item.name ~* '%*$query%*'
-					OR rest.url ~* '%*$query%*'";
-			foreach($exQuery as $queryTerm) {
-				$aQuery.=" OR ct.description ~* '%*$queryTerm%*'";
-				$aQuery.=" OR rest.name ~* '%*$queryTerm%*'";
-				$aQuery.=" OR item.name ~* '%*$queryTerm%*'";
-				$aQuery.=" OR rest.url ~* '%*$queryTerm%*'";
-			}
-			$aQuery.=") 
-			GROUP BY loc.location_id
-			ORDER BY rateAvg DESC
-			";
-		}
 			$result = pg_query($aQuery);
 			$count = pg_num_rows($result);
 			
-			if($gQuery == "")
-				$gQuery = "All Restaurants";
 			echo "	
 				<h2 class='text-center text-info' style='margin-bottom:20px'>
 					<strong>$count</strong> restaurants found for \"$gQuery\" 
