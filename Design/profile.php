@@ -80,7 +80,10 @@
 					<tr>
 						<?php 
 							$name = $_GET['name'];
-							$sm = $_GET['sm'];
+							$sm = "";
+							if (isset($_GET['sm'])) {
+								$sm = $_GET['sm'];
+							}
 							echo "
 							<th><a href='profile.php?name=$name&sr=date&sm=$sm'>Date</a></th>
 							<th><a href='profile.php?name=$name&sr=name&sm=$sm'>Name</a></th>
@@ -164,7 +167,10 @@
 					<tr>
 						<?php 
 							$name = $_GET['name'];
-							$sr = $_GET['sr'];
+							$sr = "";
+							if (isset($_GET['sr'])) {
+								$sr = $_GET['sr'];
+							}
 							echo "
 							<th><a href='profile.php?name=$name&sr=$sr&sm=date'>Date</a></th>
 							<th><a href='profile.php?name=$name&sr=$sr&sm=name'>Item</a></th>
