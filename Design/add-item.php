@@ -57,11 +57,61 @@
 							</select>
 						</div>
 					</div>
+						<div class="row">
+						<div class="form-group-xs">
+							<label for="input-description">Description</label>
+							<input name ="input-description" type="name" class="form-control" id="input-description" placeholder="Describe this item!" required />
+						</div>
+					</div>
 					
 					<div class="text-center" style="margin-top:20px">
 						<button name="add-item" id="add-item" type="submit" class="btn btn-primary"><strong>Add Menu Item</strong></button>
 					</div>
 				</form>
+
+				<?php 
+				if(array_key_exists('input-name', $_POST) && array_key_exists('input-type', $_POST) 
+					&& array_key_exists('input-price', $_POST) && array_key_exists('input-description', $_POST)){
+					$iName = $_POST['input-name'];
+					$type = $_POST['input-type'];
+					if($type == "Other")
+						$type = 0;
+					else if($type == "Appetizer")
+						$type = 1;
+					else if($type == "Entree")
+						$type = 2;
+					else if($type == "Dessert")
+						$type = 3;
+					else if($type == "Beverage")
+						$type = 4;
+					else if($type == "Alcoholic")
+						$type = 5;
+					$description = $_POST['input-description'];
+					$price = $_POST['input-price'];
+					$location_id = $_GET['id'];
+					require('connect.php');
+					$result = pg_query("SELECT * FROM Location L WHERE L.location_id = $location_id;");
+					$result = pg_fetch_assoc($result);
+					$rId = $result['restaurant_id'];
+
+					$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.restaurant_id = $rId AND 
+						MI.name = '$iName'");
+					$num = pg_num_rows($result);
+
+					if($num == 0){
+						$result = pg_query("INSERT INTO MenuItem(name, type_id, description, price, restaurant_id)
+							VALUES('$iName', $type, '$description', $price, $rId);");
+						echo "Sucess!";
+					}
+					else {
+						echo "That item already exists!";
+					}
+					
+				}
+				else{
+					echo "HAHA";
+				}
+				?>
 				
 			</div>
 	</div>
