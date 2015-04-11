@@ -48,8 +48,11 @@
 				$i = 0;
 				//Most popular restaurants!
 				//Loop to iterate through 3 top restaurants gets the queries and puts them in
+				$type1 = -1;
+				$type2 = -2;
+				$type3 = -3;
+
 				while($i < 3 && $tmp = pg_fetch_assoc($res)){
-					$i++;	
 					$name = $tmp['name'];
 					$locationId = $tmp['location_id'];
 					$res1 = pg_query("
@@ -80,15 +83,61 @@
 					<a href='restaurant.php?id=$locationId'>";
 			?>
 			<!-- Pictures -->
-				<div class="cropped-img" style="background-image:url('<?php
-					$images = array(
-					"http://www.thepaninipress.com/wp-content/themes/panini/images/bg-home-boston.jpg", 
-					"http://www.indianfoodsco.com/imagesfood/BenIndianPlatter.jpg", 
-					"http://www.luxurystnd.com/wp-content/uploads/2015/02/Breakfast-Food-Idea-A1.jpg");
-					
-					echo $images[$i - 1];
-					
-					?>')" /> 
+			<?php
+				//FILL WITH PICTURES WITH IN EACH ROW THE URL TO 3 IMAGES OF SAME TYPE GOES AS LISTED BELOW FOR INDEXES
+				/*
+				0 Unknown
+				1 Mexican
+				2 Indian
+				3 Korean
+				4 Chinese
+				5 Italian
+				6 Fine Dining
+				7 Breakfast
+				8 Middle Eastern
+				9 Sandwiches
+				10 Other
+
+				*/
+				$images = array(
+					"http://img3.wikia.nocookie.net/__cb20140128161936/tumblr-survivor/images/0/03/Unkown.png", "http://img3.wikia.nocookie.net/__cb20140128161936/tumblr-survivor/images/0/03/Unkown.png", "http://img3.wikia.nocookie.net/__cb20140128161936/tumblr-survivor/images/0/03/Unkown.png",
+					"http://foodwallpaper.info/wp-content/uploads/2014/05/mexican-restaurant-logos.jpg", "http://www.brandcrowd.com/gallery/brands/pictures/picture13899442828471.jpg", "http://www.underworldmagazines.com/wp-content/uploads/2012/08/BRLEN21.jpg",
+					"http://www.magazinehive.com/wp-content/uploads/2013/01/Srivas-Restaurant.png", "https://s-media-cache-ak0.pinimg.com/236x/62/99/3f/62993f179da1ecf00394920f4f1c7438.jpg", "http://www.thelogofactory.com/daily_logo/wp-content/uploads/2010/11/indian-restaurant-logo.png",
+					"http://www.tropicanacitymall.com/shop_dine/images/kimchi_logo.jpg", "http://koreanaasheville.com/templates/tyl02/images/logo.png", "http://fc08.deviantart.net/fs40/f/2009/041/9/5/Korean_Restaurant_Logo_by_deadfuze.jpg",
+					"http://www.outsourcelogos.com/uploads/index/166/d/Chinese_Restaurant_Logo_jpg.jpg", "http://www.freelogohub.com/wp-content/uploads/2013/02/Free-Chinese-Food-Logo.jpg", "http://www.freevector.com/site_media/preview_images/FreeVector-Asian-Food-Vector-Logo.jpg",
+					"https://m1.behance.net/rendition/modules/41568807/disp/21806f512df218df49d5b43411dc1cd9.jpg", "http://www.templatewire.com/images/screenshots/logo-templates/logo096/logo.jpg", "https://m1.behance.net/rendition/modules/52942073/disp/34e04a8eba38eb740ca679b28948db21.gif",
+					);
+
+				$name = $GLOBALS['name'];
+				$image = "";
+				$typeQuery = pg_query("SELECT cuisine 
+				FROM Restaurant R
+				WHERE R.name = '$name'");
+				$typeQuery = pg_fetch_assoc($typeQuery);
+				if($i == 0){
+					$type1 = $typeQuery['cuisine'];
+				}else if($i == 1){
+					$type2 = $typeQuery['cuisine'];
+				}else{
+					$type3 = $typeQuery['cuisine'];
+				}
+				if($i == 0){
+					$image = $images[$type1*3 + 0];
+				}
+				if($i == 1){
+					if($type1 == $type2)
+						$image = $images[$type2*3 + 1];
+					else $image = $images[$type2*3 + 0];
+				}
+				if($i == 2){
+					if($type3 == $type2 && $type3 == $type1)
+						$image = $images[$type3*3 + 2];
+					else if($type3 == $type2 || $type3 == $type1)
+						$image = $images[$type3*3 + 1];
+					else $image = $images[$type3*3 + 0];
+				}
+			?>
+				<div class="cropped-img" style="background-image:url('<?php echo $image ?>')" /> 
 				</div>
 					
 					
@@ -113,6 +162,7 @@
 					</div>
 				</div>
 				</div>";
+				$i++;	
 				}
 				?>
 				<!-- BUTTON TO VIEW ALL RESTAURANTS (EMPTY SEARCH QUERY -->
