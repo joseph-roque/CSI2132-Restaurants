@@ -403,7 +403,49 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "m":
-					echo "<h2>Not finished</h2>";
+					$extraOne = "";
+					if (isset($_GET['extrao'])) {
+						$extraOne = $_GET['extrao'];
+					}
+
+					$result = pg_query("SELECT rest.name FROM Location loc INNER JOIN Restaurant rest ON loc.restaurant_id=rest.restaurant_id WHERE loc.location_id=$extraOne");
+					$result = pg_fetch_array($result);
+					$restName = $result[0];
+					echo "
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Raters who most frequently rated <strong><a href='restaurant.php?id=$extraOne'>$restName</a></strong>
+						</h2>";
+
+					$query = str_replace("LOCATION_REPLACE", $extraOne, $query);
+					$result = pg_query($query);
+					$lastUser = "";
+					$userInfo = "";
+					$userComments = "";
+					$userCount = 0;
+					while($res = pg_fetch_array($result)) {
+						$userName = $res[0];
+						$comments = $res[1];
+						$ratingCount = $res[2];
+
+						if (strcmp($lastUser, $userName) != 0) {
+							$lastUser = $userName;
+							$userCount += 1;
+							if ($userCount > 1) {
+								echo $userInfo.$userComments."</div>";
+							}
+
+							$userInfo = "<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+									<strong><a href='profile.php?name=$userName'>$userName</a></strong><br>
+									<strong>Reputation:</strong> $ratingCount <br>";
+							$userComments = "<strong>Comments</strong><br>";
+						}
+
+						$userComments.="<p style='padding-left:2em'>$comments </p>";
+					}
+
+					if (strlen($userInfo) > 0) {
+						echo $userInfo.$userComments."</div>";
+					}
 					break;
 				case "n":
 					$extraOne = "";

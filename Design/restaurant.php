@@ -15,6 +15,13 @@
 	<?php $page_title = "Restaurant" ?>
 	
 	<?php include("includes/resources.php");?>
+
+	<script type="text/javascript">
+		function popularQueryM() {
+			var id = getParameterByName("id");
+			document.location.href="popular.php?query=m&extrao=" + id;
+		}
+	</script>
 </head>
 
 <body>
@@ -261,6 +268,7 @@
 		<div class="col-md-6 column">
 			<h2 class="text-info">
 				Reviews
+				<h5><a onClick="popularQueryM(); return false;" href="#">(See most frequent raters)</a></h5><br>
 			</h2>
 			
 			<?php
