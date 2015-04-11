@@ -22,6 +22,11 @@
 			var name = getParameterByName("name");
 			document.location.href="popular.php?query=h&extrao=" + name;
 		}
+
+		function popularQueryN(higherOrLower) {
+			var name = getParameterByName("name");
+			document.location.href="popular.php?query=n&extrao=" + name + "&extrat=" + higherOrLower;
+		}
 	</script>
 </head>
 
@@ -148,6 +153,8 @@
 				?>
 				</tbody>
 			</table>
+			<h5 class='text-right'><a onClick="popularQueryN('higher'); return false;" href="#">(See raters who gave overall higher ratings to restaurants)</a></h5>
+			<h5 class='text-right'><a onClick="popularQueryN('lower'); return false;" href="#">(See raters who gave overall lower ratings to restaurants)</a></h5>
 
 		<hr>
 			

@@ -394,7 +394,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 
 						echo "
 							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
-								<strong><a href='profile.php?id=$userName'>$userName</a></strong><br>
+								<strong><a href='profile.php?name=$userName'>$userName</a></strong><br>
 								Joined: $joinDate <br>
 								<strong>Total # of ratings:</strong> $ratingCount <br>
 								<strong>Average rating:</strong> $avgRate <br>
@@ -402,14 +402,52 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						";
 					}
 					break;
-				case "l":
-					echo "<h2>Not finished</h2>";
-					break;
 				case "m":
 					echo "<h2>Not finished</h2>";
 					break;
 				case "n":
-					echo "<h2>Not finished</h2>";
+					$extraOne = "";
+					if (isset($_GET['extrao'])) {
+						$extraOne = $_GET['extrao'];
+					}
+					$extraTwo = "true";
+					if (isset($_GET['extrat'])) {
+						$extraTwo = $_GET['extrat'];
+					}
+
+					if ($extraTwo == 'true') {
+						$compare = ">=";
+						$compareText = "higher";
+						$compareLink = "popular.php?query=n&extrao=$extraOne&extrat=false";
+					} else {
+						$compare = "<";
+						$compareText = "lower";
+						$compareLink = "popular.php?query=n&extrao=$extraOne&extrat=true";
+					}
+
+					echo "
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Raters who give overall <strong><a href='$compareLink'>$compareText</a></strong> ratings than <strong>$extraOne</strong>
+						</h2>";
+
+					$query = str_replace("NAME_REPLACE", $extraOne, $query);
+					$query = str_replace("COMPARE_REPLACE", $compare, $query);
+					$result = pg_query($query);
+					while ($res = pg_fetch_array($result)) {
+						$userName = $res[0];
+						$userEmail = $res[1];
+						$ratingCount = $res[2];
+						$avgRate = round($res[3], 1);
+
+						echo "
+							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+								<strong><a href='profile.php?name=$userName'>$userName</a></strong><br>
+								Email: $userEmail <br>
+								<strong>Total # of ratings:</strong> $ratingCount <br>
+								<strong>Average rating:</strong> $avgRate <br>
+							</div>
+						";
+					}
 					break;
 				case "o":
 					echo "	
