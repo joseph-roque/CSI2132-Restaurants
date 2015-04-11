@@ -12,9 +12,14 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 	<?php include("includes/resources.php");?>
 
 	<script type="text/javascript">
-		function changeCuisine() {
+		function changeCuisine_query_c() {
 			var cName = document.getElementById('cuisineDrop').value;
 			document.location.href="popular.php?query=query_c&extrao=" + cName;
+		}
+
+		function changeCuisine_query_e() {
+			var cName = document.getElementById('cuisineDrop').value;
+			document.location.href="popular.php?query=query_e&extrao=" + cName;
 		}
 	</script>
 </head>
@@ -44,11 +49,11 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					//FINISHED
 					echo "	
 						<h2 class='text-center text-info' style='margin-bottom:20px'>
-							Managers &amp; opening dates for <strong>$extraOne</strong> Restaurants
+							Managers &amp; opening dates for <strong>$extraOne</strong> restaurants
 						</h2>
 						";
 					$result = pg_query("SELECT ct.description FROM CuisineType ct ORDER BY ct.description");
-					echo "<select id='cuisineDrop' name='cuisineDrop' onchange='changeCuisine()' class='center-block'>";
+					echo "<select id='cuisineDrop' name='cuisineDrop' onchange='changeCuisine_query_c()' class='center-block'>";
 					while($res = pg_fetch_array($result)) {
 						$description = $res[0];
 						echo "<option value='$description'";
@@ -83,8 +88,64 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					//See restaurant page - order by "price"
 					break;
 				case "query_e":
+					//FINISHED
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Average <strong>$extraOne</strong> restaurant menu prices
+						</h2>
+						";
+					$result = pg_query("SELECT ct.description FROM CuisineType ct ORDER BY ct.description");
+					echo "<select id='cuisineDrop' name='cuisineDrop' onchange='changeCuisine_query_e()' class='center-block'>";
+					while($res = pg_fetch_array($result)) {
+						$description = $res[0];
+						echo "<option value='$description'";
+						if (strcmp($extraOne, $description) == 0) {
+							echo " selected";
+						}
+						echo ">$description</option>";
+					}
+					echo "</select><br>";
+
+					$query = str_replace("CUISINE_DESCRIPTION", $extraOne, $query);
+					$result = pg_query($query);
+					
+					while ($res = pg_fetch_array($result)) {
+						$itemDesc = $res[0];
+						$price = round($res[1], 2);
+
+						echo "
+						<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+							<strong>$itemDesc: </strong>\$$price<br>
+						</div>
+						";
+					}
 					break;
 				case "query_f":
+					//FINISHED
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Total number of ratings by each rater, for each restaurant
+						</h2>
+						";
+
+					$result = pg_query($query);
+					while($res = pg_fetch_array($result)) {
+						$userId = $res[0];
+						$restId = $res[1];
+						$userName = $res[2];
+						$restName = $res[3];
+						$ratingCount = $res[4];
+						$avgRating = round($res[5], 1);
+
+						echo "
+						<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+							<strong><a href='profile?id=$userId'>$userName</a></strong><br>
+							<a href='restaurant.php?id=$restId'>$restName</a><br>
+							# of ratings: $ratingCount<br>
+							Average Rating: $avgRating
+						</div>
+						";
+					}
 					break;
 				case "query_g":
 					break;
