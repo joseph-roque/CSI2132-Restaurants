@@ -253,113 +253,53 @@
 					
 				</tbody>
 			</table>
-			<!-- Adding new menu item -->
 			
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add Menu Item</strong>
-			</button>
-
-			<!-- MODAL BUTTON -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<!-- MODAL DIALOG -->
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">Add Menu Item</h4>
-						</div>
-						
-						<div class="modal-body">
-							<form id="formID" name="formID" method="post" action="" role="form">
-								<!-- ITEM NAME -->
-								<div class="row">
-									<div class="form-group-xs">
-										<label for="input-name">Item Name</label>
-										<input name ="input-name" type="name" class="form-control" id="input-name" required />
-									</div>
-								</div>
-								<!-- ITEM PRICE -->
-								<div class="row">
-									<div class="input-group input-group-modal">
-										<label for="input-price" style="display:table-caption">Price</label>
-										<span class="input-group-addon">$</span>
-										<input name ="input-price" type="price" class="form-control" placeholder="12.50" id="input-price" required />
-									</div>
-								</div>
-								<!-- ITEM TYPE -->
-								<div class="row">
-									<div class="form-group-xs">
-										<label id = "input-type" name = "input-type" method="post" for="form-control">Type of Food</label>
-										<select name = "input-type" id = "input-type" method= "post" class="form-control">
-											<option>Other</option>
-											<option>Appetizer</option>
-											<option>Entree</option>
-											<option>Dessert</option>
-											<option>Beverage</option>
-											<option>Alcoholic</option>
-										</select>
-									</div>
-								</div>
-							</form>
-						</div>
-						
-						<div class="modal-footer">
-							<button type="button" onclick="redirectMenu("nolink", 0)" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<button type="button" onclick="redirectMenu("nolink", 0)" class="btn btn-primary">Submit <span class="glyphicon glyphicon-ok"/></button>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<?php 
-								if(array_key_exists('input-name', $_POST) && array_key_exists('input-type', $_POST) && array_key_exists('input-price', $_POST)){
-									echo "THEY EXISTS!!!";
-									$iName = $_POST['input-name'];
-									$type = $_POST['input-type'];
-									if($type == "Other")
-										$type = 0;
-									else if($type == "Appetizer")
-										$type = 1;
-									else if($type == "Entree")
-										$type = 2;
-									else if($type == "Dessert")
-										$type = 3;
-									else if($type == "Beverage")
-										$type = 4;
-									else if($type == "Alcoholic")
-										$type = 5;
-									$price = $_POST['input-price'];
-									$location_id = $_GET['id'];
-									require('connect.php');
-									$result = pg_query("SELECT * FROM Loaction L WHERE L.location_id = $location_id");
-									$result = pg_fetch_assoc($result);
-
-									$rId = $result['restaurant_id'];
-
-									$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.restaurant_id = $rId AND 
-										MI.name = $iName");
-									$num = pg_num_rows($result);
-
-									if($num == 0){
-										$result = pg_query("INSERT INTO MenuItem(name, type_id, description, price, restaurant_id)
-											VALUES('$iName', $type, $description, $price, $rId);");
-									}
-									else {
-										echo "That item already exists!";
-									}
-									
-								}
-							?>
-			
-			
-			
-			
-			<!-- LEGACY BUTTON
-			
-			<button  onclick = "redirect('review-restaurant.php')" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
+			<!-- BUTTON FOR ADDING NEW MENU ITEM -->
+			<button  onclick = "redirect('add-item.php')" name = "add-item" method  = "post"  type="add-item" class="btn btn-primary">
 				<strong><span class=" glyphicon glyphicon-plus" style="margin-right:10px"></span>Add a Menu Item</strong>
-			</button> -->
+			</button>
+			
+			
+			<!-- OLD PHP WRITTEN BY MOE FOR THE JS MODAL -->
+			<?php 
+				if(array_key_exists('input-name', $_POST) && array_key_exists('input-type', $_POST) && array_key_exists('input-price', $_POST)){
+					echo "THEY EXISTS!!!";
+					$iName = $_POST['input-name'];
+					$type = $_POST['input-type'];
+					if($type == "Other")
+						$type = 0;
+					else if($type == "Appetizer")
+						$type = 1;
+					else if($type == "Entree")
+						$type = 2;
+					else if($type == "Dessert")
+						$type = 3;
+					else if($type == "Beverage")
+						$type = 4;
+					else if($type == "Alcoholic")
+						$type = 5;
+					$price = $_POST['input-price'];
+					$location_id = $_GET['id'];
+					require('connect.php');
+					$result = pg_query("SELECT * FROM Loaction L WHERE L.location_id = $location_id");
+					$result = pg_fetch_assoc($result);
+
+					$rId = $result['restaurant_id'];
+
+					$result = pg_query("SELECT * FROM MenuItem MI WHERE MI.restaurant_id = $rId AND 
+						MI.name = $iName");
+					$num = pg_num_rows($result);
+
+					if($num == 0){
+						$result = pg_query("INSERT INTO MenuItem(name, type_id, description, price, restaurant_id)
+							VALUES('$iName', $type, $description, $price, $rId);");
+					}
+					else {
+						echo "That item already exists!";
+					}
+					
+				}
+			?>
 		</div>
 		<!-- Reviews -->
 		<div class="col-md-6 column">
