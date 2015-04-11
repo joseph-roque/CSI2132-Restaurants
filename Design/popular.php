@@ -27,6 +27,12 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			var year = document.getElementById('yearDrop').value;
 			document.location.href="popular.php?query=g&extrao=" + month + "&extrat=" + year;
 		}
+
+		function changeRating() {
+			var name = getParameterByName("name");
+			var rating = document.getElementById('rateDrop').value;
+			document.location.href="popular.php?query=g&extrao=" + name + "&extrat=" + rating;
+		}
 	</script>
 </head>
 
@@ -253,7 +259,64 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "h":
-					echo "<h2>Not finished</h2>";
+					$extraOne = "";
+					if (isset($_GET['extrao'])) {
+						$extraOne = $_GET['extrao'];
+					}
+					$extraTwo = "Food";
+					if (isset($_GET['extrat'])) {
+						$extraTwo = $_GET['extrat'];
+					}
+
+					$food = "<option value='Food'>Food</option>";
+					$mood = "<option value='Mood'>Mood</option>";
+					$staff = "<option value='Staff'>Staff</option>";
+					$price = "<option value='Price'>Price</option>";
+					switch($extraTwo) {
+						case 'Food': default: $food = "<option value='Food' selected>Food</option>"; break;
+						case 'Mood': $mood = "<option value='Mood' selected>Mood</option>"; break;
+						case 'Staff': $staff = "<option value='Staff' selected>Staff</option>"; break;
+						case 'Price': $price = "<option value='Price' selected>Price</option>"; break;
+					}
+
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							<strong>$extraTwo</strong> rated better than <strong>$extraOne</strong>&#39;s ratings
+						</h2>
+
+
+						<select class='center-block' id='rateDrop' name='rateDrop' onchange='changeRating()'>
+							$food
+							$mood
+							$staff
+							$price
+						</select>
+						";
+
+					$query = str_replace("NAME_REPLACE", $extraOne, $query);
+					$query = str_replace("RATING_REPLACE", $extraTwo, $query);
+					$result = pg_query($query);
+					while($res = pg_fetch_array($result)) {
+						$locationId = $res[0];
+						$restName = $res[1];
+						$openDate = substr($res[2], 0, -8);
+						$food = round($res[3], 1);
+						$staff = round($res[4], 1);
+						$mood = round($res[5], 1);
+						$price = round($res[6], 1);
+						$overall = round($res[7], 1);
+						$cuisine = $res[8];
+
+						echo "
+						<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+							<strong><a href='restaurant.php?id=$locationId'>$restName</a></strong><br>
+							<a href='results.php?query=$cuisine&cui=$cuisine'>$cuisine</a><br>
+							First opened: $openDate <br>
+							Food: $food, Mood: $mood, Staff: $staff, Price: $price <br>
+							<strong>Overall Rating:</strong> $overall
+						</div>
+						";
+					}
 					break;
 				case "i":
 					echo "	
