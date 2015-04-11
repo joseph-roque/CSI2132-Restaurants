@@ -23,7 +23,15 @@
 		<?php include("includes/header.php");?>
 		<?php include("includes/navbar.php");?>
 			<h2 class="text-center text-info" style="margin-bottom:20px">
-					Add a new menu item for <strong>[restaurant name]</strong>
+			<?php
+				require('connect.php');
+				$id = $_GET['id'];
+				$rName = pg_query("SELECT R.name FROM Restaurant R, Location L WHERE L.location_id = $id AND L.restaurant_id = R.restaurant_id");
+				$rName = pg_fetch_assoc($rName);
+				$rName = $rName['name'];
+			
+				echo"Add a new menu item for <strong>$rName</strong>";
+			?>
 			</h2>
 			
 			<div class="col-md-12 column">
@@ -107,9 +115,6 @@
 						echo "That item already exists!";
 					}
 					
-				}
-				else{
-					echo "HAHA";
 				}
 				?>
 				
