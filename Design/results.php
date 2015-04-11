@@ -32,23 +32,28 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 		<?php include("includes/header.php");?>
 		<?php include("includes/navbar.php");?>
 
-		<!-- Buttons to sort results - rating/relevance/alphabetical-->
-		<div class="col-md-12 column text-center" style="margin-top:50px;margin-bottom:10px">
-		Sort these results by
-			<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-top:10px">
+		<div class="col-md-12 column">
+		
+					<!-- Buttons to sort results - rating/relevance/alphabetical-->
+		<div class="col-md-12 column text-center" style="margin-bottom:20px">
+			<p style="font-size:125%">Sort these results by:</p> 
+			<div class="btn-group" role="group" aria-label="..." style="margin-top:-5px">
 				<a onClick="sortResults('rating'); return false;" class="btn-group" role="group" href="results.php">
-					<button type="button" class="btn btn-link">Rating</button>
+					<button type="button" class="btn btn-default">
+					<span class=" glyphicon glyphicon-star" style="margin-right:5px"></span>Rating</button>
 				</a>
 				<a onClick="sortResults('rel'); return false;" class="btn-group" role="group" href="results.php">
-					<button type="button" class="btn btn-link">Relevance</button>
+					<button type="button" class="btn btn-default">
+					<span class=" glyphicon glyphicon-sort-by-attributes-alt" style="margin-right:5px"></span>Relevance</button>
 				</a>
 				<a onClick="sortResults('alpha'); return false;" class="btn-group" role="group" href="results.php">
-					<button type="button" class="btn btn-link">Alphabetical</button>
+					<button type="button" class="btn btn-default">
+					<span class=" glyphicon glyphicon-sort-by-alphabet" style="margin-right:5px"></span>Alphabetical</button>
 				</a>
 			</div>
 		</div>
-
-		<div class="col-md-12 column">
+		<hr>
+		
 			<?php
 			require('connect.php');
 			$aQuery;
