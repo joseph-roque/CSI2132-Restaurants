@@ -166,7 +166,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						$extraTwo = $_GET['extrat'];
 					}
 
-					switch($extraOne) {
+					switch(intval($extraOne)) {
 						case 1: $monthName = "January"; break;
 						case 2: $monthName = "Febraury"; break;
 						case 3: $monthName = "March"; break;
@@ -205,7 +205,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						}
 
 						echo "<option value='$month'";
-						if (strcmp($extraOne, strval($month)) == 0) {
+						if (strcmp(ltrim($extraOne, '0'), strval($month)) == 0) {
 							echo " selected";
 						}
 						echo ">$monthName</option>";
@@ -271,7 +271,6 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						$description = $res[0];
 						$locationId = $res[1];
 						$restName = $res[2];
-						$userId = $res[3];
 						$userName = $res[4];
 						$avgRate = round($res[5], 1);
 
@@ -287,14 +286,14 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 									<strong><a href='restaurant.php?id=$locationId'>$restName</a></strong><br>
 									<a href = 'results.php?query=$description&cui=$description'>$description</a><br>
 									Average Rating: $avgRate <br>
-									Raters:
+									Raters: 
 								";
 						}
 						$userCount += 1;
 						if ($userCount > 1) {
-							echo ",";
+							echo ", ";
 						}
-						echo "<a href='profile?id=$userId'> $userName</a>";
+						echo "<a href='profile.php?name=$userName'>$userName</a>";
 
 					}
 					break;
@@ -335,8 +334,9 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						</h2>
 						";
 					$result = pg_query($query);
+					$userCount = 0;
 					while ($res = pg_fetch_array($result)) {
-						$userName = $res[0];
+						$userCount += 1;
 						$userId = $res[1];
 						$userDescription = $res[2];
 						$userEmail = $res[3];
@@ -348,11 +348,19 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
 								<strong><a href='restaurant.php?id=$locationId'>$restName</a></strong><br>
 								<a href='results.php?query=$description&cui=$description'>$description</a><br>
-								Rater:<a href='profile.php?id=$userId'>$userName</a><br>
+								Rater: <a href='profile.php?name=$userName'>$userName</a><br>
 								Low rating: $lowRate <br>
 								High rating: $highRate
 							</div>
 							";
+					}
+
+					if ($userCount == 0) {
+						echo "
+							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+								<strong>No users with diverse enough ratings.</strong>
+							</div>
+						";
 					}
 					break;
 			} 

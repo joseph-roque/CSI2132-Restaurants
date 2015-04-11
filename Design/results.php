@@ -77,9 +77,9 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					GROUP BY loc.location_id, rest.name
 				";
 				switch($sort) {
-					case 'rating': default: $aQuery.=' ORDER BY rateAvg, rest.name'; break;
-					case 'rel': $aQuery.=' ORDER BY rateAvg, rest.name'; break;
-					case 'alpha': $aQuery.=' ORDER BY rest.name, rateAvg'; break;
+					case 'rating': default: $aQuery.=' ORDER BY rateAvg DESC, rest.name'; break;
+					case 'rel': $aQuery.=' ORDER BY rateAvg DESC, rest.name'; break;
+					case 'alpha': $aQuery.=' ORDER BY rest.name, rateAvg DESC'; break;
 				}
 			}
 			else{
@@ -113,9 +113,9 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 				GROUP BY loc.location_id, rest.name";
 
 				switch($sort) {
-					case 'rating': default: $aQuery.=' ORDER BY rateAvg, idCount, rest.name'; break;
-					case 'rel': $aQuery.=' ORDER BY idCount, rateAvg, rest.name'; break;
-					case 'alpha': $aQuery.=' ORDER BY rest.name, rateAvg, idCount'; break;
+					case 'rating': default: $aQuery.=' ORDER BY rateAvg DESC, idCount DESC, rest.name'; break;
+					case 'rel': $aQuery.=' ORDER BY idCount DESC, rateAvg DESC, rest.name'; break;
+					case 'alpha': $aQuery.=' ORDER BY rest.name, rateAvg DESC, idCount DESC'; break;
 				}
 			}
 			$result = pg_query($aQuery);
