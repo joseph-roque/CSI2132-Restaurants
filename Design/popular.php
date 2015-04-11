@@ -21,6 +21,12 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 			var cName = document.getElementById('cuisineDrop').value;
 			document.location.href="popular.php?query=query_e&extrao=" + cName;
 		}
+
+		function changeDate() {
+			var month = document.getElementById('monthDrop').value;
+			var year = document.getElementById('yearDrop').value;
+			document.location.href="popular.php?query=query_g&extrao=" + month + "&extrat=" + year;
+		}
 	</script>
 </head>
 
@@ -148,6 +154,92 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "query_g":
+					//FINISHED
+					switch($extraOne) {
+						case 1: $monthName = "January"; break;
+						case 2: $monthName = "Febraury"; break;
+						case 3: $monthName = "March"; break;
+						case 4: $monthName = "April"; break;
+						case 5: $monthName = "May"; break;
+						case 6: $monthName = "June"; break;
+						case 7: $monthName = "July"; break;
+						case 8: $monthName = "August"; break;
+						case 9: $monthName = "September"; break;
+						case 10: $monthName = "October"; break;
+						case 11: $monthName = "November"; break;
+						case 12: $monthName = "December"; break;
+					}
+					echo "
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Restaurants not rated in <strong>$monthName $extraTwo</strong>
+						</h2>
+						";
+
+					echo "<select class='center-block' id='monthDrop' name='monthDrop' onchange='changeDate()'>";
+					$month = 1;
+					while($month <= 12) {
+						switch($month) {
+							case 1: $monthName = "January"; break;
+							case 2: $monthName = "Febraury"; break;
+							case 3: $monthName = "March"; break;
+							case 4: $monthName = "April"; break;
+							case 5: $monthName = "May"; break;
+							case 6: $monthName = "June"; break;
+							case 7: $monthName = "July"; break;
+							case 8: $monthName = "August"; break;
+							case 9: $monthName = "September"; break;
+							case 10: $monthName = "October"; break;
+							case 11: $monthName = "November"; break;
+							case 12: $monthName = "December"; break;
+						}
+
+						echo "<option value='$month'";
+						if (strcmp($extraOne, strval($month)) == 0) {
+							echo " selected";
+						}
+						echo ">$monthName</option>";
+						$month += 1;
+					}
+					echo "</select>";
+
+					echo "<select class='center-block' id='yearDrop' name='yearDrop' onchange='changeDate()'>";
+					$year = date("Y");
+					while($year >= 1900) {
+						echo "<option value='$year'";
+						if (strcmp($extraTwo, strval($year)) == 0) {
+							echo " selected";
+						}
+						echo ">$year</option>";
+						$year -= 1;
+					}
+					echo "</select><br>";
+
+					$query = str_replace("MONTH", strval($month), $query);
+					$query = str_replace("YEAR", strval($year), $query);
+					$result = pg_query($query);
+					while($res = pg_fetch_array($result)) {
+						$restName = $res[0];
+						$cuisine = $res[1];
+						$number = $res[2];
+						$numbers_only = preg_replace("/[^\d]/", "", $number);
+						$number = preg_replace("/^1?(\d{3})(\d{3})(\d{4})$/", "$1-$2-$3", $numbers_only);
+						$address = $res[3];
+						$open = $res[4];
+						$open = substr_replace($open, ":", strlen($open)-2, 0);
+						$close = $res[5];
+						$close = substr_replace($close, ":", strlen($close)-2, 0);
+						$id = $res[6];
+
+						echo "
+						<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+							<strong><a href='restaurant.php?id=$id'>$restName</a></strong><br>
+							<a href = 'results.php?query=$cuisine&cui=$cuisine'>$cuisine</a><br>
+							$number <br>
+							$address <br>
+							$open - $close
+						</div>
+						";
+					}
 					break;
 				case "query_h":
 					break;
