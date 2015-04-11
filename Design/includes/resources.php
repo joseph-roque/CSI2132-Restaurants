@@ -44,3 +44,12 @@
 <meta name="msapplication-TileImage" content="/media/favicons/mstile-144x144.png">
 <meta name="msapplication-config" content="/media/favicons/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
+
+<!-- Function to get variables from URL -->
+<script type="text/javascript">
+	function getParameterByName(name) {
+		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"), results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+</script>

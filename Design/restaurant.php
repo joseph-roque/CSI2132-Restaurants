@@ -209,7 +209,7 @@
 						if (isset($_GET['sort'])) {
 							$orderBy = $_GET['sort'];
 						}
-						else $orderBy = "item.name";
+						else $orderBy = "type";
 						switch($orderBy) {
 						case 'type': default: $menuQuery .= "item.type_id"; break;
 						case 'item': $menuQuery .="item.name"; break;
