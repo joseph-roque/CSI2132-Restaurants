@@ -31,7 +31,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 		function changeRating() {
 			var name = getParameterByName("name");
 			var rating = document.getElementById('rateDrop').value;
-			document.location.href="popular.php?query=g&extrao=" + name + "&extrat=" + rating;
+			document.location.href="popular.php?query=h&extrao=" + name + "&extrat=" + rating;
 		}
 	</script>
 </head>
