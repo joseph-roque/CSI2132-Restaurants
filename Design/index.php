@@ -229,43 +229,43 @@
 		Check out these popular queries!
 		
 			<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-top:10px">
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=c">
 					<button type="button" class="btn btn-link">C</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="restaurant.php?id=$id&amp;sort=price">
 					<button type="button" class="btn btn-link">D</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=e">
 					<button type="button" class="btn btn-link">E</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=f">
 					<button type="button" class="btn btn-link">F</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=g">
 					<button type="button" class="btn btn-link">G</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=h">
 					<button type="button" class="btn btn-link">H</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=i">
 					<button type="button" class="btn btn-link">I</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=j">
 					<button type="button" class="btn btn-link">J</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=k">
 					<button type="button" class="btn btn-link">K</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=l">
 					<button type="button" class="btn btn-link">L</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=m">
 					<button type="button" class="btn btn-link">M</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=n">
 					<button type="button" class="btn btn-link">N</button>
 				</a>
-				<a class="btn-group" role="group" href="#">
+				<a class="btn-group" role="group" href="popular.php?query=o">
 					<button type="button" class="btn btn-link">O</button>
 				</a>
 
