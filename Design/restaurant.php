@@ -195,33 +195,36 @@
 					$rId = pg_fetch_assoc($rId);
 					$rId = $rId['restaurant_id'];
 
-					$menuQuery = "SELECT item.name, item.price, iType.description, COALESCE(AVG(itemRate.rating), 0) avgRating, item.type_id
+					$orderBy = "";
+
+					$menuQuery = "SELECT item.name,item.item_id, item.price, iType.description, COALESCE(AVG(itemRate.rating), 0) AS avgRating, item.type_id
 						FROM MenuItem item
 						LEFT JOIN RatingItem itemRate
 							ON item.item_id=itemRate.item_id
 						LEFT JOIN ItemType iType
 							ON item.type_id=iType.type_id
 						WHERE item.restaurant_id=$rId
-						GROUP BY item.name, item.price, iType.description, item.type_id
+						GROUP BY item.item_id, item.name, item.price, iType.description, item.type_id
 						ORDER BY ";
-					if (isset($_GET['sort'])) {
-						$orderBy = $_GET['sort'];
-					} else {
-						$orderBy = 'type';
-					}
-					switch($orderBy) {
-						case 'type': default: $menuQuery.="item.type_id"; break;
-						case 'item': $menuQuery.="item.name"; break;
+						if (isset($_GET['sort'])) {
+							$orderBy = $_GET['sort'];
+						}
+						else $orderBy = "item.name";
+						switch($orderBy) {
+						case 'type': default: $menuQuery .= "item.type_id"; break;
+						case 'item': $menuQuery .="item.name"; break;
 						case 'price': $menuQuery.="item.price DESC"; break;
 						case 'rating': $menuQuery.="avgRating DESC"; break;
 					}
-
+					
+					echo "THE QUERY IS $orderBy";
 					$result = pg_query($menuQuery);
-					while($res = pg_fetch_array($result)){
-						$iName = $res[0];
-						$price = $res[1];
-						$description = $res[2];
-						$itemAvgRating = $res[3];
+					while($res = pg_fetch_assoc($result)){
+						$iName = $res['name'];
+						$price = $res['price'];
+						$itemid = $res['item_id'];
+						$description = $res['description'];
+						$itemAvgRating = $res['avgrating'];
 						if($itemAvgRating > 0){
 							$itemAvgRating = round($itemAvgRating, 1);
 						}
