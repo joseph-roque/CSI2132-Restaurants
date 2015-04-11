@@ -1,4 +1,4 @@
-SELECT ct.description, rest.name, use.name, temp.avgRate
+SELECT ct.description, loc.location_id, rest.name, use.user_id, use.name, temp.avgRate
 	FROM Restaurant AS rest
 	INNER JOIN CuisineType ct
 		ON rest.cuisine=ct.cuisine_id

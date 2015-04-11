@@ -1,4 +1,4 @@
-SELECT rest.name, loc.first_open_date, rate.post_date
+SELECT loc.location_id, rest.name, loc.first_open_date, rate.post_date
 	FROM Restaurant AS rest
 	INNER JOIN Location as loc
 		ON rest.restaurant_id=loc.restaurant_id

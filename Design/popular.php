@@ -38,10 +38,13 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 		
 		<?php
 			require('connect.php');
-			$queryName = $_GET['query'];
+			$queryName = "query_c";
+			if (isset($_GET['query'])) {
+				$queryName = $_GET['query'];
+			}
 
 			$query = file_get_contents("sql/".$queryName.".sql");
-			$extraOne = '';
+			$extraOne = 'Breakfast';
 			if (isset($_GET['extrao'])) {
 				$extraOne = $_GET['extrao'];
 			}
@@ -242,8 +245,50 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "query_h":
+					//TODO
 					break;
 				case "query_i":
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							Top rated restaurants by category
+						</h2>
+						";
+
+					$result = pg_query($query);
+					$lastRestaurant = "";
+					$restCount = 0;
+					$userCount = 0;
+					while($res = pg_fetch_array($result)) {
+						$restCount += 1;
+						$description = $res[0];
+						$locationId = $res[1];
+						$restName = $res[2];
+						$userId = $res[3];
+						$userName = $res[4];
+						$avgRate = round($res[5], 1);
+
+						$isNotLast = (strcmp($restName, $lastRestaurant) !== 0);
+						$lastRestaurant = $restName;
+						if ($isNotLast) {
+							$userCount = 0;
+							if ($restCount > 1) {
+								echo "</div>";
+							}
+							echo "
+								<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+									<strong><a href='restaurant.php?id=$locationId'>$restName</a></strong><br>
+									<a href = 'results.php?query=$description&cui=$description'>$description</a><br>
+									Average Rating: $avgRate <br>
+									Raters:
+								";
+						}
+						$userCount += 1;
+						if ($userCount > 1) {
+							echo ",";
+						}
+						echo "<a href='profile?id=$userId'> $userName</a>";
+
+					}
 					break;
 				case "query_j":
 					//FINISHED
