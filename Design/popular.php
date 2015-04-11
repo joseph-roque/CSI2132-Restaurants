@@ -14,18 +14,18 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 	<script type="text/javascript">
 		function changeCuisine_query_c() {
 			var cName = document.getElementById('cuisineDrop').value;
-			document.location.href="popular.php?query=query_c&extrao=" + cName;
+			document.location.href="popular.php?query=c&extrao=" + cName;
 		}
 
 		function changeCuisine_query_e() {
 			var cName = document.getElementById('cuisineDrop').value;
-			document.location.href="popular.php?query=query_e&extrao=" + cName;
+			document.location.href="popular.php?query=e&extrao=" + cName;
 		}
 
 		function changeDate() {
 			var month = document.getElementById('monthDrop').value;
 			var year = document.getElementById('yearDrop').value;
-			document.location.href="popular.php?query=query_g&extrao=" + month + "&extrat=" + year;
+			document.location.href="popular.php?query=g&extrao=" + month + "&extrat=" + year;
 		}
 	</script>
 </head>
@@ -38,24 +38,20 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 		
 		<?php
 			require('connect.php');
-			$queryName = "query_c";
+			$queryName = "c";
 			if (isset($_GET['query'])) {
 				$queryName = $_GET['query'];
 			}
 
-			$query = file_get_contents("sql/".$queryName.".sql");
-			$extraOne = 'Breakfast';
-			if (isset($_GET['extrao'])) {
-				$extraOne = $_GET['extrao'];
-			}
-			$extraTwo = '';
-			if (isset($_GET['extrat'])) {
-				$extraTwo = $_GET['extrat'];
-			}
-			
+			$query = file_get_contents("sql/query_".$queryName.".sql");
+						
 			switch($queryName) {
-				case "query_c":
-					//FINISHED
+				case "c":
+					$extraOne = 'Breakfast';
+					if (isset($_GET['extrao'])) {
+						$extraOne = $_GET['extrao'];
+					}
+
 					echo "	
 						<h2 class='text-center text-info' style='margin-bottom:20px'>
 							Managers &amp; opening dates for <strong>$extraOne</strong> restaurants
@@ -93,11 +89,15 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						";
 					}
 					break;
-				case "query_d":
+				case "d":
 					//See restaurant page - order by "price"
 					break;
-				case "query_e":
-					//FINISHED
+				case "e":
+					$extraOne = 'Breakfast';
+					if (isset($_GET['extrao'])) {
+						$extraOne = $_GET['extrao'];
+					}
+
 					echo "	
 						<h2 class='text-center text-info' style='margin-bottom:20px'>
 							Average <strong>$extraOne</strong> restaurant menu prices
@@ -129,8 +129,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						";
 					}
 					break;
-				case "query_f":
-					//FINISHED
+				case "f":
 					echo "	
 						<h2 class='text-center text-info' style='margin-bottom:20px'>
 							Total number of ratings by each rater, for each restaurant
@@ -156,8 +155,16 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						";
 					}
 					break;
-				case "query_g":
-					//FINISHED
+				case "g":
+					$extraOne = strval(date("m"));
+					if (isset($_GET['extrao'])) {
+						$extraOne = $_GET['extrao'];
+					}
+					$extraTwo = strval(date("Y"));
+					if (isset($_GET['extrat'])) {
+						$extraTwo = $_GET['extrat'];
+					}
+
 					switch($extraOne) {
 						case 1: $monthName = "January"; break;
 						case 2: $monthName = "Febraury"; break;
@@ -244,10 +251,10 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						";
 					}
 					break;
-				case "query_h":
+				case "h":
 					//TODO
 					break;
-				case "query_i":
+				case "i":
 					echo "	
 						<h2 class='text-center text-info' style='margin-bottom:20px'>
 							Top rated restaurants by category
@@ -290,7 +297,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 
 					}
 					break;
-				case "query_j":
+				case "j":
 					//FINISHED
 					echo "	
 						<h2 class='text-center text-info' style='margin-bottom:20px'>
@@ -308,15 +315,15 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						";
 					}
 					break;
-				case "query_k":
+				case "k":
 					break;
-				case "query_l":
+				case "l":
 					break;
-				case "query_m":
+				case "m":
 					break;
-				case "query_n":
+				case "n":
 					break;
-				case "query_o":
+				case "o":
 					break;
 			} 
 		?>
