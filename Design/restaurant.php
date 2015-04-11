@@ -195,22 +195,22 @@
 					$rId = pg_fetch_assoc($rId);
 					$rId = $rId['restaurant_id'];
 
-					$menuQuery = "SELECT item.name, item.price, item.description, AVG(itemRate.rating) avgRating
+					$menuQuery = "SELECT item.name, item.price, iType.description, COALESCE(AVG(itemRate.rating), 0) avgRating, item.type_id
 						FROM MenuItem item
 						LEFT JOIN RatingItem itemRate
 							ON item.item_id=itemRate.item_id
-						INNER JOIN ItemType iType
+						LEFT JOIN ItemType iType
 							ON item.type_id=iType.type_id
 						WHERE item.restaurant_id=$rId
-						GROUP BY item.name, item.price, item.description
+						GROUP BY item.name, item.price, iType.description, item.type_id
 						ORDER BY ";
 					if (isset($_GET['sort'])) {
 						$orderBy = $_GET['sort'];
 					} else {
-						$orderBy = "type";
+						$orderBy = 'type';
 					}
 					switch($orderBy) {
-						case 'type': $menuQuery.="item.type_id"; break;
+						case 'type': default: $menuQuery.="item.type_id"; break;
 						case 'item': $menuQuery.="item.name"; break;
 						case 'price': $menuQuery.="item.price DESC"; break;
 						case 'rating': $menuQuery.="avgRating DESC"; break;
