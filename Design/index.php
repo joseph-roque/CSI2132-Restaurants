@@ -282,9 +282,6 @@
 				<a class="btn-group" role="group" href="popular.php?query=c">
 					<button type="button" class="btn btn-link">C</button>
 				</a>
-				<a class="btn-group" role="group" href="restaurant.php?id=$id&amp;sort=price">
-					<button type="button" class="btn btn-link">D</button>
-				</a>
 				<a class="btn-group" role="group" href="popular.php?query=e">
 					<button type="button" class="btn btn-link">E</button>
 				</a>
