@@ -116,7 +116,6 @@
 			<div class='text-danger' style='margin-top:10px'>
 			<?php
 				require('connect.php');
-				echo $userid;
 				if (strlen(strval($userid)) > 0) {
 					$result = pg_query("SELECT rt.type_id FROM Rater use INNER JOIN RaterType rt ON use.type_id=rt.type_id WHERE use.user_id=$userid");
 					$result = pg_fetch_array($result);
