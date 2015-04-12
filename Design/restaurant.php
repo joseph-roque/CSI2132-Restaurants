@@ -38,7 +38,12 @@
 				<?php
 					require('connect.php');
 					$id = $_GET['id'];
-					
+					$delete="-1";
+					if(array_key_exists('delete', $_GET))
+						$delete = $_GET['delete'];
+					if($delete != -1){
+						$deletQuery = pg_query("DELETE FROM MenuItem MI WHERE item_id = $delete");
+					}
 					$result = pg_query("
 						SELECT * 
 						FROM restaurant R, location L
@@ -139,12 +144,10 @@
 										url: 'delete-restaurant.php',
 										dataType: 'json',
 										data: {functionname: 'deleteRestaurant', arguments: [id]},
-										error: function(obj, textstatus, errorthrown) {
-											console.log('error!');
-											console.log(errorthrown);
-										},
+
 										success: function(obj, textstatus) {
 												if (!('error' in obj)) {
+													console.log('why u no change');
 													document.location.href='index.php';
 												} else {
 													console.log(obj, error);
@@ -300,8 +303,16 @@
 								echo "</td>
 								<td>";
 								
-								include("includes/delete-menu.php");
+								//include("includes/delete-menu.php");
 								
+								echo '
+								<button onclick="redirectMenu(';
+									echo "'restaurant.php?id=$rId&delete=$itemid'";
+									echo ')"  name = "edit-item" method  = "post"  type="edit-item" class="btn" style="padding-bottom:5px;padding-top:5px">
+									<span class=" glyphicon glyphicon-remove"></span>
+								</button>';
+
+
 								echo "</td></tr>";
 					}
 
