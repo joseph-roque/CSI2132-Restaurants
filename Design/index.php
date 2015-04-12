@@ -275,36 +275,8 @@
 		</div>
 		
 		<!-- Popular queries -->
-		<div class="col-md-12 column text-center" style="margin-top:50px;margin-bottom:10px">
-		Check out these popular queries!
-		
-			<div class="btn-group btn-group-justified" role="group" aria-label="..." style="margin-top:10px">
-				<a class="btn-group" role="group" href="popular.php?query=c">
-					<button type="button" class="btn btn-link">C</button>
-				</a>
-				<a class="btn-group" role="group" href="popular.php?query=e">
-					<button type="button" class="btn btn-link">E</button>
-				</a>
-				<a class="btn-group" role="group" href="popular.php?query=f">
-					<button type="button" class="btn btn-link">F</button>
-				</a>
-				<a class="btn-group" role="group" href="popular.php?query=g">
-					<button type="button" class="btn btn-link">G</button>
-				</a>
-				<a class="btn-group" role="group" href="popular.php?query=i">
-					<button type="button" class="btn btn-link">I</button>
-				</a>
-				<a class="btn-group" role="group" href="popular.php?query=j">
-					<button type="button" class="btn btn-link">J</button>
-				</a>
-				<a class="btn-group" role="group" href="popular.php?query=k">
-					<button type="button" class="btn btn-link">K</button>
-				</a>
-				<a class="btn-group" role="group" href="popular.php?query=o">
-					<button type="button" class="btn btn-link">O</button>
-				</a>
-
-			</div>
+		<div class="col-md-12 column text-center" style="margin-top:20px;margin-bottom:10px">
+			<a href="popular.php">Check out these popular queries!</a>
 		</div>
 	</div>
 

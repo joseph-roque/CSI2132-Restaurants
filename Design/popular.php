@@ -44,14 +44,51 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 		
 		<?php
 			require('connect.php');
-			$queryName = "c";
+			$queryName = "";
 			if (isset($_GET['query'])) {
 				$queryName = $_GET['query'];
 			}
 
-			$query = file_get_contents("sql/query_".$queryName.".sql");
+			if (strlen($queryName) > 0) {
+				$query = file_get_contents("sql/query_".$queryName.".sql");
+			}
 						
 			switch($queryName) {
+				case "":
+					echo "
+						<h2 class='text-center text-info' style='margin-top:20px;margin-bottom:20px'>
+							Popular Queries
+						</h2>
+						<h4 class='text-center' style='margin-bottom:20px'>
+							Try clicking some of the links below to view a variety of data about our restaurants and users
+						</h4>
+
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=c'>Managers & opening dates by restaurant type</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=e'>Average menu prices by restaurant type</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=f'>Number of ratings, by rater, for each restaurant</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=g'>Restaurants not rated in a certain month</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=i'>Top rated restaurants by category</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=j'>Average ratings by restaurant type</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=k'>Raters who give the highest ratings</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=o'>Raters with the most diverse ratings</a><br>
+						</div>
+					";
+					break;
 				case "c": default:
 					$extraOne = 'Breakfast';
 					if (isset($_GET['extrao'])) {
@@ -94,10 +131,6 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						</div>
 						";
 					}
-					break;
-				case "d":
-					echo "<h2>Not finished</h2>";
-					//See restaurant page - order by "price"
 					break;
 				case "e":
 					$extraOne = 'Breakfast';
@@ -361,7 +394,6 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					}
 					break;
 				case "j":
-					//FINISHED
 					echo "	
 						<h2 class='text-center text-info' style='margin-bottom:20px'>
 							Average restaurant ratings by <strong>cuisine</strong> 
