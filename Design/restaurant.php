@@ -238,7 +238,8 @@
 							echo "<th><a href='restaurant.php?id=$id&sort=type'>Type</a></th>";
 							echo "<th><a href='restaurant.php?id=$id&sort=rating'>Rating</a></th>";
 						?>
-						<th>View</th>
+						<th />
+						<th />
 					</tr>
 				</thead>
 				<!-- All menu items -->
@@ -296,6 +297,11 @@
 
 								include("includes/edit-menu.php");
 
+								echo "</td>
+								<td>";
+								
+								include("includes/delete-menu.php");
+								
 								echo "</td></tr>";
 					}
 
