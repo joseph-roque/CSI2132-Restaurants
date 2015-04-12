@@ -90,6 +90,9 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
 							<a href='popular.php?query=o'>Raters with the most diverse ratings</a><br>
 						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=q'>List of all raters</a><br>
+						</div>
 					";
 					break;
 				case "c": default:
@@ -601,6 +604,53 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 								on $postDate </h4>
 								$comments <br>
 								<strong>Food:</strong> $food | <strong>Mood:</strong> $mood | <strong>Price:</strong> $price | <strong>Staff:</strong> $staff
+							</div>
+						";
+					}
+					break;
+				case 'q':
+					$extraOne = 'rep';
+					if (isset($_GET['extrao'])) {
+						$extraOne = $_GET['extrao'];
+					}
+
+					switch($extraOne) {
+						case 'rep': default:
+							$link = "<a href='popular.php?query=q&amp;extrao=name'>Reputation</a>";
+							$orderBy = "ratingCount DESC, use.name";
+							break;
+						case 'name':
+							$link = "<a href='popular.php?query=q&amp;extrao=date'>Name</a>";
+							$orderBy = "use.name";
+							break;
+						case 'date':
+							$link = "<a href='popular.php?query=q&amp;extrao=rep'>Join Date</a>";
+							$orderBy = "use.join_date DESC, ratingCount DESC, use.name";
+							break;
+					}
+
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							List of all raters, sorted by <strong>$link</strong>
+						</h2>
+						";
+
+					$query = str_replace("ORDER_REPLACE", $orderBy, $query);
+					$result = pg_query($query);
+					while ($res = pg_fetch_array($result)) {
+						$userName = $res[0];
+						$userEmail = $res[1];
+						$userJoinDate = substr($res[2], 0, -8);
+						$type = $res[3];
+						$ratingCount = $res[4];
+
+						echo "
+							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+								<strong><a href='profile.php?name=$userName'>$userName</a></strong><br>
+								<strong>Joined on:</strong> $userJoinDate <br>
+								<strongEmail:</strong $userEmail <br>
+								<strong>Type:</strong> $type <br>
+								<strong>Total # of ratings:</strong> $ratingCount
 							</div>
 						";
 					}
