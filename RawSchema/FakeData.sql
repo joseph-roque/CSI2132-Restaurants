@@ -30,7 +30,8 @@ INSERT INTO Rater(email, name, join_date, type_id, password) VALUES
 ('iam@groot.com', 'IAmGroot', '2014-06-15', 1, 'password'),
 ('blogger@hotmail.com', 'FoodBlogger', '2014-03-03', 2, 'password'),
 ('donthatetheplaya999@aol.com', 'DontHateMissyMiss', '2011-03-04', 1, 'password'),
-('shakeitofftswiftfan@hotmail.com', 'TSwiftIsMyLife', '2014-09-12', 1, 'password');
+('shakeitofftswiftfan@hotmail.com', 'TSwiftIsMyLife', '2014-09-12', 1, 'password'),
+('contact@sizzl.me', 'Sizzl', '2015-04-12', 4, 'admin');
 
 INSERT INTO CuisineType(cuisine_id, description) VALUES
 (0, 'Unknown'),

@@ -139,10 +139,12 @@
 										url: 'delete-restaurant.php',
 										dataType: 'json',
 										data: {functionname: 'deleteRestaurant', arguments: [id]},
-
+										error: function(obj, textstatus, errorthrown) {
+											console.log('error!');
+											console.log(errorthrown);
+										},
 										success: function(obj, textstatus) {
 												if (!('error' in obj)) {
-													console.log('why u no change');
 													document.location.href='index.php';
 												} else {
 													console.log(obj, error);
