@@ -100,12 +100,17 @@
 
 				*/
 				$images = array(
-					"http://img3.wikia.nocookie.net/__cb20140128161936/tumblr-survivor/images/0/03/Unkown.png", "http://img3.wikia.nocookie.net/__cb20140128161936/tumblr-survivor/images/0/03/Unkown.png", "http://img3.wikia.nocookie.net/__cb20140128161936/tumblr-survivor/images/0/03/Unkown.png",
-					"http://foodwallpaper.info/wp-content/uploads/2014/05/mexican-restaurant-logos.jpg", "http://www.brandcrowd.com/gallery/brands/pictures/picture13899442828471.jpg", "http://www.underworldmagazines.com/wp-content/uploads/2012/08/BRLEN21.jpg",
-					"http://www.magazinehive.com/wp-content/uploads/2013/01/Srivas-Restaurant.png", "https://s-media-cache-ak0.pinimg.com/236x/62/99/3f/62993f179da1ecf00394920f4f1c7438.jpg", "http://www.thelogofactory.com/daily_logo/wp-content/uploads/2010/11/indian-restaurant-logo.png",
-					"http://www.tropicanacitymall.com/shop_dine/images/kimchi_logo.jpg", "http://koreanaasheville.com/templates/tyl02/images/logo.png", "http://fc08.deviantart.net/fs40/f/2009/041/9/5/Korean_Restaurant_Logo_by_deadfuze.jpg",
-					"http://www.outsourcelogos.com/uploads/index/166/d/Chinese_Restaurant_Logo_jpg.jpg", "http://www.freelogohub.com/wp-content/uploads/2013/02/Free-Chinese-Food-Logo.jpg", "http://www.freevector.com/site_media/preview_images/FreeVector-Asian-Food-Vector-Logo.jpg",
-					"https://m1.behance.net/rendition/modules/41568807/disp/21806f512df218df49d5b43411dc1cd9.jpg", "http://www.templatewire.com/images/screenshots/logo-templates/logo096/logo.jpg", "https://m1.behance.net/rendition/modules/52942073/disp/34e04a8eba38eb740ca679b28948db21.gif",
+					"media/cuisines/unknown.png", "media/cuisines/unknown.png", "media/cuisines/unknown.png",
+					"media/cuisines/mexican_1.jpg", "media/cuisines/mexican_2.jpg", "media/cuisines/mexican_3.jpg",
+					"media/cuisines/indian_1.jpg", "media/cuisines/indian_2.jpg", "media/cuisines/indian_3.jpg",
+					"media/cuisines/korean_1.jpg", "media/cuisines/korean_2.jpg", "media/cuisines/korean_3.jpg",
+					"media/cuisines/chinese_1.jpg", "media/cuisines/chinese_2.jpg", "media/cuisines/chinese_3.jpg",
+					"media/cuisines/italian_1.jpg", "media/cuisines/italian_2.jpg", "media/cuisines/italian_3.jpg",
+					"media/cuisines/fine_dining_1.jpg", "media/cuisines/fine_dining_2.jpg", "media/cuisines/fine_dining_3.jpg",
+					"media/cuisines/breakfast_1.jpg", "media/cuisines/breakfast_2.jpg", "media/cuisines/breakfast_3.jpg",
+					"media/cuisines/middle_eastern_1.jpg", "media/cuisines/middle_eastern_2.jpg", "media/cuisines/middle_eastern_3.jpg",
+					"media/cuisines/sandwiches_1.jpg", "media/cuisines/sandwiches_2.jpg", "media/cuisines/sandwiches_3.jpg",
+					"media/cuisines/other_1.jpg", "media/cuisines/other_2.jpg", "media/cuisines/other_3.jpg"
 					);
 
 				$name = $GLOBALS['name'];
