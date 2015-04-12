@@ -8,7 +8,8 @@ INSERT INTO RaterType(type_id, description) VALUES
 (0, 'Other'),
 (1, 'Casual'),
 (2, 'Blogger'),
-(3, 'Verified Critic');
+(3, 'Verified Critic'),
+(4, 'Admin');
 
 
 INSERT INTO Rater(email, name, join_date, type_id) VALUES
@@ -61,9 +62,6 @@ INSERT INTO Restaurant(name, cuisine, url) VALUES
 ('Taste of China', 4, null),
 ('Wonderful India', 2, null);
 
-INSERT INTO Rating(user_id, post_date, price, food, mood, staff, comments, restaurant_id)
-(4, '')
-
 INSERT INTO Location(first_open_date, manager_name, phone_number, street_address, hour_open, hour_close, restaurant_id) VALUES
 ('2014-05-01', 'Jeremy Chambers', '6135550123', '55 Lees Ave', 1200, 0000, 1),
 ('2006-01-01', 'Mary Willows', '6135559876', '100 Sussex Drive', 0800, 2300, 2),
@@ -79,3 +77,63 @@ INSERT INTO Location(first_open_date, manager_name, phone_number, street_address
 ('2014-09-09', 'James Patterson', '6135559900', '30 St Patrick Street', 0900, 0200, 12),
 ('2013-06-24', 'David Lee', '6135552020', '55 Nelson Street', 0800, 0200, 13),
 ('2002-08-12', null, '6135553949', '11 Somerset Drive', 0700, 0000, 14);
+
+INSERT INTO ItemType VALUES
+(0, 'Other'),
+(1, 'Appetizer'),
+(2, 'Entree'),
+(3, 'Dessert'),
+(4, 'Beverage'),
+(5, 'Alcoholic');
+
+INSERT INTO MenuItem(name, type_id, description, price, restaurant_id) VALUES
+('Blues Burger', 2, 'Blue cheese & double smoked bacon', 13.99, 1),
+('Cracker Jack', 2, 'Peppercorn crust, banana peppers, jack cheese & hotter than hell sauce', 12.99, 1),
+('Splitsville', 3, '4-bite banana split. Real strawberries, thick fudge sauce, fresh bananas, ice cream, chocolate sauce, whipped cream & walnuts', 4.75, 1),
+('Milkshakes', 4, 'Vanilla, chocolate, mocha, caramel, strawberry, banana', 5.99, 1),
+('Cabernet Merlot', 5, 'Made in the mountains of BC, youll love this smooth 2012 red wine', 8, 2),
+('Cabernet Sauvignon', 5, 'From sunny southern California, this 2011 red wine will delight your taste buds', 9, 2),
+('Chardonnay', 5,'Straight from the vineyards of Italy to your glass, taste the delicate flavour of this 2010 white wine', 9, 2),
+('Bo-ssam', 2, 'Steamed pork wrapped in leaves', 12.99, 3),
+('Bul-dak', 2, 'Hot & spicy chicken', 11.95, 3),
+('Al chi-gae', 1, 'Fish egg stew with vegetables', 4.95, 3),
+('Sliced pork doubly sauteed', 2, 'Sliced pork doubly sauteed', 9.30, 4),
+('General Tao's Chicken', 2, 'Hot & spicy', 9.60, 4),
+('Chicken with orange flavour', 2, 'Hot & spicy', 11.95, 4),
+('Won ton soup', 1, 'Veggies & deliciousness', 3.50, 13),
+('BBQ pork with mixed vegetables', 2, 'Pork & chinese greens', 9.30, 13),
+('Bacon fried rice', 2, 'Bacon with fried rice', 6.95, 13),
+('Perogies', 1, 'Beer-braised onions/crispy bacon/sour cream', 11, 5),
+('Fish sandwich', 2, 'Battered haddock/lettuce/red onion/french loaf', 13, 5),
+('Berry crumble', 3, 'Vanilla ice cream/warm seasonal berries/crumble', 8, 5),
+('Domestic Beer', 5, 'Coors light/Molson Canadian', 5.97, 5),
+('Import Beer', 5, 'Heineken/Carlsberg/Strongbow', 7.74, 5),
+('Burrito Vegan', 2, 'Black beans, lettuce, red and green peppers, guacamole, onion, tomatoes and salsa', 8.25, 6),
+('Burrito de Carne', 2, 'Steak, cheese, lettuce, guacamole and salsa', 8.75, 6),
+('Taco', 2, 'Soft corn tortillas filled with salsa gringa, cheese, avocado, chicken or steak', 5.75, 6),
+('Samosas', 1, 'Flaky pastry tempered with spices and stuffed with potatoes and peas.', 5, 7),
+('Pakoras', 1, 'A mixture of vegetables battered and lightly spiced', 5, 7),
+('Vegetable Bryani', 2, 'Aromatic Basmati Rice sautéed with mixed vegetables and homemade cheese.', 13, 7),
+('Chilli Prawns', 'The chefs own blend of shrimp, vegetables and spices create this delight.', 9, 14),
+('Coconut Shrimp', 'Shrimp sauteed with fresh coconut', 15,14),
+('Gulab Jamun', 3, 'An Indian classic sponge cake served in a rose water syrup.', 5, 14),
+('Zuppa Minestrone', 2, 'Tomato, fresh vegetables & roman beans in vegetable stock', 5.95, 8),
+('Vini Bianchi', 5, 'An array of white wines, we guarantee to have one youll love. Ask for recommendations',  9.49, 8),
+('Salmone Affumato', 2, 'Fresh smoked salmon with ricotta cheese and market greens', 12.95, 8),
+('French Toast', 2, 'French toast covered with a mountain of fresh fruit', 8.99, 9),
+('Crepomelette', 2, 'A delicious crepe stuffed with a Western-Cheddar omelette, served with fresh fruit', 10.85, 9),
+('Samira Wake-up', 1, 'A beautiful plate of lavishly cut fresh fruit served with a choice of toast', 7.50, 9),
+('Chicken Shawarma Plate', 2, 'Perfectly cut chicken served on a bed of rice alongside fresh salad', 12.95, 10),
+('Beef Shawarma Plate', 2, 'Perfectly cut beef served on a bed of rice alongside fresh salad', 13.95, 10),
+('Finest Falafel Platter', 2, 'Flavourful falafel delight includes 4 sesame topped falafel rounds, garlic potatoes and fresh salad', 13.25, 10),
+('Octopus Salad', 1, 'Octopus, cannellini beans, chorizo sausage, cherry tomatoes', 14, 11),
+('Escargots', 1, 'Snails sauteed with wild mushrooms in a creamy garlic tarragon sauce', 11, 11),
+('Veal chop', 2, 'Grilled 12oz. veal chop served with gnocchi in a chipotle cream sauce', 36, 11),
+('Pepperoni Pizza', 2, 'Pepperonis & mozzarella cheese. Serves 2', 9.99, 12),
+('Salmon Pizza', 2, 'Apple wood smoked salmon on our mozzarella cheese pizza. Serves 2', 12.99, 12),
+('Cheese Pizza', 2, 'Mozzarella cheese. Serves 2', 8.99, 12);
+
+INSERT INTO Rating(user_id, post_date, price, food, mood, staff, comments, restaurant_id)
+
+
+INSERT INTO RatingItem(user_id, post_date, item_id, rating, comments) VALUES
