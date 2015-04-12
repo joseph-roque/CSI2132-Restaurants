@@ -64,6 +64,9 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						</h4>
 
 						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
+							<a href='popular.php?query=p'>Most recent reviews</a><br>
+						</div>
+						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
 							<a href='popular.php?query=c'>Managers & opening dates by restaurant type</a><br>
 						</div>
 						<div class='well well-sm text-center' style='line-height:1.75; font-size:16px'>
