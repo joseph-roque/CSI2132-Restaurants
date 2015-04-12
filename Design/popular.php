@@ -559,6 +559,47 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						";
 					}
 					break;
+				case 'p':
+					$extraOne = "25";
+					if (isset($_GET["extrao"])) {
+						$extraOne = $_GET["extrao"];
+					}
+
+					switch($extraOne) {
+						case '25': default: $link = "<a href='popular.php?query=p&amp;extrao=50'>25</a>"; break;
+						case '50': default: $link = "<a href='popular.php?query=p&amp;extrao=100'>50</a>"; break;
+						case '100': default: $link = "<a href='popular.php?query=p&amp;extrao=25'>100</a>"; break;
+					}
+					echo "	
+						<h2 class='text-center text-info' style='margin-bottom:20px'>
+							<strong>$link</strong> most recent reviews
+						</h2>
+						";
+					$query = str_replace("LIMIT_REPLACE", $extraOne, $query);
+					$result = pg_query($query);
+					while($res = pg_fetch_array($result)) {
+						$restName = $res[0];
+						$userName = $res[1];
+						$raterType = $res[2];
+						$postDate = substr($res[3], 0, -8);
+						$comments = $res[4];
+						$food = $res[5];
+						$mood = $res[6];
+						$price = $res[7];
+						$staff = $res[8];
+						$locationId = $res[9];
+
+						echo "
+							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
+								<strong><a href='restaurant.php?id=$locationId'>$restName</a></strong><br>
+								<h4>by <a href='profile.php?name=$userName'>$userName</a> | $raterType <br>
+								on $postDate </h4>
+								$comments <br>
+								<strong>Food:</strong> $food | <strong>Mood:</strong> $mood | <strong>Price:</strong> $price | <strong>Staff:</strong> $staff
+							</div>
+						";
+					}
+					break;
 			} 
 		?>
 	</div>

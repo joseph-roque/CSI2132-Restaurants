@@ -88,8 +88,8 @@
 							<th><a href='profile.php?name=$name&sr=name&sm=$sm'>Name</a></th>
 							<th><a href='profile.php?name=$name&sr=food&sm=$sm'>Food</a></th>
 							<th><a href='profile.php?name=$name&sr=mood&sm=$sm'>Mood</a></th>
-							<th><a href='profile.php?name=$name&sr=staff&sm=$sm'>Staff</a></th>
 							<th><a href='profile.php?name=$name&sr=price&sm=$sm'>Price</a></th>
+							<th><a href='profile.php?name=$name&sr=staff&sm=$sm'>Staff</a></th>
 							<th><a href='profile.php?name=$name&sr=overall&sm=$sm'>Overall</a></th>
 							<th>Comments</th>
 							";
@@ -143,8 +143,8 @@
 									<td><a href='restaurant.php?id=$locationId'>$restName</a></td>
 									<td>$food</td>
 									<td>$mood</td>
-									<td>$staff</td>
 									<td>$price</td>
+									<td>$staff</td>
 									<td>$overall</td>
 									<td>$comment</td>
 								</tr

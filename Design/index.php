@@ -246,7 +246,7 @@
 					$uName = $result['name'];
 					$type = $result['type_id'];
 
-					if($type == "1")
+					if($type == 1)
 						$type = "Casual";
 					else if($type == 2)
 						$type = "Blogger";
@@ -254,9 +254,11 @@
 						$type = "Verified Critic";
 					else if($type == 0)
 						$type = "Other";
+					else if ($type == 4)
+						$type = "Admin";
 					
 			echo "	<h2>
-					$rName
+					<a href='restaurant.php?id=$location_id'>$rName</a>
 				</h2> 
 				<h4>
 				by <a href='profile.php?name=$uName'>$uName</a>
@@ -265,9 +267,9 @@
 				<p>
 					$comment
 				</p>
-				<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
+				<strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Price: </strong> $price | <strong>Staff: </strong> $staff
 				<p>
-					<a class='btn' href='restaurant.php?id=$location_id'>Read other reviews</a>
+					<a href='popular.php?query=p'>Read other recent reviews</a>
 				</p>
 				";
 				?>

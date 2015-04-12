@@ -337,7 +337,7 @@
 					<h4>
 						by <a href='profile.php?name=$author'>$author</a> | $type
 					</h4>
-					<strong>Price: </strong> $price | <strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Staff: </strong> $staff
+					<strong>Food: </strong> $food | <strong>Mood: </strong> $mood | <strong>Price: </strong> $price | <strong>Staff: </strong> $staff
 					<hr>
 					";
 				}
