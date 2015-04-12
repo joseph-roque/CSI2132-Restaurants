@@ -73,8 +73,14 @@
 			<p>
 			<?php 
 				$open = $row['hour_open'];
+				while (strlen($open) < 4) {
+					$open = "0".$open;
+				}
 				$open = substr_replace($open, ":", strlen($open)-2, 0);
 				$close = $row['hour_close'];
+				while (strlen($close) < 4) {
+					$close = "0".$close;
+				}
 				$close = substr_replace($close, ":", strlen($close)-2, 0);
 				$first = $row['first_open_date'];
 				$first = substr($first, 0, -8);

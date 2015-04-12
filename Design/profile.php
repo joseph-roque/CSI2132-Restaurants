@@ -66,7 +66,6 @@
 				
 			</dl>
 		</div>
-		<!-- MENU ITEM REVIEWS -->
 		<div class="col-md-12 column">
 
 		<!-- RESTAURANT REVIEWS -->
@@ -140,7 +139,7 @@
 						echo "
 								<tr>
 									<td width='100px'>$postDate</td>
-									<td><a href='restaurant.php?id=$locationId'>$restName</a></td>
+									<td width='150px'><a href='restaurant.php?id=$locationId'>$restName</a></td>
 									<td>$food</td>
 									<td>$mood</td>
 									<td>$price</td>
@@ -157,7 +156,7 @@
 			<h5 class='text-right'><a onClick="popularQueryN('lower'); return false;" href="#">(See raters who gave overall lower ratings to restaurants)</a></h5>
 
 		<hr>
-			
+			<!-- MENU ITEM REVIEWS -->
 			<h2 class="text-info">
 				Menu Item Reviews
 			</h2>
@@ -226,7 +225,7 @@
 						echo "
 								<tr>
 									<td width='100px'>$postDate</td>
-									<td>$itemName</td>
+									<td width='150px'>$itemName</td>
 									<td>\$$itemPrice</td>
 									<td>$cuisineType</td>
 									<td>$rating</td>

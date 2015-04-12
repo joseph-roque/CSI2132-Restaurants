@@ -190,7 +190,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 
 						echo "
 						<div class='well well-sm' style='line-height:1.75; font-size:16px'>
-							<strong><a href='profile?id=$userId'>$userName</a></strong><br>
+							<strong><a href='profile.php?name=$userName'>$userName</a></strong><br>
 							<a href='restaurant.php?id=$restId'>$restName</a><br>
 							# of ratings: $ratingCount<br>
 							Average Rating: $avgRating
@@ -536,18 +536,20 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 					$userCount = 0;
 					while ($res = pg_fetch_array($result)) {
 						$userCount += 1;
+						$userName = $res[0];
 						$userId = $res[1];
 						$userDescription = $res[2];
 						$userEmail = $res[3];
 						$locationId = $res[4];
 						$restName = $res[5];
-						$highRate = round($res[6], 2);
-						$lowRate = round($res[7], 2);
+						$highRate = round($res[6]/4.0, 2);
+						$lowRate = round($res[7]/4.0, 2);
+						$description = $res[9];
 						echo "
 							<div class='well well-sm' style='line-height:1.75; font-size:16px'>
 								<strong><a href='restaurant.php?id=$locationId'>$restName</a></strong><br>
 								<a href='results.php?query=$description&cui=$description'>$description</a><br>
-								Rater: <a href='profile.php?name=$userName'>$userName</a><br>
+								Rater: <a href='profile.php?name=$userName'>$userName</a> | $userDescription <br>
 								Low rating: $lowRate <br>
 								High rating: $highRate
 							</div>

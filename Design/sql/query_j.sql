@@ -1,4 +1,4 @@
-SELECT ct.description, temp.avgRate tmpAvgRate
+SELECT ct.description, COALESCE(temp.avgRate,0) tmpAvgRate
 FROM CuisineType ct
 LEFT JOIN
 	(SELECT ct2.cuisine_id ct2_cid, AVG(innerT.innerAvg) avgRate
