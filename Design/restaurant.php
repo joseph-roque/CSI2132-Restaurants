@@ -113,8 +113,47 @@
 			</button>
 			</form>
 			
-			<div class="text-danger" style="margin-top:10px">
-				Want this restaurant taken down? <a href="contact.php"><strong>Contact the administrator!</a></strong>
+			<div class='text-danger' style='margin-top:10px'>
+			<?php
+				require('connect.php');
+				echo $userid;
+				if (strlen(strval($userid)) > 0) {
+					$result = pg_query("SELECT rt.type_id FROM Rater use INNER JOIN RaterType rt ON use.type_id=rt.type_id WHERE use.user_id=$userid");
+					$result = pg_fetch_array($result);
+				} else {
+					$result = false;
+				}
+				if ($result) {
+					if ($result[0] == 4) {
+						echo "<script type='text/javascript'>
+								function deleteRestaurant() {
+									var id = getParameterByName('id');
+									var result;
+									jQuery.ajax({
+										type: 'POST',
+										url: 'delete-restaurant.php',
+										dataType: 'json',
+										data: {functionname: 'deleteRestaurant', arguments: [id]},
+
+										success: function(obj, textstatus) {
+												if (!('error' in obj)) {
+													console.log('why u no change');
+													document.location.href='index.php';
+												} else {
+													console.log(obj, error);
+												}
+											}
+									});
+								}
+							</script>";
+						echo "<a onClick='return deleteRestaurant();' href='#'><strong>Delete this restaurant!</strong></a>";
+					} else {
+						echo "Want this restaurant taken down? <a href='contact.php'><strong>Contact the administrator!</a></strong>";
+					}
+				} else {
+					echo "Want this restaurant taken down? <a href='contact.php'><strong>Contact the administrator!</a></strong>";
+				}
+			?>
 			</div>
 			
 		</div>
