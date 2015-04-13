@@ -137,8 +137,14 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 				$url = $tmp['url'];
 				$address = $tmp['street_address'];
 				$open = $tmp['hour_open'];
+				while (strlen($open) < 4) {
+					$open = "0".$open;
+				}
 				$open = substr_replace($open, ":", strlen($open)-2, 0);
 				$close = $tmp['hour_close'];
+				while (strlen($close) < 4) {
+					$close = "0".$close;
+				}
 				$close = substr_replace($close, ":", strlen($close)-2, 0);
 				$cuisine = $tmp['cuisine'];
 
