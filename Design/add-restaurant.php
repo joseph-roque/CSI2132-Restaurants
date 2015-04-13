@@ -142,11 +142,9 @@
 					$r1 = pg_fetch_assoc($r1);
 					$rId = $r1['restaurant_id']; 
 					if($num == 0){
-						$insertQuery = "INSERT INTO Restaurant(name, cuisine, url)
+						pg_query("INSERT INTO Restaurant(name, cuisine, url)
 							VALUES('$name', $cuisine, '$url')
-						";
-						echo "QUERY IS $insertQuery";
-						pg_query($insertQuery);
+						");
 					}
 					$first_open = $_POST['input-open-date'];
 					$mng = $_POST['input-mng'];
@@ -168,7 +166,7 @@
 					else {
 						$result = pg_query("SELECT * FROM Location WHERE Location.street_address = '$address'");
 						$location_id = $result['location_id'];
-						echo "LOCATION ID: $location_id ADDRESS: $address";
+						echo "LOCATION ID: $location_id";
 						echo "That <a href='restaurant.php?id=$location_id'>location</a> is already in our database!";
 					}
 				}
