@@ -47,6 +47,12 @@
 			require('connect.php');
 			$result = pg_query("SELECT * FROM Rater WHERE Rater.name = '$name'");
 			$result = pg_fetch_assoc($result);
+
+			if ($result == false) {
+				echo "<h3 style='text-align:center'>This user does not exist!</h3>";
+				exit;
+			}
+
 			$email = $result['email'];
 			$join = $result['join_date'];
 			$join = substr($join, 0, -8);
