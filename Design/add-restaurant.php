@@ -145,6 +145,9 @@
 						pg_query("INSERT INTO Restaurant(name, cuisine, url)
 							VALUES('$name', $cuisine, '$url')
 						");
+						$r1 = pg_query("SELECT * FROM Restaurant R WHERE R.name = '$name'");
+						$r1 = pg_fetch_assoc($r1);
+						$rId = $r1['restaurant_id']; 
 					}
 					$first_open = $_POST['input-open-date'];
 					$mng = $_POST['input-mng'];

@@ -170,7 +170,7 @@
 		<!-- Maps interface & avg. rating -->
 		<div class="col-md-7 column text-center" style="padding-top: 10px">
 		
-		<a href="https://www.google.com/maps/place/
+		<a target='_blank' href="https://www.google.com/maps/place/
 		<?php
 			$result = pg_query("
 				SELECT * FROM location WHERE location_id = $id;
