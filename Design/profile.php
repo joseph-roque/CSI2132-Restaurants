@@ -65,6 +65,42 @@
 		?>
 				
 			</dl>
+
+		<?php
+			require('connect.php');
+			if (strlen(strval($userid)) > 0) {
+				$result = pg_query("SELECT use.name FROM Rater use WHERE use.user_id=$userid");
+				$result = pg_fetch_array($result);
+			} else {
+				$result = false;
+			}
+			if ($result) {
+				if ($result[0] == $name) {
+					echo "<script type='text/javascript'>
+							function deleteUser() {
+								var name = getParameterByName('name');
+								var result;
+								jQuery.ajax({
+									type: 'POST',
+									url: 'delete-user.php',
+									dataType: 'json',
+									data: {functionname: 'deleteUser', arguments: [name]},
+
+									success: function(obj, textstatus) {
+											if (!('error' in obj)) {
+												document.location.href='logout.php';
+											} else {
+												console.log(obj, error);
+											}
+										}
+								});
+							}
+						</script>";
+					echo "<a onClick='return deleteUser();' href='#'><strong>Delete your account!</strong></a>";
+				}
+			}
+		?>
+
 		</div>
 		<div class="col-md-12 column">
 

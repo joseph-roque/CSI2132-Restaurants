@@ -147,7 +147,6 @@
 
 										success: function(obj, textstatus) {
 												if (!('error' in obj)) {
-													console.log('why u no change');
 													document.location.href='index.php';
 												} else {
 													console.log(obj, error);

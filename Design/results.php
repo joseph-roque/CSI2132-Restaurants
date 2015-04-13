@@ -126,6 +126,7 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 				</h2>
 				";
 			while($res = pg_fetch_assoc($result)){
+				$rateAvg = round($res['rateavg'], 1);
 				$location_id = $res['location_id'];
 				$q1 = pg_query(
 					"SELECT * FROM Restaurant R 
@@ -159,7 +160,8 @@ if(array_key_exists('name', $_SESSION) && array_key_exists('userid',$_SESSION)){
 						<strong><a href='restaurant.php?id=$location_id'>$name</a></strong><br>
 						<a href = 'results.php?query=$cuisine&cui=$cuisine'>$cuisine</a><br>
 						$address <br>
-						$open - $close
+						$open - $close <br>
+						<strong>Average Rating:</strong> $rateAvg
 					</div>";
 			}
 				?>	
