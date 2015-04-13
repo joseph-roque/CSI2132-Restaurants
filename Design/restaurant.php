@@ -186,7 +186,7 @@
 					
 			$row = pg_fetch_assoc($result);
 			echo $row['street_address'];
-		?>&zoom=13&scale=1&size=400x250&maptype=roadmap&format=png&visual_refresh=true"></a>
+		?>&zoom=17&scale=1&size=400x250&maptype=roadmap&format=png&visual_refresh=true"></a>
 
 			<br>
 			<div class="rating">

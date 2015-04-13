@@ -30,7 +30,7 @@
 				require('connect.php');
 				$id = $_GET['id'];
 				$query = "
-				SELECT R.name AS rname, M.name AS iname
+				SELECT R.name AS rname, M.description AS idesc, M.name AS iname
 				FROM Restaurant R, MenuItem M
 				WHERE M.restaurant_id = R.restaurant_id AND M.item_id = $id
 				";
@@ -38,9 +38,10 @@
 				$row = pg_fetch_assoc($result);
 				$rName = $row['rname'];
 				$iName = $row['iname'];
-				echo "All reviews for <strong>$iName</strong> at <strong>$rName</strong>";
+				$idesc = $row['idesc'];
+				echo "All reviews for <strong>$iName</strong> at <strong>$rName</strong></h2>";
+				echo '<h3 class="text-muted text-center"><i>"$idesc"</i></h3>';
 			?>
-			</h2>
 			
 			<table class="table table-hover"> <!-- match margin of H2 next to it -->
 				<!-- Header -->

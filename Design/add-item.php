@@ -53,8 +53,15 @@
 					<!-- FOOD TYPE -->
 					<div class="row">
 						<div class="form-group-xs">
-							<label for="input-type">Type of Food</label>
+							<label for="input-description">Description</label>
+							<input name ="input-description" type="name" class="form-control" id="input-description" placeholder="Describe this item!" required />
+							
+						</div>
+					</div>
+						<div class="row">
+						<div class="form-group-xs">
 							<!-- FETCH ALL POSSIBLE CUISINE TYPES IN HERE -->
+							<label for="input-type">Type of Food</label>
 							<select name = "input-type" id = "input-type" method= "post" class="form-control">
 								<option>Other</option>
 								<option>Appetizer</option>
@@ -63,12 +70,6 @@
 								<option>Beverage</option>
 								<option>Alcoholic</option>
 							</select>
-						</div>
-					</div>
-						<div class="row">
-						<div class="form-group-xs">
-							<label for="input-description">Description</label>
-							<input name ="input-description" type="name" class="form-control" id="input-description" placeholder="Describe this item!" required />
 						</div>
 					</div>
 					
