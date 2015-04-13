@@ -1,2 +1,2 @@
 <!-- Logo & subtitle text -->
-<a href="index.php"><img class="img-responsive center-block" src="media/logo.png" style="width:20%; padding-bottom:5px" /></a>
+<p style='text-align:center'><a href="index.php"><img src="media/logo.png" style="width:20%; padding-bottom:5px;" /></a></p>
