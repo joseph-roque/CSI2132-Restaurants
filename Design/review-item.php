@@ -25,7 +25,7 @@
 		<?php include("includes/navbar.php");?>
 		<div class="col-md-12 column">
 			<!-- ALL REVIEWS PREVIOUSLY WRITTEN -->
-			<h2 class="text-info text-center">
+			
 			<?php
 				require('connect.php');
 				$id = $_GET['id'];
@@ -38,9 +38,10 @@
 				$row = pg_fetch_assoc($result);
 				$rName = $row['rname'];
 				$iName = $row['iname'];
-				$idesc = $row['idesc'];
-				echo "All reviews for <strong>$iName</strong> at <strong>$rName</strong></h2>";
-				echo '<h3 class="text-muted text-center"><i>"$idesc"</i></h3>';
+				$idesc = $row['idesc']; 
+				echo "<h2 class='text-info text-center'><strong>$iName</strong> at <strong>$rName</strong></h2>";
+				echo "<h4 class='text-muted text-center' style='margin-bottom:40px;'><i>$idesc</i></h4>";
+				echo "<h3 class='text-info text-center'>All Reviews</h3>";
 			?>
 			
 			<table class="table table-hover"> <!-- match margin of H2 next to it -->
@@ -87,7 +88,6 @@
 			
 			<!-- WRITE A NEW REVIEW -->
 			<hr>
-			<h2 class="text-info text-center">
 			<?php
 				require('connect.php');
 				$id = $_GET['id'];
@@ -100,9 +100,8 @@
 				$row = pg_fetch_assoc($result);
 				$rName = $row['rname'];
 				$iName = $row['iname'];
-				echo "Write a review for <strong>$iName</strong> at <strong>$rName</strong>";
+				echo "<h3 class='text-info text-center'>Write a review for <strong>$iName</strong> at <strong>$rName</strong></h3>";
 			?>
-			</h2>
 		</div>
 	</div>
 	<form id="formID" name="formID" method="post" action="" role="form">
