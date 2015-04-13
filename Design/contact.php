@@ -63,7 +63,7 @@
 								$comment = $_POST['input-comment'];
 
 								$query = "
-									INSERT INTO TABLE_NAME(name, email, comment)
+									INSERT INTO Contact(name, email, comments)
 									VALUES('$name', '$email', '$comment');
 								";
 								pg_query($query);

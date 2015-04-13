@@ -125,3 +125,12 @@ CREATE TABLE RatingItem
 		ON UPDATE CASCADE ON DELETE CASCADE, 
 	CONSTRAINT valid_rating CHECK (rating >= 1 AND rating <= 5)
 );
+
+CREATE TABLE Contact
+(
+	contact_id SERIAL,
+	name TEXT,
+	email TEXT,
+	comments TEXT,
+	PRIMARY KEY(contact_id)
+);
