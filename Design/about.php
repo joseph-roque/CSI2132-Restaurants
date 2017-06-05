@@ -50,7 +50,7 @@
 				<!-- Joseph -->
 				<div class="col-md-4">
 					<div class="thumbnail" style="height:500px">
-					<a href="https://github.com/joseph-roque">
+					<a href="https://github.com/josephroque">
 					<div class="cropped-img" style="background-image:url('media/joseph.png'); min-height:300px" /> </div>
 
 					<div class="caption">
